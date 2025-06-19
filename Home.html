@@ -2,6 +2,13 @@
 <html lang="en">
 
 <head>
+  ...
+  <style>
+    /* CSS scritto qui dentro */
+  </style>
+</head>
+
+<head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>HOME|Group 18 - Bosnia and Herzegovina</title>
@@ -122,14 +129,78 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-6 position-relative align-self-start order-lg-last order-first" data-aos="fade-up"
-            data-aos-delay="200">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
-          </div>
+        <div class="col-lg-6 position-relative align-self-start order-lg-last order-first text-end" data-aos="fade-up" data-aos-delay="200">
+  <img id="myImage" src="assets/img/1920x1080_cmsv2_83d09d36-6498-5c80-8ee1-f70a53fd6e97-8318546.jpg.webp" class="img-fluid" alt="">
+  <p class="mt-2 text-muted" style="font-size: 0.95rem;">
+  Concentrations of PM2.5 around the globe. Source: IQAir
+</p>
+<a href="https://www.euronews.com/green/2024/12/14/only-seven-countries-in-the-world-breathe-safe-air-three-of-them-are-in-europe" target="_blank" class="d-block text-end text-decoration-underline" style="font-size: 0.9rem; color: #007bff;">
+  Full article: Euronews
+</a>
+</div>
+
+
+<style>
+  /* Stile cursore */
+  #myImage {
+    cursor: zoom-in;
+  }
+
+  /* Overlay fullscreen */
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    cursor: zoom-out;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  #overlay.active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* Immagine ingrandita dentro overlay */
+  #overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+    border-radius: 8px;
+  }
+</style>
+
+<!-- Overlay nascosto -->
+<div id="overlay">
+  <img src="" alt="Enlarged image">
+</div>
+
+<script>
+  const img = document.getElementById('myImage');
+  const overlay = document.getElementById('overlay');
+  const overlayImg = overlay.querySelector('img');
+
+  img.addEventListener('click', () => {
+    overlayImg.src = img.src;  // Copia src nell'overlay
+    overlay.classList.add('active');
+  });
+
+  // Chiudi overlay cliccando sull'overlay stesso
+  overlay.addEventListener('click', () => {
+    overlay.classList.remove('active');
+  });
+</script>
 
           <div class="col-lg-6 content order-last  order-lg-first" data-aos="fade-up" data-aos-delay="100">
-            <h3>Air Pollution in Bosnia and Herzegovina (2013–2022)</h3>
+            <h3>Why mapping air pollution in Bosnia and Herzegovina </h3>
             <p>
               This platform presents the results of a research project analyzing air pollution trends across Bosnia and
               Herzegovina using open-source geospatial data and WebGIS technologies. It combines atmospheric models,
@@ -138,7 +209,7 @@
 
             <ul>
               <li>
-                <i class="bi bi-diagram-3"></i>
+                <img src="assets/img/NO2.png" alt="NO₂ symbol" title="NO₂" style="height: 80px; width: auto; vertical-align: middle; margin-right: 24px;">
                 <div>
                   <h5>Understanding the Spatial Patterns of Pollution</h5>
                   <p>Air pollution distribution is not uniform. Our maps reveal how concentrations vary between urban
@@ -146,27 +217,15 @@
                 </div>
               </li>
               <li>
-                <i class="bi bi-fullscreen-exit"></i>
+                <img src="assets/img/PM2_5.png" alt="PM2.5 symbol" title="PM2.5" style="height: 80px; width: auto; vertical-align: middle; margin-right: 24px;">
                 <div>
                   <h5>The Role of Seasonality and Heating Practices</h5>
                   <p>Winter months show significantly higher pollutant levels, mainly due to widespread use of solid
                     fuels for residential heating. December is the most critical period across the country.</p>
                 </div>
               </li>
-              <li>
-                <i class="bi bi-broadcast"></i>
-                <div>
-                  <h5>Connecting Pollution to Population and Land Cover</h5>
-                  <p>By combining pollution data with population density and land use, we identify which groups are most
-                    exposed and which areas are environmentally at risk, guiding urban and territorial planning.</p>
-                </div>
-              </li>
             </ul>
           </div>
-
-        </div>
-
-      </div>
 
     </section><!-- /About Section -->
 

@@ -60,7 +60,7 @@
   <main class="main">
 
     <!-- Page Title -->
-    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/page-title-bg.jpg);">
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/world-dotted-map.png);">
       <div class="container position-relative">
         <h1>Credits</h1>
         <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p>
@@ -109,7 +109,7 @@
 
           <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
-              <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+              <img src="assets/img/FOTO_GIO.png" class="img-fluid" alt="">
               <div class="member-content">
                 <h4>Giovanni Mazzoncini</h4>
                 <p>
@@ -117,7 +117,7 @@
                 </p>
                 <div class="social">
   <a href="mailto:giovanni.mazzoncini@mail.polimi.it"><i class="bi bi-envelope-fill fs-3"></i></a>
-  <a href="https://github.com/franci1009" target="_blank"><i class="bi bi-github fs-3"></i></a>
+  <a href="https://github.com/giovanni-hub-polimi" target="_blank"><i class="bi bi-github fs-3"></i></a>
 </div>
               </div>
             </div>
@@ -128,6 +128,227 @@
       </div>
 
     </section><!-- /Team Section -->
+   
+<!-- Inserisci questo nel <head> della pagina -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font/css/simple-icons.min.css">
+
+<!-- LOGHI GIT E MAIL -->
+<style>
+  ul.list-with-logo {
+    list-style: none;
+    padding-left: 0;
+  }
+  ul.list-with-logo li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  ul.list-with-logo li .icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    display: inline-block;
+  }
+</style>
+
+<!-- END LOGHI GIT E MAIL -->
+
+<!-- END LOGHI GIT E MAIL -->
+
+<!-- /DATA SOURCES -->
+<section id="data-sources" class="section">
+  <div class="container section-title" data-aos="fade-up">
+    <span>Data Sources</span>
+    <h2>Data Sources</h2>
+    <p>This project is based on publicly available datasets from national and international institutions. Below are the main data providers and portals consulted:</p>
+  </div>
+  <div class="container">
+    <ul style="list-style:none; padding-left:0;">
+      <li class="list-item">
+        <img src="assets/img/copernicus.png" alt="Copernicus logo" class="logo-img" />
+        <div class="text-content">
+          <strong>Copernicus Land Monitoring Service</strong> – CORINE Land Cover 2018. Available at: 
+          <a href="https://land.copernicus.eu/pan-european/corine-land-cover" target="_blank">link</a>
+        </div>
+      </li>
+      <li class="list-item">
+        <img src="assets/img/EEA.png" alt="EEA logo" class="logo-img" />
+        <div class="text-content">
+          <strong>European Environment Agency (EEA)</strong> – Air quality data for NO₂, PM₂.₅. Available at: 
+          <a href="https://www.eea.europa.eu" target="_blank">link</a>
+        </div>
+      </li>
+      <li class="list-item">
+        <img src="assets/img/worldpop.png" alt="WorldPop logo" class="logo-img" />
+        <div class="text-content">
+          <strong>WorldPop</strong> – Gridded population data. Available at: 
+          <a href="https://www.worldpop.org/" target="_blank">link</a>
+        </div>
+      </li>
+      <li class="list-item">
+        <img src="assets/img/OSM.jpg" alt="OpenStreetMap logo" class="logo-img" />
+        <div class="text-content">
+          <strong>OpenStreetMap</strong> – Road networks and urban features. Available at: 
+          <a href="https://www.openstreetmap.org" target="_blank">link</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Stessa dimensione per tutti i loghi */
+  .logo-img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    flex-shrink: 0; /* Non si riduce */
+  }
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .text-content {
+    margin-left: 16px; /* spazio tra logo e testo */
+    /* Imposto una larghezza minima fissa per allineare i testi */
+    min-width: 350px; 
+  }
+
+  /* Allinea i testi a sinistra */
+  .text-content strong,
+  .text-content a,
+  .text-content {
+    display: block;
+    text-align: left;
+  }
+</style>
+<!-- /END DATA SOURCES -->
+
+<!-- /TOOLS AND TECHNOLOGIES -->
+<section id="tools" class="section">
+  <div class="container section-title" data-aos="fade-up">
+    <span>Tools and Technologies</span>
+    <h2>Tools and Technologies</h2>
+    <p>This project was developed using open-source tools for spatial analysis, web development, and data visualization:</p>
+  </div>
+  <div class="container">
+    <ul style="list-style:none; padding-left:0;">
+      <li class="list-item">
+        <div class="logo-wrapper">
+          <img src="assets/img/QGIS_logo_new.svg.png" alt="QGIS logo" class="logo-img" />
+        </div>
+        <div class="text-content">
+          <strong>QGIS</strong> – Spatial analysis and map preparation
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="logo-wrapper">
+          <img src="assets/img/geoserver.webp" alt="GeoServer logo" class="logo-img" />
+        </div>
+        <div class="text-content">
+          <strong>GeoServer</strong> – Serving geospatial data through WMS
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="logo-wrapper">
+          <img src="assets/img/openlayer.png" alt="OpenLayers logo" class="logo-img" />
+        </div>
+        <div class="text-content">
+          <strong>OpenLayers</strong> – WebGIS integration
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="logo-wrapper">
+          <img src="assets/img/Python-logo-notext.svg.png" alt="Python logo" class="logo-img" />
+        </div>
+        <div class="text-content">
+          <strong>Python</strong> – Zonal statistics and data preprocessing
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="logo-wrapper">
+          <div class="combined-logo">
+            <img src="assets/img/HTML5_logo_and_wordmark.svg.png" alt="HTML5 logo" />
+            <img src="assets/img/CSS3_logo_and_wordmark.svg.png" alt="CSS3 logo" />
+            <img src="assets/img/png-clipart-javascript-logo-html-javascript-logo-angle-text-thumbnail.png" alt="JS logo" />
+          </div>
+        </div>
+        <div class="text-content">
+          <strong>HTML, CSS, JavaScript</strong> – Website development
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .list-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .logo-wrapper {
+    width: 72px; /* spazio fisso per tutti i loghi */
+    height: 72px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo-img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+
+  .combined-logo {
+    display: flex;
+    gap: 4px;
+    width: 64px;
+    height: 64px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .combined-logo img {
+    width: 20px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .text-content {
+    flex: 1;
+    padding-left: 10px;
+    text-align: left;
+  }
+</style>
+
+
+
+<!-- /ACKNOWLEDGEMENTS -->
+<section id="acknowledgements" class="section">
+  <div class="container section-title" data-aos="fade-up">
+    <span>Acknowledgements</span>
+    <h2>Acknowledgements</h2>
+    <p>We would like to thank our course instructors for their support and guidance during the project, as well as the institutions that provided the data used for our analyses.</p>
+  </div>
+</section>
+<!-- /END ACKNOWLEDGEMENTS -->
+
+<!-- /LAST UPDATE-->
+<footer class="footer mt-5">
+  <div class="container text-center">
+    <p class="small">Last updated: June 19, 2025</p>
+  </div>
+</footer>
+<!-- /END LAST UPDATE-->
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
