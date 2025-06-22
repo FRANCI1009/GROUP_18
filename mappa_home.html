@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mappa Leaflet Fullscreen con Stile Basemap/Overlay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Fullscreen CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.fullscreen/Control.FullScreen.css" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Roboto', 'Poppins', sans-serif;
+    }
+
+    #map {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+
+    #resetView {
+      position: absolute;
+      bottom: 40px;
+      right: 10px;
+      z-index: 100001;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      font-weight: bold;
+      font-family: inherit;
+    }
+
+    #coords {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      z-index: 100001;
+      background: rgba(255,255,255,0.9);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      pointer-events: none;
+      user-select: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      font-family: inherit;
+    }
+
+    /* Basemap e overlay icons */
+    .basemap-control > .leaflet-control-layers-toggle {
+      background-image: url('assets/img/GLOBE.png');
+      background-size: 24px 24px;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 34px !important;
+      height: 34px !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .overlay-control > .leaflet-control-layers-toggle {
+      background-image: url('assets/img/layer.png');
+      background-size: 24px 24px;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 34px !important;
+      height: 34px !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .leaflet-control-layers.basemap-control {
+      position: absolute !important;
+      top: 5px !important;
+      right: 10px !important;
+      z-index: 1200;
+    }
+
+    .leaflet-control-layers.overlay-control {
+      position: absolute !important;
+      top: 50px !important;
+      right: 10px !important;
+      z-index: 1100;
+    }
+
+    .leaflet-control-layers-base label {
+      position: relative;
+      padding-left: 0px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .leaflet-control-layers-base label > input[type="radio"] {
+      display: none;
+    }
+
+    .leaflet-control-layers-expanded.basemap-control {
+      width: 180px !important;
+    }
+
+    .leaflet-control-scale {
+      bottom: 60px !important;
+      right: 10px !important;
+      z-index: 1000;
+    }
+
+    .leaflet-pseudo-fullscreen {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      z-index: 99999 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map">
+    <button id="resetView">Back to the map</button>
+    <div id="coords">lat: --, long: --</div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Fullscreen JS -->
+  <script src="https://unpkg.com/leaflet.fullscreen/Control.FullScreen.js"></script>
+
+  <script>
+    const centerBosnia = [43.9159, 17.6791];
+    const zoomBosnia = 7;
+
+    const map = L.map('map', {
+      fullscreenControl: true,
+      fullscreenControlOptions: {
+        position: 'topleft',
+        title: 'Entra in fullscreen',
+        titleCancel: 'Esci dal fullscreen'
+      }
+    }).setView(centerBosnia, zoomBosnia);
+
+    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    });
+
+    const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; Esri, Maxar, Earthstar Geographics'
+    });
+
+    osm.addTo(map);
+
+    const baseMaps = {
+      "OpenStreetMap": osm,
+      "Satellite": satellite
+    };
+
+    const overlayMaps = {
+      // Aggiungi qui eventuali layer overlay
+    };
+
+    const baseMapsControl = L.control.layers(baseMaps, null, { position: 'topright' });
+    baseMapsControl.addTo(map);
+    baseMapsControl._container.classList.add('basemap-control');
+
+    const overlayMapsControl = L.control.layers(null, overlayMaps, { position: 'topright' });
+    overlayMapsControl.addTo(map);
+    overlayMapsControl._container.classList.add('overlay-control');
+
+    L.control.scale({ position: 'bottomright', imperial: false }).addTo(map);
+
+    document.getElementById('resetView').addEventListener('click', () => {
+      map.setView(centerBosnia, zoomBosnia);
+    });
+
+    const coordsDiv = document.getElementById('coords');
+    map.on('mousemove', function(e) {
+      const lat = e.latlng.lat.toFixed(5);
+      const lng = e.latlng.lng.toFixed(5);
+      coordsDiv.textContent = `lat: ${lat}, long: ${lng}`;
+    });
+
+    map.on('fullscreenchange', function() {
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 100);
+    });
+  </script>
+
+</body>
+</html>
