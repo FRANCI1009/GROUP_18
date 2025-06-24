@@ -82,8 +82,8 @@
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
             <div class="icon flex-shrink-0"><i class="fa-solid fa-cart-flatbed"></i></div>
             <div>
-              <h4 class="title">Lorem Ipsum</h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+              <h4 class="title">CAMS</h4>
+              <p class="description"> Reanalysis for NO₂, PM2.5 (2013–2022)</p>
               <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
@@ -92,7 +92,7 @@
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
             <div class="icon flex-shrink-0"><i class="fa-solid fa-truck"></i></div>
             <div>
-              <h4 class="title">Dolor Sitema</h4>
+              <h4 class="title">ESA CCI Land Cover</h4>
               <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
               <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
@@ -101,7 +101,7 @@
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="300">
             <div class="icon flex-shrink-0"><i class="fa-solid fa-truck-ramp-box"></i></div>
             <div>
-              <h4 class="title">Sed ut perspiciatis</h4>
+              <h4 class="title"> WorldPop </h4>
               <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
               <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
@@ -111,53 +111,171 @@
 
       </div>
 
-    <!-- About Section -->
-    <section id="about" class="about section">
+    <!-- CRS Section -->
+<section class="crs-section">
+  <div class="crs-info">
+    <strong>Coordinate Reference System (CRS):</strong> EPSG:32632 - WGS 84 / UTM zone 32N<br>
+    <strong>Units:</strong> meters<br>
+    <strong>Method:</strong> Universal Transverse Mercator (UTM)<br>
+    <strong>Celestial body:</strong> Earth<br>
+    <strong>Accuracy:</strong> Based on World Geodetic System 1984 ensemble (EPSG:6326), which has a limited accuracy of at best 2 meters.
+  </div>
+</section><!-- /CRS Section -->
+
+ <!-- Services Section -->
+<section id="services" class="services section">
+
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <span>QGIS map representation of the given data<br></span>
+    <h2>QGIS map representation of the given data</h2>
+    <p>This section shows the visual representation of the datasets used in the analysis, as displayed in QGIS.</p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+    <div class="row gy-4 justify-content-center">
+
+      <!-- CAMS NO2 -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="card">
+          <div class="card-img">
+            <img src="assets/img/MAPPE_METODOLOGY/CAMS_NO2.jpeg" alt="CAMS NO2 Map" class="img-fluid">
+          </div>
+       <h3>CAMS NO<sub>2</sub></h3>
+          <p>Average annual NO₂ concentration over the study area, derived from CAMS NetCDF datasets. Visualized in µg/m³.</p>
+        </div>
+      </div>
+
+      <!-- CAMS PM2.5 -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="card">
+          <div class="card-img">
+            <img src="assets/img/pm25.jpg" alt="CAMS PM2.5 Map" class="img-fluid">
+          </div>
+         <h3>CAMS PM<sub>2,5</sub></h3>
+          <p>Average annual PM2.5 concentration, calculated and clipped for the selected region. Units in µg/m³.</p>
+        </div>
+      </div>
+
+      <!-- ESA CCI Land Cover -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="card">
+          <div class="card-img">
+            <img src="assets/img/MAPPE_METODOLOGY/LAND_COVER_RAW.jpeg"
+     alt="Land Cover ESA CCI Map"
+     class="img-fluid"
+     loading="lazy">
+          </div>
+          <h3>ESA CCI Land Cover</h3>
+          <p>Land use classification based on ESA Climate Change Initiative. Legend based on official ESA codes.</p>
+        </div>
+      </div>
+
+      <!-- WorldPop -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+        <div class="card">
+          <div class="card-img">
+            <img src="assets/img/MAPPE_METODOLOGY/POP_RAW.jpeg" alt="WorldPop Population Map" class="img-fluid">
+          </div>
+          <h3>WorldPop</h3>
+          <p>Population density raster from WorldPop, showing number of people per 100m pixel in the area of interest.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section><!-- /Services Section -->
+
+ <!-- Features Section -->
+    <section id="features" class="features section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span>OUR ELABORATIONS</span>
+        <h2>OUR ELABORATIONS</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
 
       <div class="container">
 
-        <div class="row gy-4">
-
-          <div class="col-lg-6 position-relative align-self-start order-lg-last order-first" data-aos="fade-up" data-aos-delay="200">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+        <div class="row gy-4 align-items-center features-item">
+          <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
+            <img src="assets/img/features-1.jpg" class="img-fluid" alt="">
           </div>
-
-          <div class="col-lg-6 content order-last  order-lg-first" data-aos="fade-up" data-aos-delay="100">
-            <h3>About Us</h3>
-            <p>
-              Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti. Sit quia molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius incidunt reiciendis veritatis asperiores placeat.
+          <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+            <h3>Step 1 – Data Acquisition and Preprocessing.</h3>
+            <p class="fst-italic">
+              The initial goal of the project was to analyze atmospheric concentrations of three major air pollutants (NO₂, PM₂.₅) over the period 2013–2022. The data were obtained from the CAMS Reanalysis dataset as monthly NetCDF raster files and imported into QGIS for processing.
             </p>
             <ul>
-              <li>
-                <i class="bi bi-diagram-3"></i>
-                <div>
-                  <h5>Ullamco laboris nisi ut aliquip consequat</h5>
-                  <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
-                </div>
+              <li><i class="bi bi-check"></i><span> Importing NetCDF files as raster layers.</span></li>
+              <li><i class="bi bi-check"></i> <span>Clipping to the Area of Interest (AOI) to isolate the national territory.</span>
               </li>
-              <li>
-                <i class="bi bi-fullscreen-exit"></i>
-                <div>
-                  <h5>Magnam soluta odio exercitationem reprehenderi</h5>
-                  <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata redi</p>
-                </div>
+              <li><i class="bi bi-check"></i> <span>Temporal aggregation: daily and monthly data were averaged to generate annual mean maps for each pollutant and each year.</span></li>
+              <li><i class="bi bi-check"></i> <span>Reprojected to match the AOI’s spatial reference system.</span></li>
+              <li><i class="bi bi-check"></i> <span>Clipped to the national extent.</span></li>
+              <li><i class="bi bi-check"></i> <span>Reclassified according to IPCC guidelines to enable meaningful analysis of land-use and air pollution interactions.</span></li>
+            </ul>
+          </div>
+        </div><!-- Features Item -->
+
+       <div class="row gy-4 align-items-center features-item">
+  <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+    <img src="assets/img/features-2.jpg" class="img-fluid" alt="">
+  </div>
+  <div class="col-md-7 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
+    <h3>Step 2 – Air Quality Trends and Land Cover Analysis</h3>
+    <p class="fst-italic">
+      To assess long-term trends, the following were calculated:
+    </p>
+    <ul>
+      <li><i class="bi bi-check"></i><span> Annual mean and maximum values of NO₂, PM₂.₅ for the 2013–2022 period.</span></li>
+      <li><i class="bi bi-check"></i><span> Zonal statistics were performed to relate pollutant concentrations with land cover types—especially urban areas—producing a spatial analysis of temporal trends.</span></li>
+    </ul>
+  </div>
+</div><!-- Features Item -->
+
+        <div class="row gy-4 align-items-center features-item">
+          <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out">
+            <img src="assets/img/features-3.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7" data-aos="fade-up">
+            <h3>Step 3 – Population Exposure and Health Threshold Reclassification</h3>
+            <p>To evaluate population exposure to air pollution, the WorldPop (2020) dataset was used, providing high-resolution raster data of population density.
+.</p>
+            <ul>
+              <li><i class="bi bi-check"></i> <span>Reclassified based on WHO air quality thresholds, such as:
+	•	NO₂: 10 µg/m³ (annual mean)
+	•	PM₂.₅: 5 µg/m³</span></li>
+              <li><i class="bi bi-check"></i><span>Spatially aligned to match the resolution of the population raster using resampling techniques.</span>
               </li>
-              <li>
-                <i class="bi bi-broadcast"></i>
-                <div>
-                  <h5>Voluptatem et qui exercitationem</h5>
-                  <p>Et velit et eos maiores est tempora et quos dolorem autem tempora incidunt maxime veniam</p>
-                </div>
+              <li><i class="bi bi-check"></i> <span>Zonal statistics were used to compute the total population exposed within each concentration class.</span>.
               </li>
             </ul>
           </div>
+        </div><!-- Features Item -->
 
-        </div>
-
+        <div class="row gy-4 align-items-center features-item">
+  <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+    <img src="assets/img/features-2.jpg" class="img-fluid" alt="">
+  </div>
+  <div class="col-md-7 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
+    <h3>Step 4 – Bivariate Mapping: Pollution vs Population</h3>
+    <p class="fst-italic">
+      To highlight the spatial interplay between pollution and population density, a bivariate map was created, displaying:
+    </p>
+    <ul>
+      <li><i class="bi bi-check"></i><span> Classified pollutant concentrations</span></li>
+      <li><i class="bi bi-check"></i><span> Population density</span></li>
+    </ul>
+  </div>
+</div><!-- Features Item -->
       </div>
 
-    </section><!-- /About Section -->
+    </section><!-- /Features Section -->
+
+
 
     <!-- Stats Section -->
     <section id="stats" class="stats section">
