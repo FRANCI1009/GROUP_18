@@ -256,10 +256,10 @@
       </li>
       <li class="list-item">
         <div class="logo-wrapper">
-          <img src="assets/img/openlayer.png" alt="OpenLayers logo" class="logo-img" />
+          <img src="assets/img/LEAFLET.webp" alt="Leaflet logo" class="logo-img" />
         </div>
         <div class="text-content">
-          <strong>OpenLayers</strong> – WebGIS integration
+          <strong>Leaflet</strong> – WebGIS integration
         </div>
       </li>
       <li class="list-item">
@@ -345,9 +345,22 @@
 <!-- /LAST UPDATE-->
 <footer class="footer mt-5">
   <div class="container text-center">
-    <p class="small">Last updated: June 19, 2025</p>
+    <p class="small">Last updated: <span id="last-updated"></span></p>
   </div>
 </footer>
+<!-- /END LAST UPDATE-->
+
+<script>
+  // Ottieni la data corrente
+  const today = new Date();
+
+  // Opzioni di formattazione (es. "June 24, 2025")
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+  // Inserisci la data nel footer
+  document.getElementById('last-updated').textContent = today.toLocaleDateString('en-US', options);
+</script>
+
 <!-- /END LAST UPDATE-->
 
   <!-- Scroll Top -->
