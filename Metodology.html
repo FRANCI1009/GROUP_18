@@ -93,11 +93,12 @@
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
             <div class="icon flex-shrink-0"> <img src="assets/img/EEA.png" alt="Custom Logo" style="width: 90px; height: 90px; object-fit: contain;"></div>
             <div>
-              <br>
                  <br>
                <br>
               <h4 class="title">EEA CAMS</h4>
-              <p class="description"> Reanalysis for NO₂, PM2.5 (2013–2022)</p>
+              <p class="description"> Copernicus Atmosphere Monitoring Service (CAMS) is an EU programme that provides free, high-resolution data on air quality using satellite and ground-based observations.
+                <br>
+                <br>In this project, we used CAMS reanalysis data (2013–2022) to map long-term exposure to NO₂ and PM₂.₅ in Bosnia and Herzegovina. This dataset combines past observations and models to give consistent, reliable information on pollutant levels over time.</p>
               <a href="https://ads.atmosphere.copernicus.eu/datasets/cams-europe-air-quality-reanalyses?tab=overview" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
@@ -109,8 +110,9 @@
                <br>
                 <br>
               <h4 class="title">ESA CCI Land Cover</h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-              <a href="https://cds.climate.copernicus.eu/datasets/satellite-land-cover?tab=overview" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <p class="description">ESA CCI Land Cover provides global maps classifying land into 22 categories, updated yearly with quality indicators to ensure reliability. It combines data from multiple satellite sensors over time to maintain consistency.
+<br><br>In this project, we used these maps to analyze land use and its relation to air pollution exposure in Bosnia and Herzegovina.
+<br><br><a href="https://cds.climate.copernicus.eu/datasets/satellite-land-cover?tab=overview" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -120,8 +122,10 @@
                <br>
                 <br>
               <h4 class="title"> WorldPop </h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-              <a href="https://www.worldpop.org/about/" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <p class="description">WorldPop provides free spatial data estimating population counts per grid cell from 2000 to 2020, using a global Geographic Coordinate System (WGS84).
+<br><br>In this project, we used WorldPop data to analyze population distribution in Bosnia and Herzegovina, supporting our assessment of exposure to air pollution by linking population density with pollutant levels. 
+<br><br>
+<a href="https://www.worldpop.org/about/" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -132,12 +136,12 @@
     <!-- CRS Section -->
 <section class="crs-section">
   <div class="crs-info">
-    <strong>Coordinate Reference System (CRS):</strong> EPSG:32632 - WGS 84 / UTM zone 32N<br>
-    <strong>Units:</strong> meters<br>
-    <strong>Method:</strong> Universal Transverse Mercator (UTM)<br>
+    <strong>Coordinate Reference System (CRS):</strong> EPSG:4326 – WGS 84<br>
+    <strong>Units:</strong> Geographic <br>
+    <strong>Method:</strong> Lat/long <br>
     <strong>Celestial body:</strong> Earth<br>
-    <strong>Accuracy:</strong> Based on World Geodetic System 1984 ensemble (EPSG:6326), which has a limited accuracy of at best 2 meters.
-  </div>
+    <strong>Accuracy:</strong> Based on the World Geodetic System 1984 ensemble (EPSG:6326), with a limited accuracy of up to 2 meters
+   </div>
 </section><!-- /CRS Section -->
 
  <!-- Services Section -->
@@ -159,7 +163,7 @@
           <div class="card-img">
             <img src="assets/img/MAPPE_METODOLOGY/CAMS_NO2.jpeg" alt="CAMS NO2 Map" class="img-fluid">
           </div>
-       <h3>CAMS NO<sub>2</sub></h3>
+       <h3>EEA CAMS NO<sub>2</sub></h3>
           <p>Average annual NO₂ concentration over the study area, derived from CAMS NetCDF datasets. Visualized in µg/m³.</p>
         </div>
       </div>
@@ -168,9 +172,9 @@
       <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
         <div class="card">
           <div class="card-img">
-            <img src="assets/img/pm25.jpg" alt="CAMS PM2.5 Map" class="img-fluid">
+            <img src="assets/img/MAPPE_METODOLOGY/CAMS_PM2,5.jpeg" alt="CAMS PM2.5 Map" class="img-fluid">
           </div>
-         <h3>CAMS PM<sub>2,5</sub></h3>
+         <h3>EEA CAMS PM<sub>2,5</sub></h3>
           <p>Average annual PM2.5 concentration, calculated and clipped for the selected region. Units in µg/m³.</p>
         </div>
       </div>

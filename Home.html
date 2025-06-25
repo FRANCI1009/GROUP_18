@@ -78,11 +78,10 @@
 
           <!-- Colonna sinistra: testo -->
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h2 data-aos="fade-up">Bosnia and Herzegovina air quality</h2>
+            <h2 data-aos="fade-up">Bosnia and Herzegovina 
+            </br>air quality</h2>
             <p data-aos="fade-up" data-aos-delay="100">
-              This project uncovers where and how air pollution hits hardest in Bosnia by combining satellite data and
-              GIS. We map pollutant trends, link them to land use and population exposure, and deliver it all through an
-              interactive WebGIS you can explore anytime, anywhere.
+              The project aims to study air quality in Bosnia and Herzegovina through GIS-based analyses using open-source data. In particular, the study highlights the relationship between major air pollutants (NO₂ and PM₂.₅) and environmental variables (land cover), in order to understand how these factors impact the population.
             </p>
 
             <div class="row gy-4 d-flex justify-content-between">
@@ -122,112 +121,185 @@
 
     </section><!-- /Featured Services Section -->
 
-    <!-- About Section -->
-    <section id="about" class="about section">
+<!-- About Section -->
+<section id="about" class="about section">
+
+  <div class="container">
+    <div class="row gy-4 align-items-start">
+      
+      <!-- LEFT COLUMN: TEXT -->
+      <div class="col-lg-6 content order-last order-lg-first" data-aos="fade-up" data-aos-delay="100">
+        <h3>Why mapping air pollution in Bosnia and Herzegovina</h3>
+        <p>
+          Mapping air pollution in Bosnia and Herzegovina is essential to understand how environmental and urban factors influence the distribution and concentration of harmful pollutants. Air pollution—caused by sources such as vehicle traffic, industrial emissions, and residential heating—poses serious risks to both human health and ecosystems. According to the WHO, the vast majority of the global population lives in areas where air quality exceeds safe limits, and Bosnia and Herzegovina is no exception. In urban areas especially, concentrations of pollutants like nitrogen dioxide (NO₂) and fine particulate matter (PM₂.₅) tend to be higher, affecting a large portion of the population.
+        </p>
+
+        <ul>
+          <li>
+            <img src="assets/img/NO2.png" alt="NO₂ symbol" title="NO₂" style="height: 80px; width: auto; vertical-align: middle; margin-right: 24px;">
+            <div>
+              <h5>Nitrogen dioxide</h5>
+              <p>NO₂ is a harmful gas produced mainly by traffic emissions, especially from diesel vehicles, as well as by industrial processes and power generation. It contributes to the formation of ground-level ozone and fine particulate matter, worsening overall air quality. Prolonged exposure to NO₂ irritates the respiratory system and increases the risk of asthma, bronchitis, and other chronic lung diseases. According to the WHO air quality guidelines, the recommended annual average concentration of NO₂ should not exceed 10 µg/m³.</p>
+            </div>
+          </li>
+          <li>
+            <img src="assets/img/PM2_5.png" alt="PM2.5 symbol" title="PM2.5" style="height: 80px; width: auto; vertical-align: middle; margin-right: 24px;">
+            <div>
+              <h5>Fine particulate matter</h5>
+              <p>PM₂.₅ refers to airborne particles with a diameter of less than 2.5 micrometers. These particles are emitted from vehicle exhausts, residential heating (especially wood and coal burning), industrial activities, and atmospheric chemical reactions. Due to their small size, PM₂.₅ particles can penetrate deep into the lungs and even enter the bloodstream, causing cardiovascular and respiratory diseases, and increasing the risk of stroke, cancer, and premature death. The WHO recommends that the annual average concentration of PM₂.₅ should not exceed 5 µg/m³.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- RIGHT COLUMN: MAP IMAGES -->
+      <div class="col-lg-6 order-first order-lg-last text-end" data-aos="fade-up" data-aos-delay="200">
+
+        <!-- MAP NO2 -->
+        <div>
+          <img id="myImageNO2" src="assets/img/exposure to NO2.png" class="img-fluid zoom-image" style="max-width: 70%;" alt="Exposure to NO₂">
+          <p class="mt-2 text-muted" style="font-size: 0.8rem;">
+            Mortality due to long-term exposure to NO₂ in 2022
+            <br>Source: EEA
+          </p>
+          <a href="https://www.eea.europa.eu/en/analysis/publications/harm-to-human-health-from-air-pollution-2024/map-2-mortality-due-to-long-term-exposure-to-no2-2022"
+            target="_blank"
+            class="d-block text-end text-decoration-underline"
+            style="font-size: 0.8rem; color: #007bff;">
+            Full article: European Environment Agency
+          </a>
+        </div>
+        <!-- END MAP NO2 -->
+
+        <!-- MAP PM2.5 -->
+        <div class="mt-4">
+          <img id="myImagePM25" src="assets/img/exposure to PM2.5.png" class="img-fluid zoom-image" style="max-width: 70%;" alt="Exposure to PM₂.₅">
+          <p class="mt-2 text-muted" style="font-size: 0.8rem;">
+            Mortality due to long-term exposure to PM2.5 in 2022
+            <br>Source: EEA
+          </p>
+          <a href="https://www.eea.europa.eu/en/analysis/publications/harm-to-human-health-from-air-pollution-2024/map-1-mortality-due-to-long-term-exposure-to-pm2-5-2022"
+            target="_blank"
+            class="d-block text-end text-decoration-underline"
+            style="font-size: 0.8rem; color: #007bff;">
+            Full article: European Environment Agency
+          </a>
+        </div>
+        <!-- END MAP PM2.5 -->
+
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLES for zoom -->
+  <style>
+    .zoom-image {
+      cursor: zoom-in;
+    }
+
+    .overlay-fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      cursor: zoom-out;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .overlay-fullscreen.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .overlay-fullscreen img {
+      max-width: 90vw;
+      max-height: 90vh;
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+      border-radius: 8px;
+    }
+  </style>
+
+  <!-- OVERLAYS -->
+  <div id="overlayNO2" class="overlay-fullscreen">
+    <img src="" alt="Enlarged NO₂ map">
+  </div>
+
+  <div id="overlayPM25" class="overlay-fullscreen">
+    <img src="" alt="Enlarged PM₂.₅ map">
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // NO2 image zoom
+    const imgNO2 = document.getElementById('myImageNO2');
+    const overlayNO2 = document.getElementById('overlayNO2');
+    const overlayImgNO2 = overlayNO2.querySelector('img');
+    imgNO2.addEventListener('click', () => {
+      overlayImgNO2.src = imgNO2.src;
+      overlayNO2.classList.add('active');
+    });
+    overlayNO2.addEventListener('click', () => {
+      overlayNO2.classList.remove('active');
+    });
+
+    // PM2.5 image zoom
+    const imgPM25 = document.getElementById('myImagePM25');
+    const overlayPM25 = document.getElementById('overlayPM25');
+    const overlayImgPM25 = overlayPM25.querySelector('img');
+    imgPM25.addEventListener('click', () => {
+      overlayImgPM25.src = imgPM25.src;
+      overlayPM25.classList.add('active');
+    });
+    overlayPM25.addEventListener('click', () => {
+      overlayPM25.classList.remove('active');
+    });
+  </script>
+
+</section><!-- /About Section -->
+
+
+    <!-- THREE CATEGORIES -->
+ <!-- Featured Services Section -->
+    <section id="featured-services" class="featured-services section">
 
       <div class="container">
 
         <div class="row gy-4">
 
-        <div class="col-lg-6 position-relative align-self-start order-lg-last order-first text-end" data-aos="fade-up" data-aos-delay="200">
-  <img id="myImage" src="assets/img/1920x1080_cmsv2_83d09d36-6498-5c80-8ee1-f70a53fd6e97-8318546.jpg.webp" class="img-fluid" alt="">
-  <p class="mt-2 text-muted" style="font-size: 0.95rem;">
-  Concentrations of PM2.5 around the globe. Source: IQAir
-</p>
-<a href="https://www.euronews.com/green/2024/12/14/only-seven-countries-in-the-world-breathe-safe-air-three-of-them-are-in-europe" target="_blank" class="d-block text-end text-decoration-underline" style="font-size: 0.9rem; color: #007bff;">
-  Full article: Euronews
-</a>
-</div>
-
-
-<style>
-  /* Stile cursore */
-  #myImage {
-    cursor: zoom-in;
-  }
-
-  /* Overlay fullscreen */
-  #overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    cursor: zoom-out;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  #overlay.active {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  /* Immagine ingrandita dentro overlay */
-  #overlay img {
-    max-width: 90vw;
-    max-height: 90vh;
-    box-shadow: 0 0 20px rgba(255,255,255,0.5);
-    border-radius: 8px;
-  }
-</style>
-
-<!-- Overlay nascosto -->
-<div id="overlay">
-  <img src="" alt="Enlarged image">
-</div>
-
-<script>
-  const img = document.getElementById('myImage');
-  const overlay = document.getElementById('overlay');
-  const overlayImg = overlay.querySelector('img');
-
-  img.addEventListener('click', () => {
-    overlayImg.src = img.src;  // Copia src nell'overlay
-    overlay.classList.add('active');
-  });
-
-  // Chiudi overlay cliccando sull'overlay stesso
-  overlay.addEventListener('click', () => {
-    overlay.classList.remove('active');
-  });
-</script>
-
-          <div class="col-lg-6 content order-last  order-lg-first" data-aos="fade-up" data-aos-delay="100">
-            <h3>Why mapping air pollution in Bosnia and Herzegovina </h3>
-            <p>
-              This platform presents the results of a research project analyzing air pollution trends across Bosnia and
-              Herzegovina using open-source geospatial data and WebGIS technologies. It combines atmospheric models,
-              population grids, and land cover data to assess the exposure of citizens to NO₂, PM2.5, and PM10 over the
-              last decade, highlighting key urban and environmental dynamics.
-
-            <ul>
-              <li>
-                <img src="assets/img/NO2.png" alt="NO₂ symbol" title="NO₂" style="height: 80px; width: auto; vertical-align: middle; margin-right: 24px;">
-                <div>
-                  <h5>Understanding the Spatial Patterns of Pollution</h5>
-                  <p>Air pollution distribution is not uniform. Our maps reveal how concentrations vary between urban
-                    centers and rural regions, with major hotspots around Sarajevo, Banja Luka, and Tuzla.</p>
-                </div>
-              </li>
-              <li>
-                <img src="assets/img/PM2_5.png" alt="PM2.5 symbol" title="PM2.5" style="height: 80px; width: auto; vertical-align: middle; margin-right: 24px;">
-                <div>
-                  <h5>The Role of Seasonality and Heating Practices</h5>
-                  <p>Winter months show significantly higher pollutant levels, mainly due to widespread use of solid
-                    fuels for residential heating. December is the most critical period across the country.</p>
-                </div>
-              </li>
-            </ul>
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div>
+              <h4 class="title">Understanding the Spatial Patterns of Pollution</h4>
+              <p class="description"> Air pollution distribution is not uniform. Our maps reveal how concentrations vary between urban centers and rural regions, with major hotspots around Sarajevo, Banja Luka, and Tuzla.</p>
+             </div>
           </div>
+          <!-- End Service Item -->
 
-    </section><!-- /About Section -->
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
+            <div>
+              <h4 class="title">The Role of Seasonality and Heating Practices</h4>
+              <p class="description">Winter months show significantly higher pollutant levels, mainly due to widespread use of solid fuels for residential heating. December is the most critical period across the country.</p>
+               </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="300">
+            <div>
+              <h4 class="title"> Population Exposure and Vulnerability </h4>
+              <p class="description">Not all communities are equally affected by air pollution. Densely populated areas face higher health risks. By combining pollution data with population density, our analysis highlights where public health interventions are most urgently needed.</p>
+             </div>
+          </div><!-- End Service Item -->
+
+
+
+
+
 
     <!-- Services Section -->
     <section id="services" class="services section">
@@ -236,7 +308,8 @@
       <div class="container section-title" data-aos="fade-up">
         <span>Urbanization Map<br></span>
         <h2>Urbanization Map</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p> The map below highlights the main urban areas of the country, where the intersection of population density and pollution levels is most critical. 
+          <br>Understanding these spatial patterns is a key step toward mitigating health risks and promoting sustainable development in the region.</p>
       </div><!-- End Section Title -->
       
       <!-- MAPPA INTERATTIVA -->
