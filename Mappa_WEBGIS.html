@@ -105,7 +105,7 @@
     }
 
     .leaflet-control-layers-expanded.overlay-control {
-      width: 150px !important;
+      width: 250px !important;
     }
 
     /* Scala grafica */
@@ -268,48 +268,120 @@
     map.getPane('wmsPane').style.zIndex = 650;
 
     // Overlay WMS
-    const bosniaBoundaryLayer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-      layers: 'gisgeoserver_18:BOSNIA_BOUNDARIES',
-      format: 'image/png',
-      transparent: true,
-      attribution: '© GeoServer Polimi',
-      pane: 'wmsPane'
-    });
+const bosniaBoundaryLayer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_BOUNDARIES',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
 
-    const urbanAreasLayer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-      layers: 'gisgeoserver_18:BOSNIA_URBAN_AREAS',
-      format: 'image/png',
-      transparent: true,
-      attribution: '© GeoServer Polimi',
-      pane: 'wmsPane'
-    });
+const urbanAreasLayer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_URBAN_AREAS',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
 
-    const cantonsLayer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-      layers: 'gisgeoserver_18:BOSNIA_CANTONS',
-      format: 'image/png',
-      transparent: true,
-      attribution: '© GeoServer Polimi',
-      pane: 'wmsPane'
-    });
+const cantonsLayer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_CANTONS',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
 
-    // Aggiungo overlay all'avvio (facoltativo)
-    bosniaBoundaryLayer.addTo(map);
-    urbanAreasLayer.addTo(map);
-    cantonsLayer.addTo(map);
+// Additional Overlay WMS Layers
+const no2Cams2022Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_CAMS_NO2_2022_12',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
 
-    // Mappe base e overlay
-    const baseMaps = {
-      "No basemap": noBasemap,
-      "OpenStreetMap": osm,
-      "Satellite": satellite,
-      "Carto Light": cartoLight
-    };
+const lcReclassified2022Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_LC_reclassified_2022',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
 
-    const overlayMaps = {
-      "Bosnia Boundaries": bosniaBoundaryLayer,
-      "Urban Areas": urbanAreasLayer,
-      "Cantons": cantonsLayer
-    };
+const no2Aad2022Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_NO2_2017-2022_AAD_map_2022',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const no2Bivariate2020Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_NO2_2020_bivariate',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const no2Concentration2020Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_NO2_concentration_map_2020',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const no2ZonalStatsLayer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_NO2_zonal_statistics_2013-2022',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const no2Average2022Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_average_NO2_2022',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const no2Chart2020Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_no2_2020_chart',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+// Aggiungo overlay all'avvio (facoltativo)
+bosniaBoundaryLayer.addTo(map);
+cantonsLayer.addTo(map);
+
+// Mappe base e overlay
+const baseMaps = {
+  "No basemap": noBasemap,
+  "OpenStreetMap": osm,
+  "Satellite": satellite,
+  "Carto Light": cartoLight
+};
+
+const overlayMaps = {
+  "Bosnia Boundaries": bosniaBoundaryLayer,
+  "Urban Areas": urbanAreasLayer,
+  "Cantons": cantonsLayer,
+  "NO₂ CAMS December 2022": no2Cams2022Layer,
+  "Land Cover 2022 (Reclassified)": lcReclassified2022Layer,
+  "NO₂ AAD Map 2022": no2Aad2022Layer,
+  "NO₂ Bivariate Map 2020": no2Bivariate2020Layer,
+  "NO₂ Concentration 2020": no2Concentration2020Layer,
+  "NO₂ Zonal Statistics 2013–2022": no2ZonalStatsLayer,
+  "Average NO₂ 2022": no2Average2022Layer,
+  "NO₂ Chart 2020": no2Chart2020Layer
+};
 
     // Controlli layer separati con classi personalizzate
     const baseMapsControl = L.control.layers(baseMaps, null, { position: 'topright' });
