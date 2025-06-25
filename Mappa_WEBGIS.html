@@ -357,6 +357,15 @@ const no2Chart2020Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/g
   pane: 'wmsPane'
 });
 
+const 	Population_Quantiles_reclassified = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: '	gisgeoserver_18:Population_Quantiles_reclassified',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+
 // Aggiungo overlay all'avvio (facoltativo)
 bosniaBoundaryLayer.addTo(map);
 cantonsLayer.addTo(map);
@@ -380,7 +389,8 @@ const overlayMaps = {
   "NO₂ Concentration 2020": no2Concentration2020Layer,
   "NO₂ Zonal Statistics 2013–2022": no2ZonalStatsLayer,
   "NO₂ Average 2022": no2Average2022Layer,
-  "NO₂ Chart 2020": no2Chart2020Layer
+  "NO₂ Chart 2020": no2Chart2020Layer,
+  "Population Quantiles (Reclassified)": Population_Quantiles_reclassified
 };
 
     // Controlli layer separati con classi personalizzate
