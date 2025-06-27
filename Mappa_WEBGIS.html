@@ -201,6 +201,15 @@
       margin-right: 6px;
       border: 1px solid #000;
     }
+
+    #legend i {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: middle;
+  border: 1px solid #000;
+}
   </style>
 </head>
 <body>
@@ -268,6 +277,7 @@
     map.getPane('wmsPane').style.zIndex = 650;
 
     // Overlay WMS
+// Aggiunta layer WMS
 const bosniaBoundaryLayer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
   layers: 'gisgeoserver_18:BOSNIA_BOUNDARIES',
   format: 'image/png',
@@ -292,7 +302,6 @@ const cantonsLayer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoser
   pane: 'wmsPane'
 });
 
-// Additional Overlay WMS Layers
 const no2Cams2022Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
   layers: 'gisgeoserver_18:BOSNIA_CAMS_NO2_2022_12',
   format: 'image/png',
@@ -357,48 +366,48 @@ const no2Chart2020Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/g
   pane: 'wmsPane'
 });
 
-const 	Population_Quantiles_reclassified = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-  layers: '	gisgeoserver_18:Population_Quantiles_reclassified',
+const Population_Quantiles_reclassified = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:Population_Quantiles_reclassified',
   format: 'image/png',
   transparent: true,
   attribution: '© GeoServer Polimi',
   pane: 'wmsPane'
 });
 
-const 	PM2p5average2022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-  layers: '	gisgeoserver_18:BOSNIA_average_pm2p5_2022',
+const PM2p5average2022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_average_pm2p5_2022',
   format: 'image/png',
   transparent: true,
   attribution: '© GeoServer Polimi',
   pane: 'wmsPane'
 });
 
-const 	PM2p5concentration2020 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-  layers: '	gisgeoserver_18:BOSNIA_pm2p5_concentration_map_2020_2020 ',
+const PM2p5concentration2020 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_pm2p5_concentration_map_2020_2020',
   format: 'image/png',
   transparent: true,
   attribution: '© GeoServer Polimi',
   pane: 'wmsPane'
 });
 
-const 	PM2p5CAMS2022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-  layers: ' gisgeoserver_18:BOSNIA_CAMS_pm2p5_2022_12 ',
+const PM2p5CAMS2022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_CAMS_pm2p5_2022_12',
   format: 'image/png',
   transparent: true,
   attribution: '© GeoServer Polimi',
   pane: 'wmsPane'
 });
 
-const 	PM2p5AAD2022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-  layers: ' gisgeoserver_18:BOSNIA_pm2p5 _2017-2021_AAD_map _2022 ',
+const PM2p5AAD2022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_pm2p5_2017-2021_AAD_map_2022',
   format: 'image/png',
   transparent: true,
   attribution: '© GeoServer Polimi',
   pane: 'wmsPane'
 });
 
-const 	PM2p5zonalstatistics20132022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-  layers: ' gisgeoserver_18:BOSNIA_zonal_statistics__pm2p5_2013 ',
+const PM2p5zonalstatistics20132022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: 'gisgeoserver_18:BOSNIA_zonal_statistics__pm2p5_2013',
   format: 'image/png',
   transparent: true,
   attribution: '© GeoServer Polimi',
@@ -406,14 +415,14 @@ const 	PM2p5zonalstatistics20132022 = L.tileLayer.wms('https://www.gis-geoserver
 });
 
 const PM2p5Bivariate2020Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
-  layers: ' gisgeoserver_18:bosnia_pm2p5_2020_bivariate ',
+  layers: 'gisgeoserver_18:bosnia_pm2p5_2020_bivariate',
   format: 'image/png',
   transparent: true,
   attribution: '© GeoServer Polimi',
   pane: 'wmsPane'
 });
 
-// Aggiungo overlay all'avvio (facoltativo)
+// Aggiunta layer iniziali
 bosniaBoundaryLayer.addTo(map);
 cantonsLayer.addTo(map);
 
@@ -446,35 +455,114 @@ const overlayMaps = {
   "Population Quantiles (Reclassified)": Population_Quantiles_reclassified
 };
 
-    // Controlli layer separati con classi personalizzate
-    const baseMapsControl = L.control.layers(baseMaps, null, { position: 'topright' });
-    baseMapsControl.addTo(map);
-    baseMapsControl._container.classList.add('basemap-control');
+// Controlli layer
+const baseMapsControl = L.control.layers(baseMaps, null, { position: 'topright' });
+baseMapsControl.addTo(map);
+baseMapsControl._container.classList.add('basemap-control');
 
-    const overlayMapsControl = L.control.layers(null, overlayMaps, { position: 'topright' });
-    overlayMapsControl.addTo(map);
-    overlayMapsControl._container.classList.add('overlay-control');
+const overlayMapsControl = L.control.layers(null, overlayMaps, { position: 'topright' });
+overlayMapsControl.addTo(map);
+overlayMapsControl._container.classList.add('overlay-control');
 
-    // Legenda toggle: controllo vuoto usato come bottone
-    const legendControl = L.control.layers({}, {}, { position: 'topright' });
-    legendControl.addTo(map);
-    legendControl._container.classList.add('legend-control');
+const legendControl = L.control.layers({}, {}, { position: 'topright' });
+legendControl.addTo(map);
+legendControl._container.classList.add('legend-control');
 
-    legendControl._container.addEventListener('click', function(e) {
-      e.stopPropagation();
+legendControl._container.addEventListener('click', function(e) {
+  e.stopPropagation();
+  const legend = document.getElementById('legend');
+  if (!legend) return;
+  legend.style.display = legend.style.display === 'block' ? 'none' : 'block';
+});
 
-      const legend = document.getElementById('legend');
-      if (!legend) {
-        console.error('Div #legend non trovato');
-        return;
-      }
+function aggiornaLegenda() {
+  const legendDiv = document.getElementById('legend');
+  legendDiv.innerHTML = '';
+  const layerLegend = [
+    {
+      layer: no2Cams2022Layer,
+      html: `
+        <b>NO₂ CAMS 12/2022</b>
+        <ul>
+          <li><i style="background:red"></i> > 40 µg/m³</li>
+          <li><i style="background:orange"></i> 20–40 µg/m³</li>
+          <li><i style="background:green"></i> < 20 µg/m³</li>
+        </ul>`
+    },
+    {
+      layer: no2Aad2022Layer,
+      html: `
+        <b>NO₂ AAD Map 2022</b>
+        <ul>
+          <li><i style="background:#800026"></i> > 30 µg/m³</li>
+          <li><i style="background:#FC4E2A"></i> 20–30 µg/m³</li>
+          <li><i style="background:#FED976"></i> 10–20 µg/m³</li>
+          <li><i style="background:#31a354"></i> < 10 µg/m³</li>
+        </ul>`
+    },
+    {
+      layer: no2Bivariate2020Layer,
+      html: `
+        <b>NO₂ Bivariate 2020</b>
+        <ul>
+          <li><i style="background:#e8e8e8"></i> Low-Low</li>
+          <li><i style="background:#fbb4ae"></i> High-Low</li>
+          <li><i style="background:#b3cde3"></i> Low-High</li>
+          <li><i style="background:#f768a1"></i> High-High</li>
+        </ul>`
+    },
+    {
+      layer: PM2p5CAMS2022,
+      html: `
+        <b>PM2.5 CAMS 12/2022</b>
+        <ul>
+          <li><i style="background:#bd0026"></i> > 35 µg/m³</li>
+          <li><i style="background:#f03b20"></i> 25–35 µg/m³</li>
+          <li><i style="background:#feb24c"></i> 15–25 µg/m³</li>
+          <li><i style="background:#ffeda0"></i> < 15 µg/m³</li>
+        </ul>`
+    },
+    {
+      layer: PM2p5AAD2022,
+      html: `
+        <b>PM2.5 AAD Map 2022</b>
+        <ul>
+          <li><i style="background:#800026"></i> > 30 µg/m³</li>
+          <li><i style="background:#FC4E2A"></i> 20–30 µg/m³</li>
+          <li><i style="background:#FEB24C"></i> 10–20 µg/m³</li>
+          <li><i style="background:#FFEDA0"></i> < 10 µg/m³</li>
+        </ul>`
+    },
+    {
+      layer: PM2p5zonalstatistics20132022,
+      html: `
+        <b>PM2.5 Zonal Statistics 2013–2022</b>
+        <ul>
+          <li><i style="background:#c7e9b4"></i> Down</li>
+          <li><i style="background:#41b6c4"></i> Stable</li>
+          <li><i style="background:#253494"></i> Up</li>
+        </ul>`
+    },
+    {
+      layer: Population_Quantiles_reclassified,
+      html: `
+        <b>Population Quantiles (Reclassified)</b>
+        <ul>
+          <li><i style="background:#edf8fb"></i> Q1 (lowest)</li>
+          <li><i style="background:#b2e2e2"></i> Q2</li>
+          <li><i style="background:#66c2a4"></i> Q3</li>
+          <li><i style="background:#238b45"></i> Q4 (highest)</li>
+        </ul>`
+    }
+  ];
 
-      if (legend.style.display === 'block') {
-        legend.style.display = 'none';
-      } else {
-        legend.style.display = 'block';
-      }
-    });
+  const visible = layerLegend.find(item => map.hasLayer(item.layer));
+  legendDiv.innerHTML = visible ? visible.html : '<i>Attiva un layer per vedere la legenda</i>';
+}
+
+map.on('overlayadd', aggiornaLegenda);
+map.on('overlayremove', aggiornaLegenda);
+aggiornaLegenda();
 
     // Pulsante resetView
     document.getElementById('resetView').addEventListener('click', () => {
