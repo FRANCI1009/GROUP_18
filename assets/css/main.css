@@ -1274,6 +1274,13 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 20%);
 }
 
+.features .fst-italic {
+  font-style: normal;
+  font-weight: bold;
+  color: #000;
+}
+
+
 .features .features-item+.features-item {
   margin-top: 100px;
 }

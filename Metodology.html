@@ -216,35 +216,83 @@
       <div class="container section-title" data-aos="fade-up">
         <span>OUR ELABORATIONS</span>
         <h2>OUR ELABORATIONS</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Methodological Workflow for Mapping Air Pollution (NO₂ and PM2.₅)</p>
       </div><!-- End Section Title -->
 
       <div class="container">
+  <div class="row gy-4 align-items-start features-item">
 
-        <div class="row gy-4 align-items-center features-item">
-          <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
-            <img src="assets/img/features-1.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <h3>Step 1 – Data Acquisition and Preprocessing.</h3>
-            <p class="fst-italic">
-              The initial goal of the project was to analyze atmospheric concentrations of three major air pollutants (NO₂, PM₂.₅) over the period 2013–2022. The data were obtained from the CAMS Reanalysis dataset as monthly NetCDF raster files and imported into QGIS for processing.
-            </p>
-            <ul>
-              <li><i class="bi bi-check"></i><span> Importing NetCDF files as raster layers.</span></li>
-              <li><i class="bi bi-check"></i> <span>Clipping to the Area of Interest (AOI) to isolate the national territory.</span>
-              </li>
-              <li><i class="bi bi-check"></i> <span>Temporal aggregation: daily and monthly data were averaged to generate annual mean maps for each pollutant and each year.</span></li>
-              <li><i class="bi bi-check"></i> <span>Reprojected to match the AOI’s spatial reference system.</span></li>
-              <li><i class="bi bi-check"></i> <span>Clipped to the national extent.</span></li>
-              <li><i class="bi bi-check"></i> <span>Reclassified according to IPCC guidelines to enable meaningful analysis of land-use and air pollution interactions.</span></li>
-            </ul>
-          </div>
+    <!-- Colonna sinistra: due immagini -->
+    <div class="col-md-5 d-flex flex-column" data-aos="zoom-out" data-aos-delay="100">
+      <img src="assets/img/MAPPE_METODOLOGY/LAND_COVER_RAW.jpeg" class="img-fluid mb-4" alt="">
+    </br>
+    </br>
+      <img src="assets/img/METODOLOGY-STEPS/Health guidelines.png" class="img-fluid" alt="">
+</div>
+
+    <!-- Colonna destra: testo -->
+    <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+      <h3>Step 1 – Elaborations on pollution data</h3>
+
+      <p class="fst-italic">1.1. From CAMS netCDF to yearly aggregated pollutants</p>
+      <ul>
+        <li><i class="bi bi-check"></i><span> Data source: Downloaded monthly-aggregated NetCDF files for NO₂ and PM2.₅ from the CAMS European Air Quality Reanalysis Dataset.</span></li>
+        <li><i class="bi bi-check"></i> <span>Temporal aggregation (monthly): daily data were averaged to generate monthly mean maps for each pollutant, using "Mesh Calculator" to compute the monthly means for December 2022 (the only month missing).</span></li>
+        <li><i class="bi bi-check"></i> <span>Change the format: from mesh to tif, with "Rasterize mesh dataset" for NO₂ and PM2.₅ for December 2022 (the only month missing).</span></li>
+        <li><i class="bi bi-check"></i> <span>Projection Alignment: All rasters were reprojected to EPSG:4326 (WGS 84) for consistency with population and land cover datasets.</span></li>
+        <li><i class="bi bi-check"></i> <span>Clipping to Study Area: All layers were spatially clipped using the official vector boundary of the assigned case study (Bosnia and Herzegovina), with "Clip Raster by Mask Layer". This reduced dataset size and improved performance.</span></li>
+        <li><i class="bi bi-check"></i> <span>Temporal aggregation (yearly): monthly-aggregated data were averaged to generate annual mean maps for each pollutant, using "r.series" to compute the annual means for each year (2013-2022) and each pollutant (NO₂, PM₂.₅).</span></li>
+        </ul>
+</br>
+</br>
+</br>
+</br>
+      <p class="fst-italic">1.2. From yearly aggregated pollutants to yearly concentration maps</p>
+      <ul>
+        <li><i class="bi bi-check"></i><span> Data source: Loaded all the tif files for the each pollutant for all years (2013-2022)</span></li>
+        <li><i class="bi bi-check"></i> <span>Reclassification: Reclassified the yearly maps into the 5 classes according to EU guidelines, using "Reclassify by table".</span></li>
+      </ul>
+      <div class="col-md-12" data-aos="zoom-out" data-aos-delay="100">
+  <div class="d-flex flex-row align-items-start gap-4">
+    
+    <!-- Immagine più grande -->
+    <img src="assets/img/METODOLOGY-STEPS/Health guidelines.png" class="img-fluid" style="width: 400px;" alt="">
+
+    <!-- Blocco di testo più piccolo -->
+    <div style="width: 400px; font-size: 0.95rem; background-color: #eef1fe; padding: 15px 20px; border-radius: 10px;">
+  <strong>According to the Current EU limit values, the Annual Limit Values are:</strong><br><br>
+  <strong>NO₂:</strong> 40 µg/m³<br>
+  <strong>PM₂.₅:</strong> 25 µg/m³
+</div>
+
+
+  </div>
+</div>
+
+
+
+
+
+      </br>
+      </br>
+      <p class="fst-italic">1.3. From yearly concentration maps to Annual Average Difference 2017-2021</p>
+      <ul>
+        <li><i class="bi bi-check"></i><span> Data source: yearly average maps for each pollutant between 2017 and 2022.</span></li>
+        <li><i class="bi bi-check"></i> <span>Average: calculated the difference between the annual average concentration in 2022 and the mean of the previous years, using "Raster Calculator".</span></li>
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+</br>
+</br>
+</br>
         </div><!-- Features Item -->
 
        <div class="row gy-4 align-items-center features-item">
   <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-    <img src="assets/img/features-2.jpg" class="img-fluid" alt="">
+    <img src="assets/img/??.png" class="img-fluid" alt="">
   </div>
   <div class="col-md-7 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
     <h3>Step 2 – Air Quality Trends and Land Cover Analysis</h3>
@@ -264,8 +312,8 @@
           </div>
           <div class="col-md-7" data-aos="fade-up">
             <h3>Step 3 – Population Exposure and Health Threshold Reclassification</h3>
-            <p>To evaluate population exposure to air pollution, the WorldPop (2020) dataset was used, providing high-resolution raster data of population density.
-.</p>
+            <p class="fst-italic"> To evaluate population exposure to air pollution, the WorldPop (2020) dataset was used, providing high-resolution raster data of population density.
+            </p>
             <ul>
               <li><i class="bi bi-check"></i> <span>Reclassified based on WHO air quality thresholds, such as:
 	•	NO₂: 10 µg/m³ (annual mean)
