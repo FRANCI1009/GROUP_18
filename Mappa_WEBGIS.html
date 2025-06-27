@@ -365,6 +365,53 @@ const 	Population_Quantiles_reclassified = L.tileLayer.wms('https://www.gis-geos
   pane: 'wmsPane'
 });
 
+const 	PM2p5average2022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: '	gisgeoserver_18:BOSNIA_average_pm2p5_2022',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const 	PM2p5concentration2020 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: '	gisgeoserver_18:BOSNIA_pm2p5_concentration_map_2020_2020 ',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const 	PM2p5CAMS2022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: ' gisgeoserver_18:BOSNIA_CAMS_pm2p5_2022_12 ',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const 	PM2p5AAD2022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: ' gisgeoserver_18:BOSNIA_pm2p5 _2017-2021_AAD_map _2022 ',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const 	PM2p5zonalstatistics20132022 = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: ' gisgeoserver_18:BOSNIA_zonal_statistics__pm2p5_2013 ',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
+
+const PM2p5Bivariate2020Layer = L.tileLayer.wms('https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_18/wms', {
+  layers: ' gisgeoserver_18:bosnia_pm2p5_2020_bivariate ',
+  format: 'image/png',
+  transparent: true,
+  attribution: '© GeoServer Polimi',
+  pane: 'wmsPane'
+});
 
 // Aggiungo overlay all'avvio (facoltativo)
 bosniaBoundaryLayer.addTo(map);
@@ -390,6 +437,12 @@ const overlayMaps = {
   "NO₂ Zonal Statistics 2013–2022": no2ZonalStatsLayer,
   "NO₂ Average 2022": no2Average2022Layer,
   "NO₂ Chart 2020": no2Chart2020Layer,
+  "PM2p5 CAMS 12/2022": PM2p5CAMS2022,
+  "PM2p5 AAD Map 2022": PM2p5AAD2022,
+  "PM2p5 Concentration 2020": PM2p5concentration2020,
+  "PM2p5 Average 2022": PM2p5average2022,
+  "PM2p5 Zonal Statistics 2013–2022": PM2p5zonalstatistics20132022,
+  "PM2p5 Bivariate Map 2020": PM2p5Bivariate2020Layer,
   "Population Quantiles (Reclassified)": Population_Quantiles_reclassified
 };
 
