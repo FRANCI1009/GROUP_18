@@ -84,7 +84,7 @@
         font-weight: 600;
         border: 1.5px solid #1976d2;
         pointer-events: auto;
-        display: flex;
+        display: none; /* Nascondi di default */
         align-items: center;
         gap: 6px;
         border-left: none;
@@ -281,19 +281,33 @@
   </head>
   <body>
     <button id="toggleLayerPanel" title="Layer GeoServer" style="position:absolute;top:10px;right:10px;z-index:11;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#1976d2" stroke-width="2" fill="#fff"/><path d="M7 12h10M12 7v10" stroke="#1976d2" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path d="M12 3L3 8.25l9 5.25 9-5.25L12 3z" stroke="#1976d2" stroke-width="1.3" fill="#fff"/>
+        <path d="M3 15.75l9 5.25 9-5.25" stroke="#1976d2" stroke-width="1.3" fill="none"/>
+        <path d="M3 12l9 5.25 9-5.25" stroke="#1976d2" stroke-width="1.3" fill="none"/>
+      </svg>
     </button>
     <button id="toggleBasemapPanel" title="Cambia Basemap" style="position:absolute;top:60px;right:10px;z-index:11;background:#fff;border:1px solid #ccc;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.10);cursor:pointer;font-size:22px;padding:0;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#1976d2" stroke-width="2" fill="#fff"/><path d="M3 17l4-4 4 4 4-4 4 4" stroke="#1976d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" stroke="#1976d2" stroke-width="1.3" fill="#fff"/>
+        <ellipse cx="12" cy="12" rx="6" ry="10" stroke="#1976d2" stroke-width="1.3" fill="none"/>
+        <ellipse cx="12" cy="12" rx="10" ry="6" stroke="#1976d2" stroke-width="1.3" fill="none"/>
+        <path d="M2 12h20" stroke="#1976d2" stroke-width="1.3" fill="none"/>
+      </svg>
     </button>
     <button id="toggleLegendPanel" title="Mostra/Nascondi leggenda">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#1976d2" stroke-width="2" fill="#fff"/><path d="M8 11h8M8 15h8" stroke="#1976d2" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <rect x="4" y="6" width="4" height="4" fill="#1976d2" stroke="#1976d2" stroke-width="1"/>
+        <rect x="4" y="14" width="4" height="4" fill="#43a047" stroke="#43a047" stroke-width="1"/>
+        <line x1="10" y1="8" x2="20" y2="8" stroke="#1976d2" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="10" y1="16" x2="20" y2="16" stroke="#43a047" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
     </button>
-    <div id="layerPanel" style="display:none;position:absolute;top:10px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:220px;">
+    <div id="layerPanel" style="display:none;position:absolute;top:10px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:220px;border-radius:8px;">
       <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer1"> Layer 1 (esempio)</label>
       <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer2"> Layer 2 (esempio)</label>
     </div>
-    <div id="basemapPanel" style="display:none;position:absolute;top:60px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:180px;">
+    <div id="basemapPanel" style="display:none;position:absolute;top:60px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:180px;border-radius:8px;">
       <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="none"> Nessuna basemap</label>
       <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="osm" checked> OpenStreetMap</label>
       <label style="display:block;margin-bottom:0;"><input type="radio" name="basemap" value="sat"> Satellitare</label>
@@ -302,366 +316,193 @@
       <h4>Legenda</h4>
       <div id="legendContent"></div>
     </div>
-    <div id="pixelValueDisplay">Valore: &mdash;</div>
+    <div id="pixelValueDisplay">
+      <span id="pixelValueText">Valore: &mdash;</span>
+      <button id="closePixelValueBtn" title="Chiudi" style="margin-left:12px;background:none;border:none;color:#1976d2;font-size:18px;cursor:pointer;padding:0;line-height:1;">&times;</button>
+    </div>
     <div id="coordDisplay">
       <div id="latlonDisplay" class="info-panel">Lat: &mdash; | Long: &mdash;</div>
     </div>
     <div id="map"></div>
     <div id="scaleLineWrapper"></div>
     <button id="backToMapBtn" title="Back to map">Back to map</button>
-    <!-- Pulsanti demo per spostare Layer 3 -->
-    <div style="position:absolute;top:120px;left:10px;z-index:20;">
-      <button onclick="portaLayerInCima('layer3')" style="margin-bottom:6px;padding:6px 12px;font-size:13px;">Layer 3 in cima</button><br>
-      <button onclick="portaLayerInFondo('layer3')" style="padding:6px 12px;font-size:13px;">Layer 3 in fondo</button>
-    </div>
     <script type="text/javascript">
+      // Utility: mostra/nasconde pannelli e aggiorna classi attive
+      function togglePanel(panel, btn, others) {
+        others.forEach(function(o) { o.panel.style.display = 'none'; o.btn.classList.remove('panel-btn-active'); });
+        panel.style.display = (panel.style.display === 'block' ? 'none' : 'block');
+        btn.classList.toggle('panel-btn-active', panel.style.display === 'block');
+      }
       // Basemap layers
-      var osmBase = new ol.layer.Tile({
-        source: new ol.source.OSM(),
-        visible: true
-      });
-      var emptyBase = new ol.layer.Tile({
-        source: new ol.source.TileImage({
-          tileUrlFunction: function() { return ""; }
-        }),
-        visible: false
-      });
-      var satBase = new ol.layer.Tile({
-        source: new ol.source.XYZ({
-          url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-          attributions: 'Tiles © Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-        }),
-        visible: false
-      });
-      // Ricrea la mappa con i nuovi basemap
-      var map = new ol.Map({
-        target: 'map',
-        layers: [osmBase, emptyBase, satBase],
-        view: new ol.View({
-          center: [17.6791, 43.9159], // centroide Bosnia Erzegovina
-          zoom: 8,
-          projection: 'EPSG:4326'
-        })
-      });
-      // Configurazione base per tutti i layer WMS
+      var osmBase = new ol.layer.Tile({ source: new ol.source.OSM(), visible: true });
+      var emptyBase = new ol.layer.Tile({ source: new ol.source.TileImage({ tileUrlFunction: function() { return ""; } }), visible: false });
+      var satBase = new ol.layer.Tile({ source: new ol.source.XYZ({ url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', attributions: 'Tiles © Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community' }), visible: false });
+      var map = new ol.Map({ target: 'map', layers: [osmBase, emptyBase, satBase], view: new ol.View({ center: [17.6791, 43.9159], zoom: 8, projection: 'EPSG:4326' }) });
+      // WMS config
       var wmsBaseUrl = 'https://www.gis-geoserver.polimi.it/geoserver/ows?';
       var wmsWorkspace = 'gisgeoserver_18';
       var wmsLayerNames = [
-        'BOSNIA_BOUNDARIES',
-        'BOSNIA_CANTONS',
-        'BOSNIA_URBAN_AREAS',
-        'BOSNIA_LC_reclassified_2022',
-        'POP_QUANTILES_RECLASS',
-        'BOSNIA_CAMS_NO2_2022_12',
-        'BOSNIA_average_NO2_2022',
-        'BOSNIA_NO2_concentration_map_2020',
-        'BOSNIA_NO2_2017-2022_AAD_map_2022',
-        'BOSNIA_NO2_zonal_statistics_2013-2022',
-        'BOSNIA_NO2_2020_bivariate',
-        'BOSNIA_CAMS_pm2p5_2022_12',
-        'BOSNIA_average_pm2p5_2022',
-        'BOSNIA_pm2p5_concentration_map_2020_2020',
-        'BOSNIA_pm2p5 _2017-2021_AAD_map _2022',
-        'BOSNIA_zonal_statistics__pm2p5_2013',
-        'bosnia_pm2p5_2020_bivariate'
+        'BOSNIA_BOUNDARIES','BOSNIA_CANTONS','BOSNIA_URBAN_AREAS','BOSNIA_LC_reclassified_2022','POP_QUANTILES_RECLASS',
+        'BOSNIA_CAMS_NO2_2022_12','BOSNIA_average_NO2_2022','BOSNIA_NO2_concentration_map_2020','BOSNIA_NO2_2017-2022_AAD_map_2022','BOSNIA_NO2_zonal_statistics_2013-2022','BOSNIA_NO2_2020_bivariate',
+        'BOSNIA_CAMS_pm2p5_2022_12','BOSNIA_average_pm2p5_2022','BOSNIA_pm2p5_concentration_map_2020_2020','BOSNIA_pm2p5 _2017-2021_AAD_map _2022','BOSNIA_zonal_statistics__pm2p5_2013','bosnia_pm2p5_2020_bivariate'
+      ];
+      var layerNames = [
+        'Bosnia Boundaries','Cantons','Urban Areas','Land Cover 2022 (Reclassified)','Population Quantiles (Reclassified)',
+        'NO₂ CAMS 12/2022','NO₂ Average 2022','NO₂ Concentration 2020','NO₂ AAD Map 2022','NO₂ Zonal Statistics 2013–2022','NO₂ Bivariate Map 2020',
+        'PM2p5 CAMS 12/2022','PM2p5 Average 2022','PM2p5 Concentration 2020','PM2p5 AAD Map 2022','PM2p5 Zonal Statistics 2013–2022','PM2p5 Bivariate Map 2020'
       ];
       var wmsLayers = {};
-      for (var i = 0; i < wmsLayerNames.length; i++) {
-        var key = 'layer' + (i + 1);
-        wmsLayers[key] = new ol.layer.Tile({
+      wmsLayerNames.forEach(function(name, i) {
+        wmsLayers['layer'+(i+1)] = new ol.layer.Tile({
           source: new ol.source.TileWMS({
             url: wmsBaseUrl,
-            params: {
-              'LAYERS': wmsWorkspace + ':' + wmsLayerNames[i],
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
+            params: { 'LAYERS': wmsWorkspace+':'+name, 'TILED': true, 'FORMAT': 'image/png', 'TRANSPARENT': true },
+            serverType: 'geoserver', crossOrigin: 'anonymous'
           }),
           visible: false
         });
-      }
-      // Aggiungi tutti i layer WMS alla mappa (inizialmente invisibili)
-      Object.values(wmsLayers).forEach(function(layer) {
-        map.addLayer(layer);
+        map.addLayer(wmsLayers['layer'+(i+1)]);
       });
-      // Gestione pannello layer
-      var layerPanelBtn = document.getElementById('toggleLayerPanel');
-      var basemapPanelBtn = document.getElementById('toggleBasemapPanel');
-      var legendPanelBtn = document.getElementById('toggleLegendPanel');
-      var layerPanelDiv = document.getElementById('layerPanel');
-      var basemapPanelDiv = document.getElementById('basemapPanel');
-      var legendPanelDiv = document.getElementById('legendPanel');
-      function updatePanelBtnActive() {
-        if (layerPanelDiv.style.display === 'block') {
-          layerPanelBtn.classList.add('panel-btn-active');
-        } else {
-          layerPanelBtn.classList.remove('panel-btn-active');
-        }
-        if (basemapPanelDiv.style.display === 'block') {
-          basemapPanelBtn.classList.add('panel-btn-active');
-        } else {
-          basemapPanelBtn.classList.remove('panel-btn-active');
-        }
-        if (legendPanelDiv.style.display === 'block') {
-          legendPanelBtn.classList.add('panel-btn-active');
-        } else {
-          legendPanelBtn.classList.remove('panel-btn-active');
-        }
-      }
-      layerPanelBtn.addEventListener('click', function() {
-        // Chiudi il pannello basemap e leggenda se aperti
-        if (basemapPanelDiv.style.display === 'block') {
-          basemapPanelDiv.style.display = 'none';
-        }
-        if (legendPanelDiv.style.display === 'block') {
-          legendPanelDiv.style.display = 'none';
-        }
-        layerPanelDiv.style.display = (layerPanelDiv.style.display === 'none' ? 'block' : 'none');
-        updatePanelBtnActive();
-      });
-      basemapPanelBtn.addEventListener('click', function() {
-        // Chiudi il pannello layer e leggenda se aperti
-        if (layerPanelDiv.style.display === 'block') {
-          layerPanelDiv.style.display = 'none';
-        }
-        if (legendPanelDiv.style.display === 'block') {
-          legendPanelDiv.style.display = 'none';
-        }
-        basemapPanelDiv.style.display = (basemapPanelDiv.style.display === 'none' ? 'block' : 'none');
-        updatePanelBtnActive();
-      });
-      legendPanelBtn.addEventListener('click', function() {
-        // Chiudi altri pannelli se necessario
-        if (layerPanelDiv.style.display === 'block') layerPanelDiv.style.display = 'none';
-        if (basemapPanelDiv.style.display === 'block') basemapPanelDiv.style.display = 'none';
-        legendPanelDiv.style.display = (legendPanelDiv.style.display === 'none' ? 'block' : 'none');
-        updatePanelBtnActive();
-        if (legendPanelDiv.style.display === 'block') updateLegendContent();
-      });
+      // Pannelli e bottoni
+      var btns = {
+        layer: { btn: document.getElementById('toggleLayerPanel'), panel: document.getElementById('layerPanel') },
+        basemap: { btn: document.getElementById('toggleBasemapPanel'), panel: document.getElementById('basemapPanel') },
+        legend: { btn: document.getElementById('toggleLegendPanel'), panel: document.getElementById('legendPanel') }
+      };
+      btns.layer.btn.onclick = function() { togglePanel(btns.layer.panel, btns.layer.btn, [btns.basemap, btns.legend]); };
+      btns.basemap.btn.onclick = function() { togglePanel(btns.basemap.panel, btns.basemap.btn, [btns.layer, btns.legend]); };
+      btns.legend.btn.onclick = function() { togglePanel(btns.legend.panel, btns.legend.btn, [btns.layer, btns.basemap]); if(btns.legend.panel.style.display==='block') updateLegendContent(); };
+      // Basemap radio
       document.querySelectorAll('#basemapPanel input[name=basemap]').forEach(function(radio) {
-        radio.addEventListener('change', function(e) {
+        radio.onchange = function(e) {
           var val = e.target.value;
-          osmBase.setVisible(val === 'osm');
-          emptyBase.setVisible(val === 'none');
-          satBase.setVisible(val === 'sat');
-        });
+          osmBase.setVisible(val==='osm');
+          emptyBase.setVisible(val==='none');
+          satBase.setVisible(val==='sat');
+        };
       });
-      // Nomi personalizzati per i layer
-      var layerNames = [
-        'Bosnia Boundaries',
-        'Cantons',
-        'Urban Areas',
-        'Land Cover 2022 (Reclassified)',
-        'Population Quantiles (Reclassified)',
-        'NO₂ CAMS 12/2022',
-        'NO₂ Average 2022',
-        'NO₂ Concentration 2020',
-        'NO₂ AAD Map 2022',
-        'NO₂ Zonal Statistics 2013–2022',
-        'NO₂ Bivariate Map 2020',
-        'PM2p5 CAMS 12/2022',
-        'PM2p5 Average 2022',
-        'PM2p5 Concentration 2020',
-        'PM2p5 AAD Map 2022',
-        'PM2p5 Zonal Statistics 2013–2022',
-        'PM2p5 Bivariate Map 2020'
-      ];
-      // Aggiorna il pannello layer con gruppi NO2 e PM2.5 chiudibili
-      var layerPanel = document.getElementById('layerPanel');
-      layerPanel.innerHTML = '';
-      // Gruppi
-      var groupNO2 = document.createElement('details');
-      groupNO2.style.marginBottom = '16px';
-      var groupNO2Summary = document.createElement('summary');
-      groupNO2Summary.textContent = 'NO₂ Layers';
-      groupNO2Summary.style.marginBottom = '12px';
-      groupNO2.appendChild(groupNO2Summary);
-      var groupPM25 = document.createElement('details');
-      groupPM25.style.marginBottom = '0px';
-      var groupPM25Summary = document.createElement('summary');
-      groupPM25Summary.textContent = 'PM2.5 Layers';
-      groupPM25Summary.style.marginBottom = '12px';
-      groupPM25.appendChild(groupPM25Summary);
-      // Altri layer
-      for (var i = 1; i <= wmsLayerNames.length; i++) {
-        var label = document.createElement('label');
-        label.style.display = 'block';
-        label.style.marginBottom = '16px';
-        var checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.value = 'layer' + i;
-        label.appendChild(checkbox);
-        var nome = layerNames[i-1] || ('Layer ' + i);
-        label.appendChild(document.createTextNode(' ' + nome));
-        // Raggruppa
-        if (nome.startsWith('NO₂')) {
-          groupNO2.appendChild(label);
-        } else if (nome.startsWith('PM2p5')) {
-          groupPM25.appendChild(label);
-        } else {
-          layerPanel.appendChild(label);
-        }
-      }
-      // Sposta i gruppi NO2 e PM2.5 in fondo
-      layerPanel.appendChild(groupNO2);
-      layerPanel.appendChild(groupPM25);
-      // Ricollega i listener per i nuovi checkbox
-      document.querySelectorAll('#layerPanel input[type=checkbox]').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function(e) {
-          var key = e.target.value;
-          wmsLayers[key].setVisible(e.target.checked);
+      // Generazione dinamica pannello layer con gruppi
+      (function(){
+        var panel = btns.layer.panel;
+        panel.innerHTML = '';
+        var group = { NO2: document.createElement('details'), PM25: document.createElement('details') };
+        group.NO2.style.marginBottom = '16px';
+        group.PM25.style.marginBottom = '0px';
+        var sNO2 = document.createElement('summary'); sNO2.textContent = 'NO₂ Layers'; sNO2.style.marginBottom = '12px';
+        var sPM = document.createElement('summary'); sPM.textContent = 'PM2.5 Layers'; sPM.style.marginBottom = '12px';
+        group.NO2.appendChild(sNO2); group.PM25.appendChild(sPM);
+        layerNames.forEach(function(nome, i){
+          var label = document.createElement('label');
+          label.style.display = 'block'; label.style.marginBottom = '16px';
+          var cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = 'layer'+(i+1);
+          label.appendChild(cb); label.appendChild(document.createTextNode(' '+nome));
+          if(nome.startsWith('NO₂')) group.NO2.appendChild(label);
+          else if(nome.startsWith('PM2p5')) group.PM25.appendChild(label);
+          else panel.appendChild(label);
         });
-      });
+        panel.appendChild(group.NO2); panel.appendChild(group.PM25);
+        panel.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+          cb.onchange = function(e){ wmsLayers[e.target.value].setVisible(e.target.checked); if(btns.legend.panel.style.display==='block') updateLegendContent(); };
+        });
+      })();
       // Mostra lat/lon del cursore
-      var coordDiv = document.getElementById('coordDisplay');
-      var pixelValueDiv = document.getElementById('pixelValueDisplay');
       var latlonDiv = document.getElementById('latlonDisplay');
-      // Funzione per ottenere il valore pixel dal WMS attivo
-      var lastFeatureInfoTimeout = null;
       map.on('pointermove', function(evt) {
-        var coord = evt.coordinate;
-        if (coord) {
-          var lon = coord[0].toFixed(5);
-          var lat = coord[1].toFixed(5);
-          latlonDiv.innerHTML = 'Lat: ' + lat + ' | Long: ' + lon;
-          // Throttle richieste GetFeatureInfo
-          if (lastFeatureInfoTimeout) clearTimeout(lastFeatureInfoTimeout);
-          lastFeatureInfoTimeout = setTimeout(function() {
-            getPixelValueAtCoord(evt.coordinate);
-          }, 120);
-        } else {
-          latlonDiv.innerHTML = 'Lat: &mdash; | Long: &mdash;';
-          pixelValueDiv.innerHTML = 'Valore: &mdash;';
-        }
+        var c = evt.coordinate;
+        latlonDiv.innerHTML = c ? 'Lat: '+c[1].toFixed(5)+' | Long: '+c[0].toFixed(5) : 'Lat: &mdash; | Long: &mdash;';
       });
-      function getPixelValueAtCoord(coordinate) {
-        // Trova il primo layer WMS visibile (puoi estendere per più layer)
+      // Chiudi valore pixel
+      var closePixelValueBtn = document.getElementById('closePixelValueBtn');
+      if(closePixelValueBtn) closePixelValueBtn.onclick = function(e){ e.stopPropagation(); document.getElementById('pixelValueDisplay').style.display = 'none'; };
+      // Valore pixel su click
+      map.on('singleclick', function(evt) {
+        var coord = evt.coordinate, pixelValueDiv = document.getElementById('pixelValueDisplay'), pixelValueText = document.getElementById('pixelValueText');
+        if(!coord) { pixelValueDiv.style.display = 'none'; return; }
         var found = false;
-        for (var i = 1; i <= wmsLayerNames.length; i++) {
-          var key = 'layer' + i;
-          if (wmsLayers[key] && wmsLayers[key].getVisible()) {
-            var view = map.getView();
-            var resolution = view.getResolution();
-            var size = map.getSize();
-            var extent = view.calculateExtent(size);
-            var x = Math.round((coordinate[0] - extent[0]) / resolution);
-            var y = Math.round((extent[3] - coordinate[1]) / resolution);
-            var url = wmsBaseUrl +
-              'SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo' +
-              '&LAYERS=' + encodeURIComponent(wmsWorkspace + ':' + wmsLayerNames[i-1]) +
-              '&QUERY_LAYERS=' + encodeURIComponent(wmsWorkspace + ':' + wmsLayerNames[i-1]) +
-              '&STYLES=&BBOX=' + extent.join(',') +
-              '&FEATURE_COUNT=1' +
-              '&HEIGHT=' + size[1] +
-              '&WIDTH=' + size[0] +
-              '&FORMAT=image/png' +
-              '&INFO_FORMAT=application/json' +
-              '&SRS=EPSG:4326' +
-              '&X=' + x + '&Y=' + y;
-            fetch(url)
-              .then(function(response) { return response.json(); })
-              .then(function(json) {
-                var value = '&mdash;';
-                if (json.features && json.features.length > 0) {
-                  var props = json.features[0].properties;
-                  // Mostra il primo valore numerico trovato
-                  for (var k in props) {
-                    if (typeof props[k] === 'number' || !isNaN(parseFloat(props[k]))) {
-                      value = props[k];
-                      break;
-                    }
-                  }
-                }
-                pixelValueDiv.innerHTML = 'Valore: ' + value;
-              })
-              .catch(function() {
-                pixelValueDiv.innerHTML = 'Valore: &mdash;';
-              });
-            found = true;
-            break;
+        for(var i=1;i<=wmsLayerNames.length;i++){
+          var key='layer'+i;
+          if(wmsLayers[key]&&wmsLayers[key].getVisible()){
+            var v=map.getView(), r=v.getResolution(), s=map.getSize(), e=v.calculateExtent(s);
+            var x=Math.round((coord[0]-e[0])/r), y=Math.round((e[3]-coord[1])/r);
+            var url=wmsBaseUrl+'SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS='+encodeURIComponent(wmsWorkspace+':'+wmsLayerNames[i-1])+'&QUERY_LAYERS='+encodeURIComponent(wmsWorkspace+':'+wmsLayerNames[i-1])+'&STYLES=&BBOX='+e.join(',')+'&FEATURE_COUNT=1&HEIGHT='+s[1]+'&WIDTH='+s[0]+'&FORMAT=image/png&INFO_FORMAT=application/json&SRS=EPSG:4326&X='+x+'&Y='+y;
+            fetch(url).then(r=>r.json()).then(function(json){
+              var value='&mdash;';
+              if(json.features&&json.features.length>0){
+                var props=json.features[0].properties;
+                for(var k in props){ if(typeof props[k]==='number'||!isNaN(parseFloat(props[k]))){ value=props[k]; break; } }
+              }
+              pixelValueText.innerHTML='Valore: '+value; pixelValueDiv.style.display='flex';
+            }).catch(function(){ pixelValueText.innerHTML='Valore: &mdash;'; pixelValueDiv.style.display='flex'; });
+            found=true; break;
           }
         }
-        if (!found) {
-          pixelValueDiv.innerHTML = 'Valore: &mdash;';
-        }
-      }
-      // Pulsante back to map (centroide Bosnia Erzegovina: lon=17.6791, lat=43.9159)
-      document.getElementById('backToMapBtn').addEventListener('click', function() {
-        map.getView().animate({
-          center: [17.6791, 43.9159],
-          zoom: 8,
-          duration: 600
-        });
+        if(!found){ pixelValueText.innerHTML='Valore: &mdash;'; pixelValueDiv.style.display='flex'; }
       });
-      // Aggiunta scala grafica minimale
-      var scaleLineControl = new ol.control.ScaleLine({
-        units: 'metric',
-        bar: false,
-        steps: 2,
-        minWidth: 80,
-        target: document.getElementById('scaleLineWrapper')
-      });
-      map.addControl(scaleLineControl);
-      // Aggiorna la leggenda dinamicamente in base ai layer visibili
+      // Pulsante back to map
+      document.getElementById('backToMapBtn').onclick = function(){ map.getView().animate({ center: [17.6791, 43.9159], zoom: 8, duration: 600 }); };
+      // Scala grafica minimale
+      map.addControl(new ol.control.ScaleLine({ units: 'metric', bar: false, steps: 2, minWidth: 80, target: document.getElementById('scaleLineWrapper') }));
+      // Legenda dinamica
       function updateLegendContent() {
         var legendContent = document.getElementById('legendContent');
         legendContent.innerHTML = '';
-        for (var i = 1; i <= wmsLayerNames.length; i++) {
-          var key = 'layer' + i;
-          if (wmsLayers[key] && wmsLayers[key].getVisible()) {
-            var layerName = wmsLayerNames[i-1];
-            var label = layerNames[i-1] || layerName;
-            var legendUrl = wmsBaseUrl +
-              'SERVICE=WMS&VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/png&WIDTH=32&HEIGHT=18&LAYER=' +
-              encodeURIComponent(wmsWorkspace + ':' + layerName);
-            var entry = document.createElement('div');
-            entry.className = 'legend-entry';
-            var labelDiv = document.createElement('div');
-            labelDiv.className = 'legend-label';
-            labelDiv.textContent = label;
-            var img = document.createElement('img');
-            img.className = 'legend-img';
-            img.src = legendUrl;
-            img.alt = 'Legenda ' + label;
-            entry.appendChild(labelDiv);
-            entry.appendChild(img);
-            legendContent.appendChild(entry);
+        wmsLayerNames.forEach(function(layerName, i){
+          var key='layer'+(i+1);
+          if(wmsLayers[key]&&wmsLayers[key].getVisible()){
+            var label=layerNames[i]||layerName;
+            var legendUrl=wmsBaseUrl+'SERVICE=WMS&VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/png&WIDTH=32&HEIGHT=18&LAYER='+encodeURIComponent(wmsWorkspace+':'+layerName);
+            var entry=document.createElement('div'); entry.className='legend-entry';
+            var labelDiv=document.createElement('div'); labelDiv.className='legend-label'; labelDiv.textContent=label;
+            var img=document.createElement('img'); img.className='legend-img'; img.src=legendUrl; img.alt='Legenda '+label;
+            entry.appendChild(labelDiv); entry.appendChild(img); legendContent.appendChild(entry);
           }
-        }
-        if (!legendContent.innerHTML) {
-          legendContent.innerHTML = '<span style="color:#888;">Nessun layer visibile</span>';
-        }
-      }
-      // Aggiorna la leggenda ogni volta che cambia la visibilità dei layer
-      document.querySelectorAll('#layerPanel input[type=checkbox]').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-          if (legendPanelDiv.style.display === 'block') updateLegendContent();
         });
+        if(!legendContent.innerHTML) legendContent.innerHTML='<span style="color:#888;">Nessun layer visibile</span>';
+      }
+      // RIMOSSO: Fullscreen toggle logic e variabili correlate
+      // Dopo la creazione della mappa, aggiungi il tasto custom tra i bottoni zoom
+      map.once('postrender', function() {
+        var zoomCtrl = document.querySelector('.ol-zoom');
+        if (zoomCtrl) {
+          var zoomInBtn = zoomCtrl.querySelector('.ol-zoom-in');
+          var zoomOutBtn = zoomCtrl.querySelector('.ol-zoom-out');
+          var customBtn = document.createElement('button');
+          customBtn.type = 'button';
+          customBtn.className = 'ol-zoom-custom';
+          customBtn.title = 'Fullscreen';
+          customBtn.setAttribute('tabindex', '0');
+          customBtn.setAttribute('aria-label', 'Fullscreen');
+          // Simbolo fullscreen semplice: 4 angoli neri
+          customBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 9V4h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9V4h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          customBtn.onclick = function(e) {
+            e.preventDefault();
+            var elem = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+            var mapDiv = document.getElementById('map');
+            if (!elem) {
+              if (mapDiv.requestFullscreen) mapDiv.requestFullscreen();
+              else if (mapDiv.webkitRequestFullscreen) mapDiv.webkitRequestFullscreen();
+              else if (mapDiv.mozRequestFullScreen) mapDiv.mozRequestFullScreen();
+              else if (mapDiv.msRequestFullscreen) mapDiv.msRequestFullscreen();
+            } else {
+              if (document.exitFullscreen) document.exitFullscreen();
+              else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+              else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+              else if (document.msExitFullscreen) document.msExitFullscreen();
+            }
+          };
+          // Rimuovi i bottoni esistenti e reinseriscili nell'ordine: zoom-in, zoom-out, custom
+          zoomCtrl.appendChild(customBtn); // temporaneo, per avere 3 bottoni
+          var btns = Array.from(zoomCtrl.querySelectorAll('button'));
+          btns.forEach(function(btn){ zoomCtrl.removeChild(btn); });
+          zoomCtrl.appendChild(zoomInBtn);
+          zoomCtrl.appendChild(zoomOutBtn);
+          zoomCtrl.appendChild(customBtn);
+        }
       });
-      // ESEMPIO: Spostare un layer sopra o sotto gli altri sulla mappa OpenLayers
-      // Sposta il layer 'layer3' (ad esempio) sopra tutti gli altri layer WMS
-      function portaLayerInCima(layerKey) {
-        var lyr = wmsLayers[layerKey];
-        if (!lyr) return;
-        var layersCollection = map.getLayers();
-        layersCollection.remove(lyr);
-        // Inserisci subito dopo le basemap (che sono i primi 3 layer)
-        layersCollection.insertAt(3, lyr);
-      }
-      // Sposta il layer 'layer3' in fondo (sotto tutti gli altri WMS)
-      function portaLayerInFondo(layerKey) {
-        var lyr = wmsLayers[layerKey];
-        if (!lyr) return;
-        var layersCollection = map.getLayers();
-        layersCollection.remove(lyr);
-        layersCollection.push(lyr);
-      }
-      // Esempio d'uso:
-      // portaLayerInCima('layer3'); // porta il layer 3 sopra gli altri WMS
-      // portaLayerInFondo('layer3'); // porta il layer 3 sotto gli altri WMS
+      // Stile per il nuovo bottone zoom custom, icone sempre nere e nessun cambio colore su hover/click
+      var style = document.createElement('style');
+      style.innerHTML = `.ol-zoom button, .ol-zoom-custom {\n  background: #fff;\n  color: #222;\n  border: 1px solid #ccc;\n  width: 32px;\n  height: 32px;\n  font-size: 18px;\n  border-radius: 4px;\n  margin: 0 !important;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: background 0.2s, color 0.2s;\n  cursor: pointer;\n  padding: 0;\n  outline: none;\n}\n.ol-zoom button:focus, .ol-zoom-custom:focus {\n  box-shadow: 0 0 0 2px #1976d2;\n}\n.ol-zoom button:hover, .ol-zoom-custom:hover {\n  background: #eaeaea;\n  color: #222;\n  border-color: #1976d2;\n}\n.ol-zoom button svg, .ol-zoom-custom svg {\n  stroke: #222 !important;\n  fill: #fff !important;\n}\n.ol-zoom button svg path, .ol-zoom button svg circle, .ol-zoom button svg rect,\n.ol-zoom-custom svg path, .ol-zoom-custom svg circle, .ol-zoom-custom svg rect {\n  stroke: #222 !important;\n  fill: #fff !important;\n}\n`;
+      document.head.appendChild(style);
     </script>
   </body>
 </html>
