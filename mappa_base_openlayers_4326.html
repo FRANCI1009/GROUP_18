@@ -276,23 +276,65 @@
         margin-bottom: 2px;
       }
       /* --- RIMOSSO: .ol-control.custom-fullscreen e varianti --- */
+      .custom-tab-bar {
+        display: flex;
+        position: relative;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 12px;
+        background: #fff;
+        height: 38px;
+      }
+      .custom-tab-btn {
+        flex: 1;
+        background: none;
+        border: none;
+        outline: none;
+        font-family: 'Roboto', Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        color: #1976d2;
+        padding: 0 0 8px 0;
+        margin: 0;
+        cursor: pointer;
+        transition: color 0.18s;
+        border-radius: 0;
+        position: relative;
+        z-index: 1;
+      }
+      .custom-tab-btn.active {
+        color: #1976d2;
+      }
+      .custom-tab-btn:not(.active):hover {
+        color: #1565c0;
+      }
+      .custom-tab-indicator {
+        position: absolute;
+        bottom: 0;
+        left: 0%;
+        width: 50%;
+        height: 2.5px;
+        background: #1976d2;
+        border-radius: 2px 2px 0 0;
+        transition: left 0.22s cubic-bezier(.4,0,.2,1);
+        z-index: 2;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
   </head>
   <body>
-    <button id="toggleLayerPanel" title="Layer GeoServer" style="position:absolute;top:10px;right:10px;z-index:11;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path d="M12 3L3 8.25l9 5.25 9-5.25L12 3z" stroke="#1976d2" stroke-width="1.3" fill="#fff"/>
-        <path d="M3 15.75l9 5.25 9-5.25" stroke="#1976d2" stroke-width="1.3" fill="none"/>
-        <path d="M3 12l9 5.25 9-5.25" stroke="#1976d2" stroke-width="1.3" fill="none"/>
-      </svg>
-    </button>
-    <button id="toggleBasemapPanel" title="Cambia Basemap" style="position:absolute;top:60px;right:10px;z-index:11;background:#fff;border:1px solid #ccc;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.10);cursor:pointer;font-size:22px;padding:0;">
+    <button id="toggleBasemapPanel" title="Cambia Basemap" style="position:absolute;top:10px;right:10px;z-index:11;background:#fff;border:1px solid #ccc;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.10);cursor:pointer;font-size:22px;padding:0;">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="10" stroke="#1976d2" stroke-width="1.3" fill="#fff"/>
         <ellipse cx="12" cy="12" rx="6" ry="10" stroke="#1976d2" stroke-width="1.3" fill="none"/>
         <ellipse cx="12" cy="12" rx="10" ry="6" stroke="#1976d2" stroke-width="1.3" fill="none"/>
         <path d="M2 12h20" stroke="#1976d2" stroke-width="1.3" fill="none"/>
+      </svg>
+    </button>
+    <button id="toggleLayerPanel" title="Layer GeoServer" style="position:absolute;top:60px;right:10px;z-index:11;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path d="M12 3L3 8.25l9 5.25 9-5.25L12 3z" stroke="#1976d2" stroke-width="1.3" fill="#fff"/>
+        <path d="M3 15.75l9 5.25 9-5.25" stroke="#1976d2" stroke-width="1.3" fill="none"/>
+        <path d="M3 12l9 5.25 9-5.25" stroke="#1976d2" stroke-width="1.3" fill="none"/>
       </svg>
     </button>
     <button id="toggleLegendPanel" title="Mostra/Nascondi leggenda">
@@ -303,14 +345,14 @@
         <line x1="10" y1="16" x2="20" y2="16" stroke="#43a047" stroke-width="1.3" stroke-linecap="round"/>
       </svg>
     </button>
-    <div id="layerPanel" style="display:none;position:absolute;top:10px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:220px;border-radius:8px;">
-      <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer1"> Layer 1 (esempio)</label>
-      <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer2"> Layer 2 (esempio)</label>
-    </div>
-    <div id="basemapPanel" style="display:none;position:absolute;top:60px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:180px;border-radius:8px;">
+    <div id="basemapPanel" style="display:none;position:absolute;top:10px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:180px;border-radius:8px;">
       <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="none"> Nessuna basemap</label>
       <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="osm" checked> OpenStreetMap</label>
       <label style="display:block;margin-bottom:0;"><input type="radio" name="basemap" value="sat"> Satellitare</label>
+    </div>
+    <div id="layerPanel" style="display:none;position:absolute;top:60px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:220px;border-radius:8px;">
+      <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer1"> Layer 1 (esempio)</label>
+      <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer2"> Layer 2 (esempio)</label>
     </div>
     <div id="legendPanel">
       <h4>Legenda</h4>
@@ -381,10 +423,40 @@
           satBase.setVisible(val==='sat');
         };
       });
-      // Generazione dinamica pannello layer con gruppi
+      // --- INIZIO: Tabs Layer/Ordina Layer nel pannello layer ---
       (function(){
+        var sortableLoaded = false;
+        var originalOrder = null;
+        function ensureSortable(cb) {
+          if (window.Sortable) { cb(); return; }
+          if (!sortableLoaded) {
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js';
+            script.onload = function() { cb(); };
+            document.head.appendChild(script);
+            sortableLoaded = true;
+          }
+        }
         var panel = btns.layer.panel;
         panel.innerHTML = '';
+        // Tabs
+        var tabBar = document.createElement('div');
+        tabBar.className = 'custom-tab-bar';
+        var tab1 = document.createElement('button');
+        var tab2 = document.createElement('button');
+        tab1.textContent = 'Layer';
+        tab2.textContent = 'Ordina Layer';
+        tab1.className = 'custom-tab-btn active';
+        tab2.className = 'custom-tab-btn';
+        tabBar.appendChild(tab1); tabBar.appendChild(tab2);
+        // Indicatore blu
+        var tabIndicator = document.createElement('div');
+        tabIndicator.className = 'custom-tab-indicator';
+        tabBar.appendChild(tabIndicator);
+        panel.appendChild(tabBar);
+        // Sezione selezione layer (come ora)
+        var layerSection = document.createElement('div');
+        layerSection.id = 'layerSection';
         var group = { NO2: document.createElement('details'), PM25: document.createElement('details') };
         group.NO2.style.marginBottom = '16px';
         group.PM25.style.marginBottom = '0px';
@@ -398,12 +470,126 @@
           label.appendChild(cb); label.appendChild(document.createTextNode(' '+nome));
           if(nome.startsWith('NO₂')) group.NO2.appendChild(label);
           else if(nome.startsWith('PM2p5')) group.PM25.appendChild(label);
-          else panel.appendChild(label);
+          else layerSection.appendChild(label);
         });
-        panel.appendChild(group.NO2); panel.appendChild(group.PM25);
-        panel.querySelectorAll('input[type=checkbox]').forEach(function(cb){
-          cb.onchange = function(e){ wmsLayers[e.target.value].setVisible(e.target.checked); if(btns.legend.panel.style.display==='block') updateLegendContent(); };
+        layerSection.appendChild(group.NO2); layerSection.appendChild(group.PM25);
+        // Sezione ordinamento layer attivi
+        var sortSection = document.createElement('div');
+        sortSection.id = 'sortSection';
+        sortSection.style.display = 'none';
+        // Bottone reset ordine
+        var resetBtn = document.createElement('button');
+        resetBtn.textContent = 'Ripristina ordine originale';
+        resetBtn.style.background = '#fff';
+        resetBtn.style.color = '#1976d2';
+        resetBtn.style.border = '1px solid #1976d2';
+        resetBtn.style.borderRadius = '5px';
+        resetBtn.style.padding = '6px 12px';
+        resetBtn.style.fontWeight = '500';
+        resetBtn.style.fontSize = '14px';
+        resetBtn.style.cursor = 'pointer';
+        resetBtn.style.marginBottom = '12px';
+        resetBtn.style.display = 'block';
+        sortSection.appendChild(resetBtn);
+        var sortList = document.createElement('ul');
+        sortList.id = 'sortableLayerList';
+        sortList.style.listStyle = 'none';
+        sortList.style.padding = '0';
+        sortList.style.margin = '0';
+        sortSection.appendChild(sortList);
+        var sortHint = document.createElement('div');
+        sortHint.textContent = 'Trascina per cambiare l\'ordine di visualizzazione dei layer attivi.';
+        sortHint.style.fontSize = '13px';
+        sortHint.style.color = '#888';
+        sortHint.style.margin = '10px 0 0 0';
+        sortSection.appendChild(sortHint);
+        panel.appendChild(layerSection);
+        panel.appendChild(sortSection);
+        // Funzione per aggiornare la lista dei layer attivi nel sortSection
+        function updateSortableList() {
+          sortList.innerHTML = '';
+          var active = [];
+          for(var i=0;i<layerNames.length;i++){
+            var key = 'layer'+(i+1);
+            if(wmsLayers[key] && wmsLayers[key].getVisible()) {
+              active.push({key:key, name:layerNames[i]});
+            }
+          }
+          // Salva l'ordine originale solo la prima volta che ci sono layer attivi
+          if(originalOrder === null && active.length > 0) {
+            originalOrder = active.map(function(l){ return l.key; });
+          }
+          active.forEach(function(l){
+            var li = document.createElement('li');
+            li.textContent = l.name;
+            li.setAttribute('data-layer', l.key);
+            li.style.background = '#f7f7f7';
+            li.style.border = '1px solid #e0e0e0';
+            li.style.borderRadius = '5px';
+            li.style.padding = '7px 12px';
+            li.style.marginBottom = '8px';
+            li.style.cursor = 'grab';
+            li.style.fontSize = '15px';
+            li.style.color = '#1976d2';
+            sortList.appendChild(li);
+          });
+          // Inizializza/aggiorna SortableJS SOLO se è caricato
+          ensureSortable(function() {
+            if(sortList._sortable) sortList._sortable.destroy();
+            sortList._sortable = Sortable.create(sortList, {
+              animation: 150,
+              onEnd: function() {
+                var newOrder = Array.from(sortList.children).map(function(li){ return li.getAttribute('data-layer'); });
+                newOrder.reverse().forEach(function(key){
+                  var lyr = wmsLayers[key];
+                  if(lyr) { map.removeLayer(lyr); map.addLayer(lyr); }
+                });
+              }
+            });
+          });
+        }
+        // Bottone reset ordine: riporta i layer attivi all'ordine originale
+        resetBtn.onclick = function() {
+          if(!originalOrder) return;
+          // Prendi solo i layer attivi nell'ordine originale
+          var activeKeys = Array.from(sortList.children).map(function(li){ return li.getAttribute('data-layer'); });
+          var toOrder = originalOrder.filter(function(key){ return activeKeys.includes(key); });
+          // Rimuovi e riaggiungi i layer attivi secondo l'ordine originale
+          toOrder.reverse().forEach(function(key){
+            var lyr = wmsLayers[key];
+            if(lyr) { map.removeLayer(lyr); map.addLayer(lyr); }
+          });
+          // Aggiorna la lista visuale
+          updateSortableList();
+        };
+        // Aggiorna lista ordinabile ogni volta che cambia la visibilità di un layer
+        layerSection.addEventListener('change', function(e){
+          if(e.target && e.target.type==='checkbox') {
+            wmsLayers[e.target.value].setVisible(e.target.checked);
+            if(btns.legend.panel.style.display==='block') updateLegendContent();
+            updateSortableList();
+          }
         });
+        // Inizializza la lista ordinabile al primo avvio
+        setTimeout(updateSortableList, 700);
+        // Tab switching
+        function setActiveTab(idx) {
+          if(idx===0) {
+            tab1.classList.add('active'); tab2.classList.remove('active');
+            layerSection.style.display = 'block';
+            sortSection.style.display = 'none';
+            tabIndicator.style.left = '0%';
+          } else {
+            tab2.classList.add('active'); tab1.classList.remove('active');
+            layerSection.style.display = 'none';
+            sortSection.style.display = 'block';
+            updateSortableList();
+            tabIndicator.style.left = '50%';
+          }
+        }
+        tab1.onclick = function(){ setActiveTab(0); };
+        tab2.onclick = function(){ setActiveTab(1); };
+        setTimeout(function(){ setActiveTab(0); }, 10);
       })();
       // Mostra lat/lon del cursore
       var latlonDiv = document.getElementById('latlonDisplay');
@@ -472,24 +658,41 @@
           customBtn.title = 'Fullscreen';
           customBtn.setAttribute('tabindex', '0');
           customBtn.setAttribute('aria-label', 'Fullscreen');
-          // Simbolo fullscreen semplice: 4 angoli neri
-          customBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 9V4h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9V4h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          // SVG per entrare in fullscreen
+          var svgEnter = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 9V4h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9V4h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          // SVG per uscire dal fullscreen
+          var svgExit = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4H4v5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 4h5v5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          customBtn.innerHTML = svgEnter;
+          function updateFullscreenIcon() {
+            var elem = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+            customBtn.innerHTML = elem ? svgExit : svgEnter;
+            customBtn.title = elem ? 'Esci da fullscreen' : 'Fullscreen';
+            customBtn.setAttribute('aria-label', elem ? 'Esci da fullscreen' : 'Fullscreen');
+          }
           customBtn.onclick = function(e) {
             e.preventDefault();
             var elem = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-            var mapDiv = document.getElementById('map');
+            var bodyOrDoc = document.body;
             if (!elem) {
-              if (mapDiv.requestFullscreen) mapDiv.requestFullscreen();
-              else if (mapDiv.webkitRequestFullscreen) mapDiv.webkitRequestFullscreen();
-              else if (mapDiv.mozRequestFullScreen) mapDiv.mozRequestFullScreen();
-              else if (mapDiv.msRequestFullscreen) mapDiv.msRequestFullscreen();
+              if (bodyOrDoc.requestFullscreen) bodyOrDoc.requestFullscreen();
+              else if (bodyOrDoc.webkitRequestFullscreen) bodyOrDoc.webkitRequestFullscreen();
+              else if (bodyOrDoc.mozRequestFullScreen) bodyOrDoc.mozRequestFullScreen();
+              else if (bodyOrDoc.msRequestFullscreen) bodyOrDoc.msRequestFullscreen();
             } else {
               if (document.exitFullscreen) document.exitFullscreen();
               else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
               else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
               else if (document.msExitFullscreen) document.msExitFullscreen();
             }
+            // Aggiorna l'icona subito dopo il click (con piccolo delay per sicurezza)
+            setTimeout(updateFullscreenIcon, 200);
           };
+          // Aggiorna icona quando cambia lo stato fullscreen
+          ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','MSFullscreenChange'].forEach(function(ev){
+            document.addEventListener(ev, updateFullscreenIcon);
+          });
+          // Aggiorna subito all'avvio
+          updateFullscreenIcon();
           // Rimuovi i bottoni esistenti e reinseriscili nell'ordine: zoom-in, zoom-out, custom
           zoomCtrl.appendChild(customBtn); // temporaneo, per avere 3 bottoni
           var btns = Array.from(zoomCtrl.querySelectorAll('button'));
@@ -503,6 +706,35 @@
       var style = document.createElement('style');
       style.innerHTML = `.ol-zoom button, .ol-zoom-custom {\n  background: #fff;\n  color: #222;\n  border: 1px solid #ccc;\n  width: 32px;\n  height: 32px;\n  font-size: 18px;\n  border-radius: 4px;\n  margin: 0 !important;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: background 0.2s, color 0.2s;\n  cursor: pointer;\n  padding: 0;\n  outline: none;\n}\n.ol-zoom button:focus, .ol-zoom-custom:focus {\n  box-shadow: 0 0 0 2px #1976d2;\n}\n.ol-zoom button:hover, .ol-zoom-custom:hover {\n  background: #eaeaea;\n  color: #222;\n  border-color: #1976d2;\n}\n.ol-zoom button svg, .ol-zoom-custom svg {\n  stroke: #222 !important;\n  fill: #fff !important;\n}\n.ol-zoom button svg path, .ol-zoom button svg circle, .ol-zoom button svg rect,\n.ol-zoom-custom svg path, .ol-zoom-custom svg circle, .ol-zoom-custom svg rect {\n  stroke: #222 !important;\n  fill: #fff !important;\n}\n`;
       document.head.appendChild(style);
+      // Gestione fullscreen: mantieni UI visibile e navigabile
+      function handleFullscreenChange() {
+        var isFull = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+        var uiIds = [
+          'toggleBasemapPanel', 'toggleLayerPanel', 'toggleLegendPanel',
+          'basemapPanel', 'layerPanel', 'legendPanel',
+          'pixelValueDisplay', 'coordDisplay', 'scaleLineWrapper', 'backToMapBtn'
+        ];
+        uiIds.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) {
+            if (isFull) {
+              if (!el._origPos) el._origPos = el.style.position;
+              if (!el._origZ) el._origZ = el.style.zIndex;
+              el.style.position = 'fixed';
+              el.style.zIndex = '1001';
+            } else {
+              if (el._origPos !== undefined) el.style.position = el._origPos;
+              if (el._origZ !== undefined) el.style.zIndex = el._origZ;
+            }
+          }
+        });
+        setTimeout(function(){
+          if(window.map && map.updateSize) map.updateSize();
+        }, 200);
+      }
+      ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','MSFullscreenChange'].forEach(function(ev){
+        document.addEventListener(ev, handleFullscreenChange);
+      });
     </script>
   </body>
 </html>
