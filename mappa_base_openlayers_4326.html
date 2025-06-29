@@ -20,7 +20,7 @@
         top: 0;
         left: 0;
       }
-      #toggleLayerPanel {
+      #toggleLayerPanel, #toggleBasemapPanel {
         background: #fff;
         border: 1px solid #ccc;
         border-radius: 50%;
@@ -33,9 +33,64 @@
         cursor: pointer;
         font-size: 22px;
         padding: 0;
+        transition: background 0.2s, color 0.2s;
       }
-      #toggleLayerPanel:hover {
+      #toggleLayerPanel:hover, #toggleBasemapPanel:hover {
         background: #f0f0f0;
+      }
+      /* Bottone attivo: blu, simbolo bianco */
+      .active-toggle-btn {
+        background: #1976d2 !important;
+        border-color: #1976d2 !important;
+      }
+      .active-toggle-btn svg {
+        /* Cambia simbolo in bianco */
+        stroke: #fff !important;
+        fill: #1976d2 !important;
+      }
+      .active-toggle-btn svg path,
+      .active-toggle-btn svg circle,
+      .active-toggle-btn svg rect {
+        stroke: #fff !important;
+        fill: #1976d2 !important;
+      }
+      .panel-btn-active {
+        background: #1976d2 !important;
+        border-color: #1976d2 !important;
+        color: #fff !important;
+      }
+      .panel-btn-active svg circle,
+      .panel-btn-active svg rect {
+        stroke: #fff !important;
+        fill: #1976d2 !important;
+      }
+      .panel-btn-active svg path {
+        stroke: #fff !important;
+      }
+      #pixelValueDisplay {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        background: #fff;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        padding: 8px 22px;
+        min-width: 120px;
+        margin: 0;
+        font-size: 16px;
+        color: #1976d2;
+        font-weight: 600;
+        border: 1.5px solid #1976d2;
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-bottom: none;
       }
       #coordDisplay {
         position: absolute;
@@ -44,18 +99,49 @@
         z-index: 12;
         background: rgba(255,255,255,0.95);
         border-radius: 6px;
-        padding: 6px 14px;
+        padding: 0;
         font-size: 15px;
         color: #222;
         box-shadow: 0 1px 4px rgba(0,0,0,0.08);
         font-family: 'Roboto', Arial, sans-serif;
         pointer-events: none;
         min-width: 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .info-panel {
+        background: none;
+        border-radius: 6px;
+        box-shadow: none;
+        padding: 0;
+        min-width: 0;
+        margin: 0;
+        font-size: 15px;
+        color: #222;
+        border: none;
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      #latlonDisplay {
+        font-size: 17px;
+        color: #222;
+        font-weight: 400;
+        min-height: 22px;
+        /* border-left: 4px solid #bbb; */
+        border: none;
+        padding-left: 18px;
+        margin-bottom: 0;
+        background: none;
+        box-shadow: none;
+        letter-spacing: 0.5px;
       }
       /* Rimosse regole duplicate o in conflitto per .ol-scale-line e .ol-scale-bar */
       .ol-scale-line {
-        background: #1976d2 !important;
-        border: 2px solid #fff !important;
+        background: none !important;
+        border: none !important;
         color: #fff !important;
         font-size: 15px !important;
         font-weight: 500 !important;
@@ -70,9 +156,23 @@
         display: inline-block;
         overflow-x: hidden;
         letter-spacing: 0.5px;
+        font-family: 'Roboto', Arial, sans-serif !important;
+        bottom: 16px !important;
+        right: 16px !important;
+        left: auto !important;
+        top: auto !important;
       }
-      .ol-scale-bar {
-        display: none !important;
+      .ol-scale-bar { display: none !important; }
+      /* Wrapper per posizionamento custom */
+      #scaleLineWrapper {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        z-index: 14;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
       }
       #backToMapBtn {
         position: absolute;
@@ -100,6 +200,82 @@
         color: #1976d2;
         border-color: #1976d2;
       }
+      #toggleLegendPanel {
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        cursor: pointer;
+        font-size: 22px;
+        padding: 0;
+        position: absolute;
+        top: 110px;
+        right: 10px;
+        z-index: 11;
+        transition: background 0.2s, color 0.2s;
+      }
+      #toggleLegendPanel:hover {
+        background: #f0f0f0;
+      }
+      .panel-btn-active#toggleLegendPanel {
+        background: #1976d2 !important;
+        border-color: #1976d2 !important;
+        color: #fff !important;
+      }
+      .panel-btn-active#toggleLegendPanel svg path,
+      .panel-btn-active#toggleLegendPanel svg rect {
+        stroke: #fff !important;
+        fill: #1976d2 !important;
+      }
+      #legendPanel {
+        display: none;
+        position: absolute;
+        top: 110px;
+        right: 64px;
+        z-index: 10;
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 14px 16px 14px 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        min-width: 220px;
+        max-width: 320px;
+        max-height: 60vh;
+        overflow-y: auto;
+        font-family: 'Roboto', Arial, sans-serif;
+        font-size: 15px;
+        border-radius: 8px;
+      }
+      #legendPanel h4 {
+        margin: 0 0 10px 0;
+        font-size: 17px;
+        font-weight: 500;
+        color: #1976d2;
+      }
+      .legend-entry {
+        margin-bottom: 18px;
+      }
+      .legend-entry:last-child {
+        margin-bottom: 0;
+      }
+      .legend-label {
+        font-weight: 500;
+        margin-bottom: 4px;
+        color: #222;
+      }
+      .legend-img {
+        display: block;
+        max-width: 100%;
+        background: #f7f7f7;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        margin-bottom: 2px;
+      }
+      /* --- RIMOSSO: .ol-control.custom-fullscreen e varianti --- */
     </style>
     <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
   </head>
@@ -110,20 +286,34 @@
     <button id="toggleBasemapPanel" title="Cambia Basemap" style="position:absolute;top:60px;right:10px;z-index:11;background:#fff;border:1px solid #ccc;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.10);cursor:pointer;font-size:22px;padding:0;">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#1976d2" stroke-width="2" fill="#fff"/><path d="M3 17l4-4 4 4 4-4 4 4" stroke="#1976d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-    <div id="layerPanel" style="display:none;position:absolute;top:50px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:220px;">
+    <button id="toggleLegendPanel" title="Mostra/Nascondi leggenda">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#1976d2" stroke-width="2" fill="#fff"/><path d="M8 11h8M8 15h8" stroke="#1976d2" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div id="layerPanel" style="display:none;position:absolute;top:10px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:220px;">
       <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer1"> Layer 1 (esempio)</label>
       <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer2"> Layer 2 (esempio)</label>
     </div>
-    <div id="basemapPanel" style="display:none;position:absolute;top:50px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:180px;">
+    <div id="basemapPanel" style="display:none;position:absolute;top:60px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:180px;">
       <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="none"> Nessuna basemap</label>
       <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="osm" checked> OpenStreetMap</label>
       <label style="display:block;margin-bottom:0;"><input type="radio" name="basemap" value="sat"> Satellitare</label>
     </div>
-    <div id="coordDisplay" style="position:absolute;bottom:16px;left:16px;z-index:12;background:rgba(255,255,255,0.95);border-radius:6px;padding:6px 14px;font-size:15px;color:#222;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-family:'Roboto',Arial,sans-serif;pointer-events:none;min-width:120px;">
-      Lat: &mdash; | Long: &mdash;
+    <div id="legendPanel">
+      <h4>Legenda</h4>
+      <div id="legendContent"></div>
+    </div>
+    <div id="pixelValueDisplay">Valore: &mdash;</div>
+    <div id="coordDisplay">
+      <div id="latlonDisplay" class="info-panel">Lat: &mdash; | Long: &mdash;</div>
     </div>
     <div id="map"></div>
+    <div id="scaleLineWrapper"></div>
     <button id="backToMapBtn" title="Back to map">Back to map</button>
+    <!-- Pulsanti demo per spostare Layer 3 -->
+    <div style="position:absolute;top:120px;left:10px;z-index:20;">
+      <button onclick="portaLayerInCima('layer3')" style="margin-bottom:6px;padding:6px 12px;font-size:13px;">Layer 3 in cima</button><br>
+      <button onclick="portaLayerInFondo('layer3')" style="padding:6px 12px;font-size:13px;">Layer 3 in fondo</button>
+    </div>
     <script type="text/javascript">
       // Basemap layers
       var osmBase = new ol.layer.Tile({
@@ -153,13 +343,36 @@
           projection: 'EPSG:4326'
         })
       });
-      // Definisci i layer WMS (sostituisci con i tuoi dati reali)
-      var wmsLayers = {
-        'layer1': new ol.layer.Tile({
+      // Configurazione base per tutti i layer WMS
+      var wmsBaseUrl = 'https://www.gis-geoserver.polimi.it/geoserver/ows?';
+      var wmsWorkspace = 'gisgeoserver_18';
+      var wmsLayerNames = [
+        'BOSNIA_BOUNDARIES',
+        'BOSNIA_CANTONS',
+        'BOSNIA_URBAN_AREAS',
+        'BOSNIA_LC_reclassified_2022',
+        'POP_QUANTILES_RECLASS',
+        'BOSNIA_CAMS_NO2_2022_12',
+        'BOSNIA_average_NO2_2022',
+        'BOSNIA_NO2_concentration_map_2020',
+        'BOSNIA_NO2_2017-2022_AAD_map_2022',
+        'BOSNIA_NO2_zonal_statistics_2013-2022',
+        'BOSNIA_NO2_2020_bivariate',
+        'BOSNIA_CAMS_pm2p5_2022_12',
+        'BOSNIA_average_pm2p5_2022',
+        'BOSNIA_pm2p5_concentration_map_2020_2020',
+        'BOSNIA_pm2p5 _2017-2021_AAD_map _2022',
+        'BOSNIA_zonal_statistics__pm2p5_2013',
+        'bosnia_pm2p5_2020_bivariate'
+      ];
+      var wmsLayers = {};
+      for (var i = 0; i < wmsLayerNames.length; i++) {
+        var key = 'layer' + (i + 1);
+        wmsLayers[key] = new ol.layer.Tile({
           source: new ol.source.TileWMS({
-            url: 'https://www.gis-geoserver.polimi.it/geoserver/ows?', // Corretto: termina con /ows?
+            url: wmsBaseUrl,
             params: {
-              'LAYERS': 'gisgeoserver_18:BOSNIA_CAMS_NO2_2022_12',
+              'LAYERS': wmsWorkspace + ':' + wmsLayerNames[i],
               'TILED': true,
               'FORMAT': 'image/png',
               'TRANSPARENT': true
@@ -168,246 +381,8 @@
             crossOrigin: 'anonymous'
           }),
           visible: false
-        }),
-        'layer2': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer2',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer3': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer3',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer4': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer4',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer5': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer5',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer6': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer6',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer7': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer7',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer8': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer8',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer9': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer9',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer10': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer10',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer11': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer11',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer12': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer12',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer13': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer13',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer14': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer14',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer15': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer15',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer16': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer16',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer17': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer17',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        }),
-        'layer18': new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'https://TUO_GEOSERVER/geoserver/ows?',
-            params: {
-              'LAYERS': 'workspace:layer18',
-              'TILED': true,
-              'FORMAT': 'image/png',
-              'TRANSPARENT': true
-            },
-            serverType: 'geoserver',
-            crossOrigin: 'anonymous'
-          }),
-          visible: false
-        })
-      };
+        });
+      }
       // Aggiungi tutti i layer WMS alla mappa (inizialmente invisibili)
       Object.values(wmsLayers).forEach(function(layer) {
         map.addLayer(layer);
@@ -415,21 +390,56 @@
       // Gestione pannello layer
       var layerPanelBtn = document.getElementById('toggleLayerPanel');
       var basemapPanelBtn = document.getElementById('toggleBasemapPanel');
+      var legendPanelBtn = document.getElementById('toggleLegendPanel');
       var layerPanelDiv = document.getElementById('layerPanel');
       var basemapPanelDiv = document.getElementById('basemapPanel');
+      var legendPanelDiv = document.getElementById('legendPanel');
+      function updatePanelBtnActive() {
+        if (layerPanelDiv.style.display === 'block') {
+          layerPanelBtn.classList.add('panel-btn-active');
+        } else {
+          layerPanelBtn.classList.remove('panel-btn-active');
+        }
+        if (basemapPanelDiv.style.display === 'block') {
+          basemapPanelBtn.classList.add('panel-btn-active');
+        } else {
+          basemapPanelBtn.classList.remove('panel-btn-active');
+        }
+        if (legendPanelDiv.style.display === 'block') {
+          legendPanelBtn.classList.add('panel-btn-active');
+        } else {
+          legendPanelBtn.classList.remove('panel-btn-active');
+        }
+      }
       layerPanelBtn.addEventListener('click', function() {
-        // Chiudi il pannello basemap se aperto
+        // Chiudi il pannello basemap e leggenda se aperti
         if (basemapPanelDiv.style.display === 'block') {
           basemapPanelDiv.style.display = 'none';
         }
+        if (legendPanelDiv.style.display === 'block') {
+          legendPanelDiv.style.display = 'none';
+        }
         layerPanelDiv.style.display = (layerPanelDiv.style.display === 'none' ? 'block' : 'none');
+        updatePanelBtnActive();
       });
       basemapPanelBtn.addEventListener('click', function() {
-        // Chiudi il pannello layer se aperto
+        // Chiudi il pannello layer e leggenda se aperti
         if (layerPanelDiv.style.display === 'block') {
           layerPanelDiv.style.display = 'none';
         }
+        if (legendPanelDiv.style.display === 'block') {
+          legendPanelDiv.style.display = 'none';
+        }
         basemapPanelDiv.style.display = (basemapPanelDiv.style.display === 'none' ? 'block' : 'none');
+        updatePanelBtnActive();
+      });
+      legendPanelBtn.addEventListener('click', function() {
+        // Chiudi altri pannelli se necessario
+        if (layerPanelDiv.style.display === 'block') layerPanelDiv.style.display = 'none';
+        if (basemapPanelDiv.style.display === 'block') basemapPanelDiv.style.display = 'none';
+        legendPanelDiv.style.display = (legendPanelDiv.style.display === 'none' ? 'block' : 'none');
+        updatePanelBtnActive();
+        if (legendPanelDiv.style.display === 'block') updateLegendContent();
       });
       document.querySelectorAll('#basemapPanel input[name=basemap]').forEach(function(radio) {
         radio.addEventListener('change', function(e) {
@@ -452,7 +462,6 @@
         'NO₂ AAD Map 2022',
         'NO₂ Zonal Statistics 2013–2022',
         'NO₂ Bivariate Map 2020',
-        'NO₂ Chart 2020',
         'PM2p5 CAMS 12/2022',
         'PM2p5 Average 2022',
         'PM2p5 Concentration 2020',
@@ -465,22 +474,22 @@
       layerPanel.innerHTML = '';
       // Gruppi
       var groupNO2 = document.createElement('details');
-      groupNO2.style.marginBottom = '16px'; // Spaziatura coerente con i layer
+      groupNO2.style.marginBottom = '16px';
       var groupNO2Summary = document.createElement('summary');
       groupNO2Summary.textContent = 'NO₂ Layers';
-      groupNO2Summary.style.marginBottom = '12px'; // Spaziatura sotto il summary
+      groupNO2Summary.style.marginBottom = '12px';
       groupNO2.appendChild(groupNO2Summary);
       var groupPM25 = document.createElement('details');
-      groupPM25.style.marginBottom = '0px'; // Ridotto lo spazio bianco sotto la sezione PM2.5
+      groupPM25.style.marginBottom = '0px';
       var groupPM25Summary = document.createElement('summary');
       groupPM25Summary.textContent = 'PM2.5 Layers';
-      groupPM25Summary.style.marginBottom = '12px'; // Spaziatura sotto il summary
+      groupPM25Summary.style.marginBottom = '12px';
       groupPM25.appendChild(groupPM25Summary);
       // Altri layer
-      for (var i = 1; i <= 18; i++) {
+      for (var i = 1; i <= wmsLayerNames.length; i++) {
         var label = document.createElement('label');
         label.style.display = 'block';
-        label.style.marginBottom = '16px'; // aumentato da 6px a 16px per maggiore leggibilità
+        label.style.marginBottom = '16px';
         var checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.value = 'layer' + i;
@@ -496,6 +505,7 @@
           layerPanel.appendChild(label);
         }
       }
+      // Sposta i gruppi NO2 e PM2.5 in fondo
       layerPanel.appendChild(groupNO2);
       layerPanel.appendChild(groupPM25);
       // Ricollega i listener per i nuovi checkbox
@@ -507,16 +517,77 @@
       });
       // Mostra lat/lon del cursore
       var coordDiv = document.getElementById('coordDisplay');
+      var pixelValueDiv = document.getElementById('pixelValueDisplay');
+      var latlonDiv = document.getElementById('latlonDisplay');
+      // Funzione per ottenere il valore pixel dal WMS attivo
+      var lastFeatureInfoTimeout = null;
       map.on('pointermove', function(evt) {
         var coord = evt.coordinate;
         if (coord) {
           var lon = coord[0].toFixed(5);
           var lat = coord[1].toFixed(5);
-          coordDiv.innerHTML = 'Lat: ' + lat + ' | Long: ' + lon;
+          latlonDiv.innerHTML = 'Lat: ' + lat + ' | Long: ' + lon;
+          // Throttle richieste GetFeatureInfo
+          if (lastFeatureInfoTimeout) clearTimeout(lastFeatureInfoTimeout);
+          lastFeatureInfoTimeout = setTimeout(function() {
+            getPixelValueAtCoord(evt.coordinate);
+          }, 120);
         } else {
-          coordDiv.innerHTML = 'Lat: &mdash; | Long: &mdash;';
+          latlonDiv.innerHTML = 'Lat: &mdash; | Long: &mdash;';
+          pixelValueDiv.innerHTML = 'Valore: &mdash;';
         }
       });
+      function getPixelValueAtCoord(coordinate) {
+        // Trova il primo layer WMS visibile (puoi estendere per più layer)
+        var found = false;
+        for (var i = 1; i <= wmsLayerNames.length; i++) {
+          var key = 'layer' + i;
+          if (wmsLayers[key] && wmsLayers[key].getVisible()) {
+            var view = map.getView();
+            var resolution = view.getResolution();
+            var size = map.getSize();
+            var extent = view.calculateExtent(size);
+            var x = Math.round((coordinate[0] - extent[0]) / resolution);
+            var y = Math.round((extent[3] - coordinate[1]) / resolution);
+            var url = wmsBaseUrl +
+              'SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo' +
+              '&LAYERS=' + encodeURIComponent(wmsWorkspace + ':' + wmsLayerNames[i-1]) +
+              '&QUERY_LAYERS=' + encodeURIComponent(wmsWorkspace + ':' + wmsLayerNames[i-1]) +
+              '&STYLES=&BBOX=' + extent.join(',') +
+              '&FEATURE_COUNT=1' +
+              '&HEIGHT=' + size[1] +
+              '&WIDTH=' + size[0] +
+              '&FORMAT=image/png' +
+              '&INFO_FORMAT=application/json' +
+              '&SRS=EPSG:4326' +
+              '&X=' + x + '&Y=' + y;
+            fetch(url)
+              .then(function(response) { return response.json(); })
+              .then(function(json) {
+                var value = '&mdash;';
+                if (json.features && json.features.length > 0) {
+                  var props = json.features[0].properties;
+                  // Mostra il primo valore numerico trovato
+                  for (var k in props) {
+                    if (typeof props[k] === 'number' || !isNaN(parseFloat(props[k]))) {
+                      value = props[k];
+                      break;
+                    }
+                  }
+                }
+                pixelValueDiv.innerHTML = 'Valore: ' + value;
+              })
+              .catch(function() {
+                pixelValueDiv.innerHTML = 'Valore: &mdash;';
+              });
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          pixelValueDiv.innerHTML = 'Valore: &mdash;';
+        }
+      }
       // Pulsante back to map (centroide Bosnia Erzegovina: lon=17.6791, lat=43.9159)
       document.getElementById('backToMapBtn').addEventListener('click', function() {
         map.getView().animate({
@@ -525,6 +596,72 @@
           duration: 600
         });
       });
+      // Aggiunta scala grafica minimale
+      var scaleLineControl = new ol.control.ScaleLine({
+        units: 'metric',
+        bar: false,
+        steps: 2,
+        minWidth: 80,
+        target: document.getElementById('scaleLineWrapper')
+      });
+      map.addControl(scaleLineControl);
+      // Aggiorna la leggenda dinamicamente in base ai layer visibili
+      function updateLegendContent() {
+        var legendContent = document.getElementById('legendContent');
+        legendContent.innerHTML = '';
+        for (var i = 1; i <= wmsLayerNames.length; i++) {
+          var key = 'layer' + i;
+          if (wmsLayers[key] && wmsLayers[key].getVisible()) {
+            var layerName = wmsLayerNames[i-1];
+            var label = layerNames[i-1] || layerName;
+            var legendUrl = wmsBaseUrl +
+              'SERVICE=WMS&VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/png&WIDTH=32&HEIGHT=18&LAYER=' +
+              encodeURIComponent(wmsWorkspace + ':' + layerName);
+            var entry = document.createElement('div');
+            entry.className = 'legend-entry';
+            var labelDiv = document.createElement('div');
+            labelDiv.className = 'legend-label';
+            labelDiv.textContent = label;
+            var img = document.createElement('img');
+            img.className = 'legend-img';
+            img.src = legendUrl;
+            img.alt = 'Legenda ' + label;
+            entry.appendChild(labelDiv);
+            entry.appendChild(img);
+            legendContent.appendChild(entry);
+          }
+        }
+        if (!legendContent.innerHTML) {
+          legendContent.innerHTML = '<span style="color:#888;">Nessun layer visibile</span>';
+        }
+      }
+      // Aggiorna la leggenda ogni volta che cambia la visibilità dei layer
+      document.querySelectorAll('#layerPanel input[type=checkbox]').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+          if (legendPanelDiv.style.display === 'block') updateLegendContent();
+        });
+      });
+      // ESEMPIO: Spostare un layer sopra o sotto gli altri sulla mappa OpenLayers
+      // Sposta il layer 'layer3' (ad esempio) sopra tutti gli altri layer WMS
+      function portaLayerInCima(layerKey) {
+        var lyr = wmsLayers[layerKey];
+        if (!lyr) return;
+        var layersCollection = map.getLayers();
+        layersCollection.remove(lyr);
+        // Inserisci subito dopo le basemap (che sono i primi 3 layer)
+        layersCollection.insertAt(3, lyr);
+      }
+      // Sposta il layer 'layer3' in fondo (sotto tutti gli altri WMS)
+      function portaLayerInFondo(layerKey) {
+        var lyr = wmsLayers[layerKey];
+        if (!lyr) return;
+        var layersCollection = map.getLayers();
+        layersCollection.remove(lyr);
+        layersCollection.push(lyr);
+      }
+      // Esempio d'uso:
+      // portaLayerInCima('layer3'); // porta il layer 3 sopra gli altri WMS
+      // portaLayerInFondo('layer3'); // porta il layer 3 sotto gli altri WMS
     </script>
   </body>
 </html>
