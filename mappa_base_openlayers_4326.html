@@ -662,13 +662,16 @@
           var svgEnter = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 9V4h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9V4h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
           // SVG per uscire dal fullscreen
           var svgExit = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4H4v5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 4h5v5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-          customBtn.innerHTML = svgEnter;
           function updateFullscreenIcon() {
             var elem = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+            if (!customBtn) return;
+            // Forza la rimozione di eventuali SVG figli prima di impostare innerHTML
+            while (customBtn.firstChild) customBtn.removeChild(customBtn.firstChild);
             customBtn.innerHTML = elem ? svgExit : svgEnter;
             customBtn.title = elem ? 'Esci da fullscreen' : 'Fullscreen';
             customBtn.setAttribute('aria-label', elem ? 'Esci da fullscreen' : 'Fullscreen');
           }
+          customBtn.innerHTML = svgEnter;
           customBtn.onclick = function(e) {
             e.preventDefault();
             var elem = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
@@ -684,10 +687,9 @@
               else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
               else if (document.msExitFullscreen) document.msExitFullscreen();
             }
-            // Aggiorna l'icona subito dopo il click (con piccolo delay per sicurezza)
             setTimeout(updateFullscreenIcon, 200);
           };
-          // Aggiorna icona quando cambia lo stato fullscreen
+          // Listener dopo che customBtn esiste
           ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','MSFullscreenChange'].forEach(function(ev){
             document.addEventListener(ev, updateFullscreenIcon);
           });
@@ -700,6 +702,8 @@
           zoomCtrl.appendChild(zoomInBtn);
           zoomCtrl.appendChild(zoomOutBtn);
           zoomCtrl.appendChild(customBtn);
+          // Aggiorna l'icona dopo il riordino
+          updateFullscreenIcon();
         }
       });
       // Stile per il nuovo bottone zoom custom, icone sempre nere e nessun cambio colore su hover/click
