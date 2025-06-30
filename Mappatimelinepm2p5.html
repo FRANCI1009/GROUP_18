@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mappa temporale con OpenLayers + GeoServer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; padding: 0; font-family: 'Roboto', Arial, sans-serif; }
+    #map { width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; }
+    #timePanel {
+      position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+      background: #fff; border: 1.2px solid #1976d2; border-radius: 7px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10); padding: 7px 14px; z-index: 13;
+      display: flex; align-items: center; gap: 10px;
+      min-width: unset; max-width: 340px;
+      height: 38px;
+    }
+    #timeSlider { width: 170px; margin: 0 6px; }
+    #timeLabel { font-size: 15px; font-weight: 500; color: #1976d2; margin: 0 4px; }
+    #timePanel button { height:32px;width:32px; }
+    #basemapPanel {
+      position: absolute; top: 16px; right: 16px; z-index: 10;
+      background: #fff; border: 1px solid #ccc; border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.13); padding: 14px 18px; min-width: 160px;
+    }
+    .ol-scale-line { background: none !important; color: #1976d2 !important; font-weight: 500 !important; font-size: 15px !important; border-radius: 6px !important; box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important; padding: 4px 14px !important; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="basemapPanel">
+    <strong>Basemap</strong><br>
+    <label><input type="radio" name="basemap" value="osm" checked> OSM</label><br>
+    <label><input type="radio" name="basemap" value="sat"> Satellitare</label><br>
+    <label><input type="radio" name="basemap" value="light"> CartoDB Light</label>
+  </div>
+  <div id="timePanel">
+    <button id="prevYearBtn" title="Anno precedente" style="background:none;border:none;padding:0 6px;display:flex;align-items:center;justify-content:center;cursor:pointer;height:32px;width:32px;border-radius:50%;transition:background 0.18s;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#1976d2" stroke-width="1.2" fill="#fff"/><path d="M14.5 8l-4 4 4 4" stroke="#1976d2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span id="timeLabel">Anno: <b>2022</b></span>
+    <input type="range" id="timeSlider" min="2013" max="2022" step="1" value="2022">
+    <button id="nextYearBtn" title="Anno successivo" style="background:none;border:none;padding:0 6px;display:flex;align-items:center;justify-content:center;cursor:pointer;height:32px;width:32px;border-radius:50%;transition:background 0.18s;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#1976d2" stroke-width="1.2" fill="#fff"/><path d="M9.5 8l4 4-4 4" stroke="#1976d2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <script>
+    // Basemap layers
+    var osmBase = new ol.layer.Tile({ source: new ol.source.OSM(), visible: true });
+    var satBase = new ol.layer.Tile({ source: new ol.source.XYZ({ url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' }), visible: false });
+    var lightBase = new ol.layer.Tile({ source: new ol.source.XYZ({ url: 'https://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png' }), visible: false });
+    var map = new ol.Map({
+      target: 'map',
+      layers: [osmBase, satBase, lightBase],
+      view: new ol.View({ center: [17.6791, 43.9159], zoom: 8, projection: 'EPSG:4326' })
+    });
+    // Basemap switch
+    document.querySelectorAll('#basemapPanel input[name=basemap]').forEach(function(radio) {
+      radio.onchange = function(e) {
+        var val = e.target.value;
+        osmBase.setVisible(val==='osm');
+        satBase.setVisible(val==='sat');
+        lightBase.setVisible(val==='light');
+      };
+    });
+    // 10 layer WMS, uno per anno PM2.5 dal 2013 al 2022
+    var wmsBaseUrl = 'https://www.gis-geoserver.polimi.it/geoserver/ows?';
+    var wmsWorkspace = 'gisgeoserver_18';
+    var years = [2013,2014,2015,2016,2017,2018,2019,2020,2021,2022];
+    var wmsLayerNames = [
+      'BOSNIA_average_pm2p5_2013',
+      'BOSNIA_average_pm2p5_2014',
+      'BOSNIA_average_pm2p5_2015',
+      'BOSNIA_average_pm2p5_2016',
+      'BOSNIA_average_pm2p5_2017',
+      'BOSNIA_average_pm2p5_2018',
+      'BOSNIA_average_pm2p5_2019',
+      'BOSNIA_average_PM2.5_2020',
+      'BOSNIA_average_PM2.5_2021',
+      'BOSNIA_average_pm2p5_2022'
+    ];
+    var layerNames = [
+      'PM2.5 2013',
+      'PM2.5 2014',
+      'PM2.5 2015',
+      'PM2.5 2016',
+      'PM2.5 2017',
+      'PM2.5 2018',
+      'PM2.5 2019',
+      'PM2.5 2020',
+      'PM2.5 2021',
+      'PM2.5 2022'
+    ];
+    var wmsLayers = {};
+    wmsLayerNames.forEach(function(name, i) {
+      wmsLayers[years[i]] = new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+          url: wmsBaseUrl,
+          params: {
+            'LAYERS': wmsWorkspace+':'+name,
+            'TILED': true,
+            'FORMAT': 'image/png',
+            'TRANSPARENT': true
+          },
+          serverType: 'geoserver', crossOrigin: 'anonymous'
+        }),
+        visible: false
+      });
+      map.addLayer(wmsLayers[years[i]]);
+    });
+    // Slider temporale + bottoni
+    var timeSlider = document.getElementById('timeSlider');
+    timeSlider.min = years[0];
+    timeSlider.max = years[years.length-1];
+    timeSlider.value = 2022;
+    var timeLabel = document.getElementById('timeLabel');
+    var prevYearBtn = document.getElementById('prevYearBtn');
+    var nextYearBtn = document.getElementById('nextYearBtn');
+    var currentYear = 2022;
+    function updateYearLayer(year) {
+      Object.keys(wmsLayers).forEach(function(y){ wmsLayers[y].setVisible(false); });
+      if(wmsLayers[year]) wmsLayers[year].setVisible(true);
+      timeSlider.value = year;
+      timeLabel.innerHTML = 'Anno: <b>'+year+'</b>';
+    }
+    updateYearLayer(currentYear);
+    timeSlider.oninput = function() {
+      currentYear = parseInt(this.value);
+      updateYearLayer(currentYear);
+    };
+    prevYearBtn.onclick = function() {
+      var idx = years.indexOf(currentYear);
+      if(idx > 0) {
+        currentYear = years[idx-1];
+        updateYearLayer(currentYear);
+      }
+    };
+    nextYearBtn.onclick = function() {
+      var idx = years.indexOf(currentYear);
+      if(idx < years.length-1) {
+        currentYear = years[idx+1];
+        updateYearLayer(currentYear);
+      }
+    };
+    // Scala grafica minimale
+    map.addControl(new ol.control.ScaleLine({ units: 'metric', bar: false, steps: 2, minWidth: 80 }));
+  </script>
+</body>
+</html>
