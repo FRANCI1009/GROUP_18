@@ -73,126 +73,71 @@
       </div>
     </div><!-- End Page Title -->
 
-    <!-- Featured Services Section -->
-    <section id="featured-services" class="featured-services section">
-
+    <!-- Our Elaboration Section (Results) -->
+    <section id="our-elaboration" class="our-elaboration section">
       <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon flex-shrink-0"><i class="fa-solid fa-cart-flatbed"></i></div>
-            <div>
-              <h4 class="title">Lorem Ipsum</h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
+        <div class="section-title" data-aos="fade-up">
+          <span>Our Elaboration</span>
+          <h2>Our Elaboration</h2>
+          <p>Below are the main results of our GIS analysis: interactive maps, temporal series, and statistical visualizations.</p>
+        </div>
+        <div class="row g-4 align-items-start">
+        <div class="mb-2" style="padding-left: 12px;">
+          <button id="sync-btn" class="btn btn-outline-primary btn-sm px-3 py-1 fw-bold" type="button">
+            <i class="bi bi-link-45deg me-1"></i><span id="sync-btn-text">Sincronizza slider</span>
+          </button>
+        </div>
+        <!-- Box 1: Slider Map 1 (sinistra) -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+          <div class="result-box p-2 shadow rounded bg-white d-flex flex-column align-items-center justify-content-center" style="max-width: 300px; margin: 0 auto;">
+            <div class="slider-container position-relative w-100 mb-2">
+              <img id="slider1-img" src="assets/img/Results_PM2.5_avgyear/2013.png" class="img-fluid rounded border" alt="PM2.5 Map Year">
+            </div>
+            <div class="d-flex w-100 align-items-center mt-1 gap-2 position-relative">
+              <span id="slider1-num" class="slider-num small position-absolute start-0 ms-2">1/10</span>
+              <div class="d-flex flex-grow-1 justify-content-center align-items-center gap-2 w-100">
+                <button class="slider-arrow left p-0 border-0 bg-transparent" id="slider1-prev" aria-label="Previous image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 6 8 12 16 18"/></svg></button>
+                <span id="slider1-year" class="slider-year fw-bold mx-2">2013</span>
+                <button class="slider-arrow right p-0 border-0 bg-transparent" id="slider1-next" aria-label="Next image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 16 12 8 18"/></svg></button>
+              </div>
             </div>
           </div>
-          <!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon flex-shrink-0"><i class="fa-solid fa-truck"></i></div>
-            <div>
-              <h4 class="title">Dolor Sitema</h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-              <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="300">
-            <div class="icon flex-shrink-0"><i class="fa-solid fa-truck-ramp-box"></i></div>
-            <div>
-              <h4 class="title">Sed ut perspiciatis</h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-              <a href="#" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
         </div>
-
-      </div>
-
-    </section><!-- /Featured Services Section -->
-
-    <!-- Services Section -->
-    <section id="services" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <span>Our Services<br></span>
-        <h2>Our ServiceS</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-1.jpg" alt="" class="img-fluid">
-              </div>
-              <h3>Storage</h3>
-              <p>Cumque eos in qui numquam. Aut aspernatur perferendis sed atque quia voluptas quisquam repellendus temporibus itaqueofficiis odit</p>
+          <!-- Box 2: Slider Map 2 (centro) -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+          <div class="result-box p-2 shadow rounded bg-white d-flex flex-column align-items-center justify-content-center" style="max-width: 300px; margin: 0 auto;">
+            <div class="slider-container position-relative w-100 mb-2">
+              <img id="slider2-img" src="assets/img/Results_PM2.5_avgyear/2013.png" class="img-fluid rounded border" alt="Map 2 Year">
             </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-2.jpg" alt="" class="img-fluid">
+            <div class="d-flex w-100 align-items-center mt-1 gap-2 position-relative">
+              <span id="slider2-num" class="slider-num small position-absolute start-0 ms-2">1/10</span>
+              <div class="d-flex flex-grow-1 justify-content-center align-items-center gap-2 w-100">
+                <button class="slider-arrow left p-0 border-0 bg-transparent" id="slider2-prev" aria-label="Previous image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 6 8 12 16 18"/></svg></button>
+                <span id="slider2-year" class="slider-year fw-bold mx-2">2013</span>
+                <button class="slider-arrow right p-0 border-0 bg-transparent" id="slider2-next" aria-label="Next image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 16 12 8 18"/></svg></button>
               </div>
-              <h3><a href="#" class="stretched-link">Logistics</a></h3>
-              <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt molestiae dolor ipsam ducimus occaecati nisi</p>
             </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-3.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Cargo</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-4.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Trucking</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-5.jpg" alt="" class="img-fluid">
-              </div>
-              <h3>Packaging</h3>
-              <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum onsequuntur maiores beatae consequatur magni voluptates</p>
-            </div>
-          </div><!-- End Card Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/service-6.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="#" class="stretched-link">Warehousing</a></h3>
-              <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi quisquam aut nostrum unde et qui est non quo nulla</p>
-            </div>
-          </div><!-- End Card Item -->
-
+          </div>
         </div>
-
+          <!-- Testo descrittivo a destra -->
+          <div class="col-lg-6 col-12">
+            <div class="bg-white rounded shadow-sm p-4 h-100 d-flex flex-column justify-content-center" style="background-color: #eef1fe !important; min-height: 300px;">
+              <h3 class="mb-3" style="color: #0d6efd;">PM2.5 and [Second Map/Result] Annual Averages (2013-2022)</h3>
+              <p class="fst-italic mb-2">Yearly aggregated PM2.5 and [Second Map/Result] concentration maps for Bosnia and Herzegovina, derived from CAMS NetCDF data and processed as annual means. Each map shows the spatial distribution for a given year, reprojected and clipped to the study area.</p>
+              <ul class="mb-0">
+                <li><i class="bi bi-check"></i> <span><strong>Data source:</strong> CAMS European Air Quality Reanalysis Dataset (2013–2022) and [Second Source]</span></li>
+                <li><i class="bi bi-check"></i> <span><strong>Processing:</strong> Monthly to annual aggregation, reprojection, and clipping</span></li>
+                <li><i class="bi bi-check"></i> <span><strong>Visualization:</strong> PNG maps, 10 years, slider navigation</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Box 3 e 4 rimossi per layout più pulito -->
+        <!-- ...existing code... -->
       </div>
+    </section>
 
-    </section><!-- /Services Section -->
+    <!-- (Servizi rimossi, ora la sezione "Our Elaboration" è la principale) -->
 
     <!-- Features Section -->
     <section id="features" class="features section">
@@ -295,6 +240,108 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    // Slider logic for all PNGs in Results_PM2.5_avgyear
+    const slider1Images = [
+      "assets/img/Results_PM2.5_avgyear/2013.png",
+      "assets/img/Results_PM2.5_avgyear/2014.png",
+      "assets/img/Results_PM2.5_avgyear/2015.png",
+      "assets/img/Results_PM2.5_avgyear/2016.png",
+      "assets/img/Results_PM2.5_avgyear/2017.png",
+      "assets/img/Results_PM2.5_avgyear/2018.png",
+      "assets/img/Results_PM2.5_avgyear/2019.png",
+      "assets/img/Results_PM2.5_avgyear/2020.png",
+      "assets/img/Results_PM2.5_avgyear/2021.png",
+      "assets/img/Results_PM2.5_avgyear/2022.png"
+    ];
+    let slider1Index = 0;
+    let slider2Index = 0;
+    const slider1Img = document.getElementById('slider1-img');
+    const slider1Num = document.getElementById('slider1-num');
+    const slider1Year = document.getElementById('slider1-year');
+    const slider2Images = slider1Images;
+    const slider2Img = document.getElementById('slider2-img');
+    const slider2Num = document.getElementById('slider2-num');
+    const slider2Year = document.getElementById('slider2-year');
+    // --- Sync logic ---
+    let syncSliders = false;
+    const syncBtn = document.getElementById('sync-btn');
+    const syncBtnText = document.getElementById('sync-btn-text');
+    syncBtn.onclick = function() {
+      syncSliders = !syncSliders;
+      if (syncSliders) {
+        syncBtn.classList.remove('btn-outline-primary');
+        syncBtn.classList.add('btn-primary');
+        syncBtnText.textContent = 'Disattiva sincronizzazione';
+        // Allinea subito i due slider
+        slider2Index = slider1Index;
+        updateSlider2();
+      } else {
+        syncBtn.classList.remove('btn-primary');
+        syncBtn.classList.add('btn-outline-primary');
+        syncBtnText.textContent = 'Sincronizza slider';
+      }
+    };
+    // Funzioni di update
+    function updateSlider1() {
+      slider1Img.src = slider1Images[slider1Index];
+      slider1Num.textContent = (slider1Index + 1) + "/" + slider1Images.length;
+      slider1Year.textContent = 2013 + slider1Index;
+      document.getElementById('slider1-prev').disabled = slider1Index === 0;
+      document.getElementById('slider1-next').disabled = slider1Index === slider1Images.length - 1;
+    }
+    function updateSlider2() {
+      slider2Img.src = slider2Images[slider2Index];
+      slider2Num.textContent = (slider2Index + 1) + "/" + slider2Images.length;
+      slider2Year.textContent = 2013 + slider2Index;
+      document.getElementById('slider2-prev').disabled = slider2Index === 0;
+      document.getElementById('slider2-next').disabled = slider2Index === slider2Images.length - 1;
+    }
+    // Gestione frecce con sincronizzazione
+    document.getElementById('slider1-prev').onclick = function() {
+      if (slider1Index > 0) {
+        slider1Index--;
+        if (syncSliders) {
+          slider2Index = slider1Index;
+          updateSlider2();
+        }
+        updateSlider1();
+      }
+    };
+    document.getElementById('slider1-next').onclick = function() {
+      if (slider1Index < slider1Images.length - 1) {
+        slider1Index++;
+        if (syncSliders) {
+          slider2Index = slider1Index;
+          updateSlider2();
+        }
+        updateSlider1();
+      }
+    };
+    document.getElementById('slider2-prev').onclick = function() {
+      if (slider2Index > 0) {
+        slider2Index--;
+        if (syncSliders) {
+          slider1Index = slider2Index;
+          updateSlider1();
+        }
+        updateSlider2();
+      }
+    };
+    document.getElementById('slider2-next').onclick = function() {
+      if (slider2Index < slider2Images.length - 1) {
+        slider2Index++;
+        if (syncSliders) {
+          slider1Index = slider2Index;
+          updateSlider1();
+        }
+        updateSlider2();
+      }
+    };
+    // Inizializza
+    updateSlider1();
+    updateSlider2();
+  </script>
 
 </body>
 
