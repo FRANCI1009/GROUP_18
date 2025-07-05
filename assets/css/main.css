@@ -1,3 +1,23 @@
+/* Custom blue for sync button */
+#sync-btn-feat.btn-outline-primary {
+  color: #001973;
+  border-color: #001973;
+}
+#sync-btn-feat.btn-outline-primary:hover,
+#sync-btn-feat.btn-outline-primary:focus {
+  background-color: #001973;
+  color: #fff;
+  border-color: #001973;
+}
+#sync-btn-feat.btn-primary {
+  background-color: #001973;
+  border-color: #001973;
+}
+#sync-btn-feat.btn-primary:hover,
+#sync-btn-feat.btn-primary:focus {
+  background-color: #001973;
+  border-color: #001973;
+}
 /**
 * Template Name: Logis
 * Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
