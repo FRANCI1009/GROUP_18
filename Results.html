@@ -345,110 +345,71 @@
   <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-
       // Slider logic for Features section only
-      const slider1Images = [
-        "assets/img/Results_PM2.5_avgyear/2013.png",
-        "assets/img/Results_PM2.5_avgyear/2014.png",
-        "assets/img/Results_PM2.5_avgyear/2015.png",
-        "assets/img/Results_PM2.5_avgyear/2016.png",
-        "assets/img/Results_PM2.5_avgyear/2017.png",
-        "assets/img/Results_PM2.5_avgyear/2018.png",
-        "assets/img/Results_PM2.5_avgyear/2019.png",
-        "assets/img/Results_PM2.5_avgyear/2020.png",
-        "assets/img/Results_PM2.5_avgyear/2021.png",
-        "assets/img/Results_PM2.5_avgyear/2022.png"
-      ];
-      const slider2Images = [
-        "assets/img/Results_NO2_avgyear/2013.png",
-        "assets/img/Results_NO2_avgyear/2014.png",
-        "assets/img/Results_NO2_avgyear/2015.png",
-        "assets/img/Results_NO2_avgyear/2016.png",
-        "assets/img/Results_NO2_avgyear/2017.png",
-        "assets/img/Results_NO2_avgyear/2018.png",
-        "assets/img/Results_NO2_avgyear/2019.png",
-        "assets/img/Results_NO2_avgyear/2020.png",
-        "assets/img/Results_NO2_avgyear/2021.png",
-        "assets/img/Results_NO2_avgyear/2022.png"
-      ];
+      const slider1Images = Array.from({length: 10}, (_, i) => `assets/img/Results_PM2.5_avgyear/${2013 + i}.png`);
+      const slider2Images = Array.from({length: 10}, (_, i) => `assets/img/Results_NO2_avgyear/${2013 + i}.png`);
 
-      // --- Features Section Slider Logic ---
-      let slider1IndexFeat = 0;
-      let slider2IndexFeat = 0;
+      let slider1IndexFeat = 0, slider2IndexFeat = 0, syncSlidersFeat = false;
       const slider1ImgFeat = document.getElementById('slider1-img-feat');
       const slider1NumFeat = document.getElementById('slider1-num-feat');
       const slider1YearFeat = document.getElementById('slider1-year-feat');
       const slider2ImgFeat = document.getElementById('slider2-img-feat');
       const slider2NumFeat = document.getElementById('slider2-num-feat');
       const slider2YearFeat = document.getElementById('slider2-year-feat');
-      let syncSlidersFeat = false;
       const syncBtnFeat = document.getElementById('sync-btn-feat');
       const syncBtnTextFeat = document.getElementById('sync-btn-text-feat');
-      syncBtnFeat.onclick = function() {
-        syncSlidersFeat = !syncSlidersFeat;
-        if (syncSlidersFeat) {
-          syncBtnFeat.classList.remove('btn-outline-primary');
-          syncBtnFeat.classList.add('btn-primary');
-          syncBtnTextFeat.textContent = 'Disattiva sincronizzazione';
-          slider2IndexFeat = slider1IndexFeat;
-          updateSlider2Feat();
-        } else {
-          syncBtnFeat.classList.remove('btn-primary');
-          syncBtnFeat.classList.add('btn-outline-primary');
-          syncBtnTextFeat.textContent = 'Sincronizza slider';
-        }
-      };
+
       function updateSlider1Feat() {
         slider1ImgFeat.src = slider1Images[slider1IndexFeat];
-        slider1NumFeat.textContent = (slider1IndexFeat + 1) + "/" + slider1Images.length;
+        slider1NumFeat.textContent = `${slider1IndexFeat + 1}/${slider1Images.length}`;
         slider1YearFeat.textContent = 2013 + slider1IndexFeat;
         document.getElementById('slider1-prev-feat').disabled = slider1IndexFeat === 0;
         document.getElementById('slider1-next-feat').disabled = slider1IndexFeat === slider1Images.length - 1;
       }
       function updateSlider2Feat() {
         slider2ImgFeat.src = slider2Images[slider2IndexFeat];
-        slider2NumFeat.textContent = (slider2IndexFeat + 1) + "/" + slider2Images.length;
+        slider2NumFeat.textContent = `${slider2IndexFeat + 1}/${slider2Images.length}`;
         slider2YearFeat.textContent = 2013 + slider2IndexFeat;
         document.getElementById('slider2-prev-feat').disabled = slider2IndexFeat === 0;
         document.getElementById('slider2-next-feat').disabled = slider2IndexFeat === slider2Images.length - 1;
       }
+
+      syncBtnFeat.onclick = function() {
+        syncSlidersFeat = !syncSlidersFeat;
+        syncBtnFeat.classList.toggle('btn-outline-primary', !syncSlidersFeat);
+        syncBtnFeat.classList.toggle('btn-primary', syncSlidersFeat);
+        syncBtnTextFeat.textContent = syncSlidersFeat ? 'Disattiva sincronizzazione' : 'Sincronizza slider';
+        if (syncSlidersFeat) {
+          slider2IndexFeat = slider1IndexFeat;
+          updateSlider2Feat();
+        }
+      };
+
       document.getElementById('slider1-prev-feat').onclick = function() {
         if (slider1IndexFeat > 0) {
           slider1IndexFeat--;
-          if (syncSlidersFeat) {
-            slider2IndexFeat = slider1IndexFeat;
-            updateSlider2Feat();
-          }
+          if (syncSlidersFeat) slider2IndexFeat = slider1IndexFeat, updateSlider2Feat();
           updateSlider1Feat();
         }
       };
       document.getElementById('slider1-next-feat').onclick = function() {
         if (slider1IndexFeat < slider1Images.length - 1) {
           slider1IndexFeat++;
-          if (syncSlidersFeat) {
-            slider2IndexFeat = slider1IndexFeat;
-            updateSlider2Feat();
-          }
+          if (syncSlidersFeat) slider2IndexFeat = slider1IndexFeat, updateSlider2Feat();
           updateSlider1Feat();
         }
       };
       document.getElementById('slider2-prev-feat').onclick = function() {
         if (slider2IndexFeat > 0) {
           slider2IndexFeat--;
-          if (syncSlidersFeat) {
-            slider1IndexFeat = slider2IndexFeat;
-            updateSlider1Feat();
-          }
+          if (syncSlidersFeat) slider1IndexFeat = slider2IndexFeat, updateSlider1Feat();
           updateSlider2Feat();
         }
       };
       document.getElementById('slider2-next-feat').onclick = function() {
         if (slider2IndexFeat < slider2Images.length - 1) {
           slider2IndexFeat++;
-          if (syncSlidersFeat) {
-            slider1IndexFeat = slider2IndexFeat;
-            updateSlider1Feat();
-          }
+          if (syncSlidersFeat) slider1IndexFeat = slider2IndexFeat, updateSlider1Feat();
           updateSlider2Feat();
         }
       };
