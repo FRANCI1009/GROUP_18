@@ -392,14 +392,14 @@
       var wmsBaseUrl = 'https://www.gis-geoserver.polimi.it/geoserver/ows?';
       var wmsWorkspace = 'gisgeoserver_18';
       var wmsLayerNames = [
-        'BOSNIA_BOUNDARIES',
-        'BOSNIA_CANTONS',
-        'BOSNIA_URBAN_AREAS',
+        'BOSNIA_BOUNDARIES','BOSNIA_CANTONS','BOSNIA_URBAN_AREAS','BOSNIA_LC_reclassified_2022','POP_QUANTILES_RECLASS',
+        'BOSNIA_CAMS_NO2_2022_12','BOSNIA_average_NO2_2022','BOSNIA_NO2_concentration_map_2020','BOSNIA_NO2_2017-2022_AAD_map_2022','BOSNIA_NO2_zonal_statistics_2013-2022','BOSNIA_NO2_2020_bivariate',
+        'BOSNIA_CAMS_pm2p5_2022_12','BOSNIA_average_pm2p5_2022','BOSNIA_pm2p5_concentration_map_2020_2020','BOSNIA_pm2p5 _2017-2021_AAD_map _2022','BOSNIA_zonal_statistics__pm2p5_2013','bosnia_pm2p5_2020_bivariate'
       ];
       var layerNames = [
-        'Bosnia Boundaries',
-        'Cantons',
-        'Urban Areas',
+        'Bosnia Boundaries','Cantons','Urban Areas','Land Cover 2022 (Reclassified)','Population Quantiles (Reclassified)',
+        'NO₂ CAMS 12/2022','NO₂ Average 2022','NO₂ Concentration 2020','NO₂ AAD Map 2022','NO₂ Zonal Statistics 2013–2022','NO₂ Bivariate Map 2020',
+        'PM2p5 CAMS 12/2022','PM2p5 Average 2022','PM2p5 Concentration 2020','PM2p5 AAD Map 2022','PM2p5 Zonal Statistics 2013–2022','PM2p5 Bivariate Map 2020'
       ];
       var wmsLayers = {};
       wmsLayerNames.forEach(function(name, i) {
@@ -409,7 +409,7 @@
             params: { 'LAYERS': wmsWorkspace+':'+name, 'TILED': true, 'FORMAT': 'image/png', 'TRANSPARENT': true },
             serverType: 'geoserver', crossOrigin: 'anonymous'
           }),
-          visible: true // <--- Cambia qui: tutti i layer WMS visibili all'apertura
+          visible: false
         });
         map.addLayer(wmsLayers['layer'+(i+1)]);
       });
@@ -422,26 +422,6 @@
       btns.layer.btn.onclick = function() { togglePanel(btns.layer.panel, btns.layer.btn, [btns.basemap, btns.legend]); };
       btns.basemap.btn.onclick = function() { togglePanel(btns.basemap.panel, btns.basemap.btn, [btns.layer, btns.legend]); };
       btns.legend.btn.onclick = function() { togglePanel(btns.legend.panel, btns.legend.btn, [btns.layer, btns.basemap]); if(btns.legend.panel.style.display==='block') updateLegendContent(); };
-      // Generazione dinamica del pannello layer (solo lista semplice, senza tab e senza ordina layer)
-      (function(){
-        var panel = btns.layer.panel;
-        panel.innerHTML = '';
-        layerNames.forEach(function(nome, i){
-          var label = document.createElement('label');
-          label.style.display = 'block'; label.style.marginBottom = '16px';
-          var cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = 'layer'+(i+1);
-          cb.checked = true; // Seleziona tutti i layer all'apertura
-          label.appendChild(cb); label.appendChild(document.createTextNode(' '+nome));
-          panel.appendChild(label);
-        });
-        // Gestione accensione/spegnimento layer
-        panel.addEventListener('change', function(e){
-          if(e.target && e.target.type==='checkbox') {
-            wmsLayers[e.target.value].setVisible(e.target.checked);
-            if(btns.legend.panel.style.display==='block') updateLegendContent();
-          }
-        });
-      })();
       // Basemap radio
       document.querySelectorAll('#basemapPanel input[name=basemap]').forEach(function(radio) {
         radio.onchange = function(e) {
@@ -452,6 +432,174 @@
           lightBase.setVisible(val==='light');
         };
       });
+      // --- INIZIO: Tabs Layer/Ordina Layer nel pannello layer ---
+      (function(){
+        var sortableLoaded = false;
+        var originalOrder = null;
+        function ensureSortable(cb) {
+          if (window.Sortable) { cb(); return; }
+          if (!sortableLoaded) {
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js';
+            script.onload = function() { cb(); };
+            document.head.appendChild(script);
+            sortableLoaded = true;
+          }
+        }
+        var panel = btns.layer.panel;
+        panel.innerHTML = '';
+        // Tabs
+        var tabBar = document.createElement('div');
+        tabBar.className = 'custom-tab-bar';
+        var tab1 = document.createElement('button');
+        var tab2 = document.createElement('button');
+        tab1.textContent = 'Layer';
+        tab2.textContent = 'Ordina Layer';
+        tab1.className = 'custom-tab-btn active';
+        tab2.className = 'custom-tab-btn';
+        tabBar.appendChild(tab1); tabBar.appendChild(tab2);
+        // Indicatore blu
+        var tabIndicator = document.createElement('div');
+        tabIndicator.className = 'custom-tab-indicator';
+        tabBar.appendChild(tabIndicator);
+        panel.appendChild(tabBar);
+        // Sezione selezione layer (come ora)
+        var layerSection = document.createElement('div');
+        layerSection.id = 'layerSection';
+        var group = { NO2: document.createElement('details'), PM25: document.createElement('details') };
+        group.NO2.style.marginBottom = '16px';
+        group.PM25.style.marginBottom = '0px';
+        var sNO2 = document.createElement('summary'); sNO2.textContent = 'NO₂ Layers'; sNO2.style.marginBottom = '12px';
+        var sPM = document.createElement('summary'); sPM.textContent = 'PM2.5 Layers'; sPM.style.marginBottom = '12px';
+        group.NO2.appendChild(sNO2); group.PM25.appendChild(sPM);
+        layerNames.forEach(function(nome, i){
+          var label = document.createElement('label');
+          label.style.display = 'block'; label.style.marginBottom = '16px';
+          var cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = 'layer'+(i+1);
+          label.appendChild(cb); label.appendChild(document.createTextNode(' '+nome));
+          if(nome.startsWith('NO₂')) group.NO2.appendChild(label);
+          else if(nome.startsWith('PM2p5')) group.PM25.appendChild(label);
+          else layerSection.appendChild(label);
+        });
+        layerSection.appendChild(group.NO2); layerSection.appendChild(group.PM25);
+        // Sezione ordinamento layer attivi
+        var sortSection = document.createElement('div');
+        sortSection.id = 'sortSection';
+        sortSection.style.display = 'none';
+        // Bottone reset ordine
+        var resetBtn = document.createElement('button');
+        resetBtn.textContent = 'Ripristina ordine originale';
+        resetBtn.style.background = '#fff';
+        resetBtn.style.color = '#1976d2';
+        resetBtn.style.border = '1px solid #1976d2';
+        resetBtn.style.borderRadius = '5px';
+        resetBtn.style.padding = '6px 12px';
+        resetBtn.style.fontWeight = '500';
+        resetBtn.style.fontSize = '14px';
+        resetBtn.style.cursor = 'pointer';
+        resetBtn.style.marginBottom = '12px';
+        resetBtn.style.display = 'block';
+        sortSection.appendChild(resetBtn);
+        var sortList = document.createElement('ul');
+        sortList.id = 'sortableLayerList';
+        sortList.style.listStyle = 'none';
+        sortList.style.padding = '0';
+        sortList.style.margin = '0';
+        sortSection.appendChild(sortList);
+        var sortHint = document.createElement('div');
+        sortHint.textContent = 'Trascina per cambiare l\'ordine di visualizzazione dei layer attivi.';
+        sortHint.style.fontSize = '13px';
+        sortHint.style.color = '#888';
+        sortHint.style.margin = '10px 0 0 0';
+        sortSection.appendChild(sortHint);
+        panel.appendChild(layerSection);
+        panel.appendChild(sortSection);
+        // Funzione per aggiornare la lista dei layer attivi nel sortSection
+        function updateSortableList() {
+          sortList.innerHTML = '';
+          var active = [];
+          for(var i=0;i<layerNames.length;i++){
+            var key = 'layer'+(i+1);
+            if(wmsLayers[key] && wmsLayers[key].getVisible()) {
+              active.push({key:key, name:layerNames[i]});
+            }
+          }
+          // Salva l'ordine originale solo la prima volta che ci sono layer attivi
+          if(originalOrder === null && active.length > 0) {
+            originalOrder = active.map(function(l){ return l.key; });
+          }
+          active.forEach(function(l){
+            var li = document.createElement('li');
+            li.textContent = l.name;
+            li.setAttribute('data-layer', l.key);
+            li.style.background = '#f7f7f7';
+            li.style.border = '1px solid #e0e0e0';
+            li.style.borderRadius = '5px';
+            li.style.padding = '7px 12px';
+            li.style.marginBottom = '8px';
+            li.style.cursor = 'grab';
+            li.style.fontSize = '15px';
+            li.style.color = '#1976d2';
+            sortList.appendChild(li);
+          });
+          // Inizializza/aggiorna SortableJS SOLO se è caricato
+          ensureSortable(function() {
+            if(sortList._sortable) sortList._sortable.destroy();
+            sortList._sortable = Sortable.create(sortList, {
+              animation: 150,
+              onEnd: function() {
+                var newOrder = Array.from(sortList.children).map(function(li){ return li.getAttribute('data-layer'); });
+                newOrder.reverse().forEach(function(key){
+                  var lyr = wmsLayers[key];
+                  if(lyr) { map.removeLayer(lyr); map.addLayer(lyr); }
+                });
+              }
+            });
+          });
+        }
+        // Bottone reset ordine: riporta i layer attivi all'ordine originale
+        resetBtn.onclick = function() {
+          if(!originalOrder) return;
+          // Prendi solo i layer attivi nell'ordine originale
+          var activeKeys = Array.from(sortList.children).map(function(li){ return li.getAttribute('data-layer'); });
+          var toOrder = originalOrder.filter(function(key){ return activeKeys.includes(key); });
+          // Rimuovi e riaggiungi i layer attivi secondo l'ordine originale
+          toOrder.reverse().forEach(function(key){
+            var lyr = wmsLayers[key];
+            if(lyr) { map.removeLayer(lyr); map.addLayer(lyr); }
+          });
+          // Aggiorna la lista visuale
+          updateSortableList();
+        };
+        // Aggiorna lista ordinabile ogni volta che cambia la visibilità di un layer
+        layerSection.addEventListener('change', function(e){
+          if(e.target && e.target.type==='checkbox') {
+            wmsLayers[e.target.value].setVisible(e.target.checked);
+            if(btns.legend.panel.style.display==='block') updateLegendContent();
+            updateSortableList();
+          }
+        });
+        // Inizializza la lista ordinabile al primo avvio
+        setTimeout(updateSortableList, 700);
+        // Tab switching
+        function setActiveTab(idx) {
+          if(idx===0) {
+            tab1.classList.add('active'); tab2.classList.remove('active');
+            layerSection.style.display = 'block';
+            sortSection.style.display = 'none';
+            tabIndicator.style.left = '0%';
+          } else {
+            tab2.classList.add('active'); tab1.classList.remove('active');
+            layerSection.style.display = 'none';
+            sortSection.style.display = 'block';
+            updateSortableList();
+            tabIndicator.style.left = '50%';
+          }
+        }
+        tab1.onclick = function(){ setActiveTab(0); };
+        tab2.onclick = function(){ setActiveTab(1); };
+        setTimeout(function(){ setActiveTab(0); }, 10);
+      })();
       // Mostra lat/lon del cursore
       var latlonDiv = document.getElementById('latlonDisplay');
       map.on('pointermove', function(evt) {
