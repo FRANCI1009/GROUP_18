@@ -40,29 +40,29 @@
       }
       /* Bottone attivo: blu, simbolo bianco */
       .active-toggle-btn {
-        background: #1976d2 !important;
-        border-color: #1976d2 !important;
+        background: #001973 !important;
+        border-color: #001973 !important;
       }
       .active-toggle-btn svg {
         /* Cambia simbolo in bianco */
         stroke: #fff !important;
-        fill: #1976d2 !important;
+        fill: #001973 !important;
       }
       .active-toggle-btn svg path,
       .active-toggle-btn svg circle,
       .active-toggle-btn svg rect {
         stroke: #fff !important;
-        fill: #1976d2 !important;
+        fill: #001973 !important;
       }
       .panel-btn-active {
-        background: #1976d2 !important;
-        border-color: #1976d2 !important;
+        background: #001973 !important;
+        border-color: #001973 !important;
         color: #fff !important;
       }
       .panel-btn-active svg circle,
       .panel-btn-active svg rect {
         stroke: #fff !important;
-        fill: #1976d2 !important;
+        fill: #001973 !important;
       }
       .panel-btn-active svg path {
         stroke: #fff !important;
@@ -80,9 +80,9 @@
         min-width: 120px;
         margin: 0;
         font-size: 16px;
-        color: #1976d2;
+        color: #001973;
         font-weight: 600;
-        border: 1.5px solid #1976d2;
+        border: 1.5px solid #001973;
         pointer-events: auto;
         display: none; /* Nascondi di default */
         align-items: center;
@@ -100,10 +100,10 @@
         background: rgba(255,255,255,0.95);
         border-radius: 6px;
         padding: 0;
-        font-size: 15px;
+        font-size: 12px
         color: #222;
         box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-        font-family: 'Roboto', Arial, sans-serif;
+        font-family: 'Roboto', Arial, sans-serif !important;
         pointer-events: none;
         min-width: 120px;
         display: flex;
@@ -138,7 +138,6 @@
         box-shadow: none;
         letter-spacing: 0.5px;
       }
-      /* Rimosse regole duplicate o in conflitto per .ol-scale-line e .ol-scale-bar */
       .ol-scale-line {
         background: none !important;
         border: none !important;
@@ -197,8 +196,8 @@
       }
       #backToMapBtn:hover {
         background: #f0f0f0;
-        color: #1976d2;
-        border-color: #1976d2;
+        color: #001973;
+        border-color: #001973;
       }
       #toggleLegendPanel {
         background: #fff;
@@ -223,14 +222,14 @@
         background: #f0f0f0;
       }
       .panel-btn-active#toggleLegendPanel {
-        background: #1976d2 !important;
-        border-color: #1976d2 !important;
+        background: #001973 !important;
+        border-color: #001973 !important;
         color: #fff !important;
       }
       .panel-btn-active#toggleLegendPanel svg path,
       .panel-btn-active#toggleLegendPanel svg rect {
         stroke: #fff !important;
-        fill: #1976d2 !important;
+        fill: #001973 !important;
       }
       #legendPanel {
         display: none;
@@ -254,7 +253,7 @@
         margin: 0 0 10px 0;
         font-size: 17px;
         font-weight: 500;
-        color: #1976d2;
+        color: #001973;
       }
       .legend-entry {
         margin-bottom: 18px;
@@ -292,7 +291,7 @@
         font-family: 'Roboto', Arial, sans-serif;
         font-size: 15px;
         font-weight: 500;
-        color: #1976d2;
+        color: #001973;
         padding: 0 0 8px 0;
         margin: 0;
         cursor: pointer;
@@ -302,10 +301,10 @@
         z-index: 1;
       }
       .custom-tab-btn.active {
-        color: #1976d2;
+        color: #001973;
       }
       .custom-tab-btn:not(.active):hover {
-        color: #1565c0;
+        color: #001973;
       }
       .custom-tab-indicator {
         position: absolute;
@@ -313,7 +312,7 @@
         left: 0%;
         width: 50%;
         height: 2.5px;
-        background: #1976d2;
+        background: #001973;
         border-radius: 2px 2px 0 0;
         transition: left 0.22s cubic-bezier(.4,0,.2,1);
         z-index: 2;
@@ -324,44 +323,44 @@
   <body>
     <button id="toggleBasemapPanel" title="Cambia Basemap" style="position:absolute;top:10px;right:10px;z-index:11;background:#fff;border:1px solid #ccc;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.10);cursor:pointer;font-size:22px;padding:0;">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" stroke="#1976d2" stroke-width="1.3" fill="#fff"/>
-        <ellipse cx="12" cy="12" rx="6" ry="10" stroke="#1976d2" stroke-width="1.3" fill="none"/>
-        <ellipse cx="12" cy="12" rx="10" ry="6" stroke="#1976d2" stroke-width="1.3" fill="none"/>
-        <path d="M2 12h20" stroke="#1976d2" stroke-width="1.3" fill="none"/>
+        <circle cx="12" cy="12" r="10" stroke="#001973" stroke-width="1.3" fill="#fff"/>
+        <ellipse cx="12" cy="12" rx="6" ry="10" stroke="#001973" stroke-width="1.3" fill="none"/>
+        <ellipse cx="12" cy="12" rx="10" ry="6" stroke="#001973" stroke-width="1.3" fill="none"/>
+        <path d="M2 12h20" stroke="#001973" stroke-width="1.3" fill="none"/>
       </svg>
     </button>
     <button id="toggleLayerPanel" title="Layer GeoServer" style="position:absolute;top:60px;right:10px;z-index:11;">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path d="M12 3L3 8.25l9 5.25 9-5.25L12 3z" stroke="#1976d2" stroke-width="1.3" fill="#fff"/>
-        <path d="M3 15.75l9 5.25 9-5.25" stroke="#1976d2" stroke-width="1.3" fill="none"/>
-        <path d="M3 12l9 5.25 9-5.25" stroke="#1976d2" stroke-width="1.3" fill="none"/>
+        <path d="M12 3L3 8.25l9 5.25 9-5.25L12 3z" stroke="#001973" stroke-width="1.3" fill="#fff"/>
+        <path d="M3 15.75l9 5.25 9-5.25" stroke="#001973" stroke-width="1.3" fill="none"/>
+        <path d="M3 12l9 5.25 9-5.25" stroke="#001973" stroke-width="1.3" fill="none"/>
       </svg>
     </button>
     <button id="toggleLegendPanel" title="Mostra/Nascondi leggenda">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <rect x="4" y="6" width="4" height="4" fill="#1976d2" stroke="#1976d2" stroke-width="1"/>
-        <rect x="4" y="14" width="4" height="4" fill="#43a047" stroke="#43a047" stroke-width="1"/>
-        <line x1="10" y1="8" x2="20" y2="8" stroke="#1976d2" stroke-width="1.3" stroke-linecap="round"/>
-        <line x1="10" y1="16" x2="20" y2="16" stroke="#43a047" stroke-width="1.3" stroke-linecap="round"/>
+        <rect x="4" y="6" width="4" height="4" fill="#001973" stroke="#001973" stroke-width="1"/>
+        <rect x="4" y="14" width="4" height="4" fill="#001973" stroke="#43a047" stroke-width="1"/>
+        <line x1="10" y1="8" x2="20" y2="8" stroke="#001973" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="10" y1="16" x2="20" y2="16" stroke="#001973" stroke-width="1.3" stroke-linecap="round"/>
       </svg>
     </button>
     <div id="basemapPanel" style="display:none;position:absolute;top:10px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:180px;border-radius:8px;">
-      <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="none"> Nessuna basemap</label>
+      <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="none"> No basemap</label>
       <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="osm" checked> OpenStreetMap</label>
-      <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="sat"> Satellitare</label>
-      <label style="display:block;margin-bottom:0;"><input type="radio" name="basemap" value="light"> CartoDB Positron</label>
+      <label style="display:block;margin-bottom:12px;"><input type="radio" name="basemap" value="sat"> Satellite</label>
+      <label style="display:block;margin-bottom:0;"><input type="radio" name="basemap" value="light"> Cart-o</label>
     </div>
     <div id="layerPanel" style="display:none;position:absolute;top:60px;right:64px;z-index:10;background:#fff;border:1px solid #ccc;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:220px;border-radius:8px;">
       <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer1"> Layer 1 (esempio)</label>
       <label style="display:block;margin-bottom:6px;"><input type="checkbox" value="layer2"> Layer 2 (esempio)</label>
     </div>
     <div id="legendPanel">
-      <h4>Legenda</h4>
+      <h4>Legend</h4>
       <div id="legendContent"></div>
     </div>
     <div id="pixelValueDisplay">
       <span id="pixelValueText">Valore: &mdash;</span>
-      <button id="closePixelValueBtn" title="Chiudi" style="margin-left:12px;background:none;border:none;color:#1976d2;font-size:18px;cursor:pointer;padding:0;line-height:1;">&times;</button>
+      <button id="closePixelValueBtn" title="Chiudi" style="margin-left:12px;background:none;border:none;color:#001973;font-size:18px;cursor:pointer;padding:0;line-height:1;">&times;</button>
     </div>
     <div id="coordDisplay">
       <div id="latlonDisplay" class="info-panel">Lat: &mdash; | Long: &mdash;</div>
@@ -392,14 +391,14 @@
       var wmsBaseUrl = 'https://www.gis-geoserver.polimi.it/geoserver/ows?';
       var wmsWorkspace = 'gisgeoserver_18';
       var wmsLayerNames = [
-        'BOSNIA_BOUNDARIES','BOSNIA_CANTONS','BOSNIA_URBAN_AREAS','BOSNIA_LC_reclassified_2022','POP_QUANTILES_RECLASS',
-        'BOSNIA_CAMS_NO2_2022_12','BOSNIA_average_NO2_2022','BOSNIA_NO2_concentration_map_2020','BOSNIA_NO2_2017-2022_AAD_map_2022','BOSNIA_NO2_zonal_statistics_2013-2022','BOSNIA_NO2_2020_bivariate',
-        'BOSNIA_CAMS_pm2p5_2022_12','BOSNIA_average_pm2p5_2022','BOSNIA_pm2p5_concentration_map_2020_2020','BOSNIA_pm2p5 _2017-2021_AAD_map _2022','BOSNIA_zonal_statistics__pm2p5_2013','bosnia_pm2p5_2020_bivariate'
+        'BOSNIA_BOUNDARIES','BOSNIA_CANTONS','BOSNIA_URBAN_AREAS','BOSNIA_LC_reclassified_2022','BOSNIA_Population_Quantiles_reclassified',
+        'BOSNIA_CAMS_NO2_2022_12','BOSNIA_average_NO2_2022','BOSNIA_NO2_concentration_map_2020','BOSNIA_NO2_2017-2022_AAD_map_2022','BOSNIA_NO2_2020_bivariate',
+        'BOSNIA_CAMS_pm2p5_2022_12','BOSNIA_average_pm2p5_2022','BOSNIA_pm2p5_concentration_map_2020_2020','BOSNIA_pm2p5 _2017-2021_AAD_map _2022','bosnia_pm2p5_2020_bivariate'
       ];
       var layerNames = [
         'Bosnia Boundaries','Cantons','Urban Areas','Land Cover 2022 (Reclassified)','Population Quantiles (Reclassified)',
-        'NO₂ CAMS 12/2022','NO₂ Average 2022','NO₂ Concentration 2020','NO₂ AAD Map 2022','NO₂ Zonal Statistics 2013–2022','NO₂ Bivariate Map 2020',
-        'PM2p5 CAMS 12/2022','PM2p5 Average 2022','PM2p5 Concentration 2020','PM2p5 AAD Map 2022','PM2p5 Zonal Statistics 2013–2022','PM2p5 Bivariate Map 2020'
+        'NO₂ CAMS 12/2022','NO₂ Average 2022','NO₂ Concentration 2020','NO₂ AAD Map 2022','NO₂ Bivariate Map 2020',
+        'PM2p5 CAMS 12/2022','PM2p5 Average 2022','PM2p5 Concentration 2020','PM2p5 AAD Map 2022','PM2p5 Bivariate Map 2020'
       ];
       var wmsLayers = {};
       wmsLayerNames.forEach(function(name, i) {
@@ -454,7 +453,7 @@
         var tab1 = document.createElement('button');
         var tab2 = document.createElement('button');
         tab1.textContent = 'Layer';
-        tab2.textContent = 'Ordina Layer';
+        tab2.textContent = 'Sort Layers';
         tab1.className = 'custom-tab-btn active';
         tab2.className = 'custom-tab-btn';
         tabBar.appendChild(tab1); tabBar.appendChild(tab2);
@@ -488,10 +487,10 @@
         sortSection.style.display = 'none';
         // Bottone reset ordine
         var resetBtn = document.createElement('button');
-        resetBtn.textContent = 'Ripristina ordine originale';
+        resetBtn.textContent = 'Reset original order';
         resetBtn.style.background = '#fff';
-        resetBtn.style.color = '#1976d2';
-        resetBtn.style.border = '1px solid #1976d2';
+        resetBtn.style.color = '#001973';
+        resetBtn.style.border = '1px solid #001973';
         resetBtn.style.borderRadius = '5px';
         resetBtn.style.padding = '6px 12px';
         resetBtn.style.fontWeight = '500';
@@ -507,7 +506,7 @@
         sortList.style.margin = '0';
         sortSection.appendChild(sortList);
         var sortHint = document.createElement('div');
-        sortHint.textContent = 'Trascina per cambiare l\'ordine di visualizzazione dei layer attivi.';
+        sortHint.textContent = 'Drag to change the display order of active layers';
         sortHint.style.fontSize = '13px';
         sortHint.style.color = '#888';
         sortHint.style.margin = '10px 0 0 0';
@@ -539,7 +538,7 @@
             li.style.marginBottom = '8px';
             li.style.cursor = 'grab';
             li.style.fontSize = '15px';
-            li.style.color = '#1976d2';
+            li.style.color = '#001973';
             sortList.appendChild(li);
           });
           // Inizializza/aggiorna SortableJS SOLO se è caricato
@@ -626,8 +625,8 @@
                 var props=json.features[0].properties;
                 for(var k in props){ if(typeof props[k]==='number'||!isNaN(parseFloat(props[k]))){ value=props[k]; break; } }
               }
-              pixelValueText.innerHTML='Valore: '+value; pixelValueDiv.style.display='flex';
-            }).catch(function(){ pixelValueText.innerHTML='Valore: &mdash;'; pixelValueDiv.style.display='flex'; });
+              pixelValueText.innerHTML='Value: '+value; pixelValueDiv.style.display='flex';
+            }).catch(function(){ pixelValueText.innerHTML='Value: &mdash;'; pixelValueDiv.style.display='flex'; });
             found=true; break;
           }
         }
@@ -668,17 +667,17 @@
           customBtn.setAttribute('tabindex', '0');
           customBtn.setAttribute('aria-label', 'Fullscreen');
           // SVG per entrare in fullscreen
-          var svgEnter = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 9V4h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9V4h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          var svgEnter = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 9V4h5" stroke="#001973" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9V4h-5" stroke="#001973" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#001973" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#001973" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
           // SVG per uscire dal fullscreen
-          var svgExit = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4H4v5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 4h5v5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          var svgExit = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 4H4v5" stroke="#001973" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 4h5v5" stroke="#001973" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v5h5" stroke="#001973" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 15v5h-5" stroke="#001973" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
           function updateFullscreenIcon() {
             var elem = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
             if (!customBtn) return;
             // Forza la rimozione di eventuali SVG figli prima di impostare innerHTML
             while (customBtn.firstChild) customBtn.removeChild(customBtn.firstChild);
             customBtn.innerHTML = elem ? svgExit : svgEnter;
-            customBtn.title = elem ? 'Esci da fullscreen' : 'Fullscreen';
-            customBtn.setAttribute('aria-label', elem ? 'Esci da fullscreen' : 'Fullscreen');
+            customBtn.title = elem ? 'Exit fullscreen' : 'Fullscreen';
+            customBtn.setAttribute('aria-label', elem ? 'Exit fullscreen' : 'Fullscreen');
           }
           customBtn.innerHTML = svgEnter;
           customBtn.onclick = function(e) {
@@ -717,7 +716,7 @@
       });
       // Stile per il nuovo bottone zoom custom, icone sempre nere e nessun cambio colore su hover/click
       var style = document.createElement('style');
-      style.innerHTML = `.ol-zoom button, .ol-zoom-custom {\n  background: #fff;\n  color: #222;\n  border: 1px solid #ccc;\n  width: 32px;\n  height: 32px;\n  font-size: 18px;\n  border-radius: 4px;\n  margin: 0 !important;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: background 0.2s, color 0.2s;\n  cursor: pointer;\n  padding: 0;\n  outline: none;\n}\n.ol-zoom button:focus, .ol-zoom-custom:focus {\n  box-shadow: 0 0 0 2px #1976d2;\n}\n.ol-zoom button:hover, .ol-zoom-custom:hover {\n  background: #eaeaea;\n  color: #222;\n  border-color: #1976d2;\n}\n.ol-zoom button svg, .ol-zoom-custom svg {\n  stroke: #222 !important;\n  fill: #fff !important;\n}\n.ol-zoom button svg path, .ol-zoom button svg circle, .ol-zoom button svg rect,\n.ol-zoom-custom svg path, .ol-zoom-custom svg circle, .ol-zoom-custom svg rect {\n  stroke: #222 !important;\n  fill: #fff !important;\n}\n`;
+      style.innerHTML = `.ol-zoom button, .ol-zoom-custom {\n  background: #fff;\n  color: #001973;\n  border: 1px solid #ccc;\n  width: 32px;\n  height: 32px;\n  font-size: 18px;\n  border-radius: 4px;\n  margin: 0 !important;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: background 0.2s, color 0.2s;\n  cursor: pointer;\n  padding: 0;\n  outline: none;\n}\n.ol-zoom button:focus, .ol-zoom-custom:focus {\n  box-shadow: 0 0 0 2px #1976d2;\n}\n.ol-zoom button:hover, .ol-zoom-custom:hover {\n  background: #eaeaea;\n  color: #222;\n  border-color: #1976d2;\n}\n.ol-zoom button svg, .ol-zoom-custom svg {\n  stroke: #222 !important;\n  fill: #fff !important;\n}\n.ol-zoom button svg path, .ol-zoom button svg circle, .ol-zoom button svg rect,\n.ol-zoom-custom svg path, .ol-zoom-custom svg circle, .ol-zoom-custom svg rect {\n  stroke: #222 !important;\n  fill: #fff !important;\n}\n`;
       document.head.appendChild(style);
       // Gestione fullscreen: mantieni UI visibile e navigabile
       function handleFullscreenChange() {
