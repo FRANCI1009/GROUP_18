@@ -73,69 +73,7 @@
       </div>
     </div><!-- End Page Title -->
 
-    <!-- Our Elaboration Section (Results) -->
-    <section id="our-elaboration" class="our-elaboration section">
-      <div class="container">
-        <div class="section-title" data-aos="fade-up">
-          <span>Our Elaboration</span>
-          <h2>Our Elaboration</h2>
-          <p>Below are the main results of our GIS analysis: interactive maps, temporal series, and statistical visualizations.</p>
-        </div>
-        <div class="row g-4 align-items-start">
-        <div class="mb-2" style="padding-left: 12px;">
-          <button id="sync-btn" class="btn btn-outline-primary btn-sm px-3 py-1 fw-bold" type="button">
-            <i class="bi bi-link-45deg me-1"></i><span id="sync-btn-text">Sincronizza slider</span>
-          </button>
-        </div>
-        <!-- Box 1: Slider Map 1 (sinistra) -->
-        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
-          <div class="result-box p-2 shadow rounded bg-white d-flex flex-column align-items-center justify-content-center" style="max-width: 300px; margin: 0 auto;">
-            <div class="slider-container position-relative w-100 mb-2">
-              <img id="slider1-img" src="assets/img/Results_PM2.5_avgyear/2013.png" class="img-fluid rounded border" alt="PM2.5 Map Year">
-            </div>
-            <div class="d-flex w-100 align-items-center mt-1 gap-2 position-relative">
-              <span id="slider1-num" class="slider-num small position-absolute start-0 ms-2">1/10</span>
-              <div class="d-flex flex-grow-1 justify-content-center align-items-center gap-2 w-100">
-                <button class="slider-arrow left p-0 border-0 bg-transparent" id="slider1-prev" aria-label="Previous image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 6 8 12 16 18"/></svg></button>
-                <span id="slider1-year" class="slider-year fw-bold mx-2">2013</span>
-                <button class="slider-arrow right p-0 border-0 bg-transparent" id="slider1-next" aria-label="Next image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 16 12 8 18"/></svg></button>
-              </div>
-            </div>
-          </div>
-        </div>
-          <!-- Box 2: Slider Map 2 (centro) -->
-        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
-          <div class="result-box p-2 shadow rounded bg-white d-flex flex-column align-items-center justify-content-center" style="max-width: 300px; margin: 0 auto;">
-            <div class="slider-container position-relative w-100 mb-2">
-              <img id="slider2-img" src="assets/img/Results_PM2.5_avgyear/2013.png" class="img-fluid rounded border" alt="Map 2 Year">
-            </div>
-            <div class="d-flex w-100 align-items-center mt-1 gap-2 position-relative">
-              <span id="slider2-num" class="slider-num small position-absolute start-0 ms-2">1/10</span>
-              <div class="d-flex flex-grow-1 justify-content-center align-items-center gap-2 w-100">
-                <button class="slider-arrow left p-0 border-0 bg-transparent" id="slider2-prev" aria-label="Previous image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 6 8 12 16 18"/></svg></button>
-                <span id="slider2-year" class="slider-year fw-bold mx-2">2013</span>
-                <button class="slider-arrow right p-0 border-0 bg-transparent" id="slider2-next" aria-label="Next image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 16 12 8 18"/></svg></button>
-              </div>
-            </div>
-          </div>
-        </div>
-          <!-- Testo descrittivo a destra -->
-          <div class="col-lg-6 col-12">
-            <div class="bg-white rounded shadow-sm p-4 h-100 d-flex flex-column justify-content-center" style="background-color: #eef1fe !important; min-height: 300px;">
-              <h3 class="mb-3" style="color: #0d6efd;">PM2.5 and [Second Map/Result] Annual Averages (2013-2022)</h3>
-              <p class="fst-italic mb-2">Yearly aggregated PM2.5 and [Second Map/Result] concentration maps for Bosnia and Herzegovina, derived from CAMS NetCDF data and processed as annual means. Each map shows the spatial distribution for a given year, reprojected and clipped to the study area.</p>
-              <ul class="mb-0">
-                <li><i class="bi bi-check"></i> <span><strong>Data source:</strong> CAMS European Air Quality Reanalysis Dataset (2013–2022) and [Second Source]</span></li>
-                <li><i class="bi bi-check"></i> <span><strong>Processing:</strong> Monthly to annual aggregation, reprojection, and clipping</span></li>
-                <li><i class="bi bi-check"></i> <span><strong>Visualization:</strong> PNG maps, 10 years, slider navigation</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- Box 3 e 4 rimossi per layout più pulito -->
-        <!-- ...existing code... -->
-      </div>
-    </section>
+
 
     <!-- (Servizi rimossi, ora la sezione "Our Elaboration" è la principale) -->
 
@@ -152,26 +90,86 @@
       <div class="container">
 
         <div class="row gy-4 align-items-center features-item">
-          <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
-            <img src="assets/img/features-1.jpg" class="img-fluid" alt="">
+          <!-- Copia delle mappe e bottone da Our Elaboration -->
+          <div class="col-md-5 d-flex flex-column align-items-center" data-aos="zoom-out" data-aos-delay="100">
+            <div class="mb-2" style="padding-left: 12px;">
+              <button id="sync-btn-feat" class="btn btn-outline-primary btn-sm px-3 py-1 fw-bold" type="button">
+                <i class="bi bi-link-45deg me-1"></i><span id="sync-btn-text-feat">Sincronizza slider</span>
+              </button>
+            </div>
+            <div class="d-flex w-100 gap-3">
+              <!-- Box 1: Slider Map 1 (sinistra) -->
+              <div class="result-box p-2 shadow rounded bg-white d-flex flex-column align-items-center justify-content-center" style="max-width: 220px; min-width: 180px; margin: 0 auto;">
+                <div class="w-100 text-center mb-1">
+                  <span class="fw-bold" style="color: #0d6efd;">PM 2.5</span>
+                </div>
+                <div class="slider-container position-relative w-100 mb-2">
+                  <img id="slider1-img-feat" src="assets/img/Results_PM2.5_avgyear/2013.png" class="img-fluid rounded border" alt="PM2.5 Map Year">
+                </div>
+                <div class="d-flex w-100 align-items-center mt-1 gap-2 position-relative">
+                  <span id="slider1-num-feat" class="slider-num small position-absolute start-0 ms-2">1/10</span>
+                  <div class="d-flex flex-grow-1 justify-content-center align-items-center gap-2 w-100">
+                    <button class="slider-arrow left p-0 border-0 bg-transparent" id="slider1-prev-feat" aria-label="Previous image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 6 8 12 16 18"/></svg></button>
+                    <span id="slider1-year-feat" class="slider-year fw-bold mx-2">2013</span>
+                    <button class="slider-arrow right p-0 border-0 bg-transparent" id="slider1-next-feat" aria-label="Next image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 16 12 8 18"/></svg></button>
+                  </div>
+                </div>
+              </div>
+              <!-- Box 2: Slider Map 2 (centro) -->
+              <div class="result-box p-2 shadow rounded bg-white d-flex flex-column align-items-center justify-content-center" style="max-width: 220px; min-width: 180px; margin: 0 auto;">
+                <div class="w-100 text-center mb-1">
+                  <span class="fw-bold" style="color: #0d6efd;">NO2</span>
+                </div>
+                <div class="slider-container position-relative w-100 mb-2">
+                  <img id="slider2-img-feat" src="assets/img/Results_NO2_avgyear/2013.png" class="img-fluid rounded border" alt="NO2 Map Year">
+                </div>
+                <div class="d-flex w-100 align-items-center mt-1 gap-2 position-relative">
+                  <span id="slider2-num-feat" class="slider-num small position-absolute start-0 ms-2">1/10</span>
+                  <div class="d-flex flex-grow-1 justify-content-center align-items-center gap-2 w-100">
+                    <button class="slider-arrow left p-0 border-0 bg-transparent" id="slider2-prev-feat" aria-label="Previous image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 6 8 12 16 18"/></svg></button>
+                    <span id="slider2-year-feat" class="slider-year fw-bold mx-2">2013</span>
+                    <button class="slider-arrow right p-0 border-0 bg-transparent" id="slider2-next-feat" aria-label="Next image" style="width:28px;height:28px;"><svg width="24" height="24" fill="none" stroke="#0d6efd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 16 12 8 18"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="bi bi-check"></i><span> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check"></i> <span>Ullam est qui quos consequatur eos accusamus.</span></li>
+            <h3>PM2.5 and NO2 Annual Averages (2013-2022)</h3>
+            <p class="fst-italic mb-2">Yearly aggregated PM2.5 and NO2 concentration maps for Bosnia and Herzegovina, derived from CAMS NetCDF data and processed as annual means. Each map shows the spatial distribution for a given year, reprojected and clipped to the study area.</p>
+            <ul class="mb-0">
+              <li><i class="bi bi-check"></i> <span><strong>Data source:</strong> CAMS European Air Quality Reanalysis Dataset (2013–2022) and CAMS NO2 data</span></li>
+              <li><i class="bi bi-check"></i> <span><strong>Processing:</strong> Monthly to annual aggregation, reprojection, and clipping</span></li>
+              <li><i class="bi bi-check"></i> <span><strong>Visualization:</strong> PNG maps, 10 years, slider navigation</span></li>
             </ul>
           </div>
         </div><!-- Features Item -->
 
         <div class="row gy-4 align-items-center features-item">
-          <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/features-2.jpg" class="img-fluid" alt="">
+          <!-- Box 4 PNG affiancate (2 summer, 2 winter) -->
+          <div class="col-md-5 order-1 order-md-2 d-flex flex-column align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <div class="d-flex flex-wrap justify-content-center gap-3 w-100">
+              <!-- Summer 1 -->
+              <div class="four-png-box text-center">
+                <img src="assets/img/Results_NO2_avgyear/2018_summer.png" class="img-fluid rounded border mb-1" alt="NO2 Summer 2018" style="max-width: 120px;">
+                <div class="small fw-bold">NO2 Summer 2018</div>
+              </div>
+              <!-- Summer 2 -->
+              <div class="four-png-box text-center">
+                <img src="assets/img/Results_NO2_avgyear/2022_summer.png" class="img-fluid rounded border mb-1" alt="NO2 Summer 2022" style="max-width: 120px;">
+                <div class="small fw-bold">NO2 Summer 2022</div>
+              </div>
+              <!-- Winter 1 -->
+              <div class="four-png-box text-center">
+                <img src="assets/img/Results_NO2_avgyear/2018_winter.png" class="img-fluid rounded border mb-1" alt="NO2 Winter 2018" style="max-width: 120px;">
+                <div class="small fw-bold">NO2 Winter 2018</div>
+              </div>
+              <!-- Winter 2 -->
+              <div class="four-png-box text-center">
+                <img src="assets/img/Results_NO2_avgyear/2022_winter.png" class="img-fluid rounded border mb-1" alt="NO2 Winter 2022" style="max-width: 120px;">
+                <div class="small fw-bold">NO2 Winter 2022</div>
+              </div>
+            </div>
           </div>
           <div class="col-md-7 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
             <h3>Corporis temporibus maiores provident</h3>
@@ -241,106 +239,117 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
   <script>
-    // Slider logic for all PNGs in Results_PM2.5_avgyear
-    const slider1Images = [
-      "assets/img/Results_PM2.5_avgyear/2013.png",
-      "assets/img/Results_PM2.5_avgyear/2014.png",
-      "assets/img/Results_PM2.5_avgyear/2015.png",
-      "assets/img/Results_PM2.5_avgyear/2016.png",
-      "assets/img/Results_PM2.5_avgyear/2017.png",
-      "assets/img/Results_PM2.5_avgyear/2018.png",
-      "assets/img/Results_PM2.5_avgyear/2019.png",
-      "assets/img/Results_PM2.5_avgyear/2020.png",
-      "assets/img/Results_PM2.5_avgyear/2021.png",
-      "assets/img/Results_PM2.5_avgyear/2022.png"
-    ];
-    let slider1Index = 0;
-    let slider2Index = 0;
-    const slider1Img = document.getElementById('slider1-img');
-    const slider1Num = document.getElementById('slider1-num');
-    const slider1Year = document.getElementById('slider1-year');
-    const slider2Images = slider1Images;
-    const slider2Img = document.getElementById('slider2-img');
-    const slider2Num = document.getElementById('slider2-num');
-    const slider2Year = document.getElementById('slider2-year');
-    // --- Sync logic ---
-    let syncSliders = false;
-    const syncBtn = document.getElementById('sync-btn');
-    const syncBtnText = document.getElementById('sync-btn-text');
-    syncBtn.onclick = function() {
-      syncSliders = !syncSliders;
-      if (syncSliders) {
-        syncBtn.classList.remove('btn-outline-primary');
-        syncBtn.classList.add('btn-primary');
-        syncBtnText.textContent = 'Disattiva sincronizzazione';
-        // Allinea subito i due slider
-        slider2Index = slider1Index;
-        updateSlider2();
-      } else {
-        syncBtn.classList.remove('btn-primary');
-        syncBtn.classList.add('btn-outline-primary');
-        syncBtnText.textContent = 'Sincronizza slider';
-      }
-    };
-    // Funzioni di update
-    function updateSlider1() {
-      slider1Img.src = slider1Images[slider1Index];
-      slider1Num.textContent = (slider1Index + 1) + "/" + slider1Images.length;
-      slider1Year.textContent = 2013 + slider1Index;
-      document.getElementById('slider1-prev').disabled = slider1Index === 0;
-      document.getElementById('slider1-next').disabled = slider1Index === slider1Images.length - 1;
-    }
-    function updateSlider2() {
-      slider2Img.src = slider2Images[slider2Index];
-      slider2Num.textContent = (slider2Index + 1) + "/" + slider2Images.length;
-      slider2Year.textContent = 2013 + slider2Index;
-      document.getElementById('slider2-prev').disabled = slider2Index === 0;
-      document.getElementById('slider2-next').disabled = slider2Index === slider2Images.length - 1;
-    }
-    // Gestione frecce con sincronizzazione
-    document.getElementById('slider1-prev').onclick = function() {
-      if (slider1Index > 0) {
-        slider1Index--;
-        if (syncSliders) {
-          slider2Index = slider1Index;
-          updateSlider2();
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // Slider logic for Features section only
+      const slider1Images = [
+        "assets/img/Results_PM2.5_avgyear/2013.png",
+        "assets/img/Results_PM2.5_avgyear/2014.png",
+        "assets/img/Results_PM2.5_avgyear/2015.png",
+        "assets/img/Results_PM2.5_avgyear/2016.png",
+        "assets/img/Results_PM2.5_avgyear/2017.png",
+        "assets/img/Results_PM2.5_avgyear/2018.png",
+        "assets/img/Results_PM2.5_avgyear/2019.png",
+        "assets/img/Results_PM2.5_avgyear/2020.png",
+        "assets/img/Results_PM2.5_avgyear/2021.png",
+        "assets/img/Results_PM2.5_avgyear/2022.png"
+      ];
+      const slider2Images = [
+        "assets/img/Results_NO2_avgyear/2013.png",
+        "assets/img/Results_NO2_avgyear/2014.png",
+        "assets/img/Results_NO2_avgyear/2015.png",
+        "assets/img/Results_NO2_avgyear/2016.png",
+        "assets/img/Results_NO2_avgyear/2017.png",
+        "assets/img/Results_NO2_avgyear/2018.png",
+        "assets/img/Results_NO2_avgyear/2019.png",
+        "assets/img/Results_NO2_avgyear/2020.png",
+        "assets/img/Results_NO2_avgyear/2021.png",
+        "assets/img/Results_NO2_avgyear/2022.png"
+      ];
+
+      // --- Features Section Slider Logic ---
+      let slider1IndexFeat = 0;
+      let slider2IndexFeat = 0;
+      const slider1ImgFeat = document.getElementById('slider1-img-feat');
+      const slider1NumFeat = document.getElementById('slider1-num-feat');
+      const slider1YearFeat = document.getElementById('slider1-year-feat');
+      const slider2ImgFeat = document.getElementById('slider2-img-feat');
+      const slider2NumFeat = document.getElementById('slider2-num-feat');
+      const slider2YearFeat = document.getElementById('slider2-year-feat');
+      let syncSlidersFeat = false;
+      const syncBtnFeat = document.getElementById('sync-btn-feat');
+      const syncBtnTextFeat = document.getElementById('sync-btn-text-feat');
+      syncBtnFeat.onclick = function() {
+        syncSlidersFeat = !syncSlidersFeat;
+        if (syncSlidersFeat) {
+          syncBtnFeat.classList.remove('btn-outline-primary');
+          syncBtnFeat.classList.add('btn-primary');
+          syncBtnTextFeat.textContent = 'Disattiva sincronizzazione';
+          slider2IndexFeat = slider1IndexFeat;
+          updateSlider2Feat();
+        } else {
+          syncBtnFeat.classList.remove('btn-primary');
+          syncBtnFeat.classList.add('btn-outline-primary');
+          syncBtnTextFeat.textContent = 'Sincronizza slider';
         }
-        updateSlider1();
+      };
+      function updateSlider1Feat() {
+        slider1ImgFeat.src = slider1Images[slider1IndexFeat];
+        slider1NumFeat.textContent = (slider1IndexFeat + 1) + "/" + slider1Images.length;
+        slider1YearFeat.textContent = 2013 + slider1IndexFeat;
+        document.getElementById('slider1-prev-feat').disabled = slider1IndexFeat === 0;
+        document.getElementById('slider1-next-feat').disabled = slider1IndexFeat === slider1Images.length - 1;
       }
-    };
-    document.getElementById('slider1-next').onclick = function() {
-      if (slider1Index < slider1Images.length - 1) {
-        slider1Index++;
-        if (syncSliders) {
-          slider2Index = slider1Index;
-          updateSlider2();
+      function updateSlider2Feat() {
+        slider2ImgFeat.src = slider2Images[slider2IndexFeat];
+        slider2NumFeat.textContent = (slider2IndexFeat + 1) + "/" + slider2Images.length;
+        slider2YearFeat.textContent = 2013 + slider2IndexFeat;
+        document.getElementById('slider2-prev-feat').disabled = slider2IndexFeat === 0;
+        document.getElementById('slider2-next-feat').disabled = slider2IndexFeat === slider2Images.length - 1;
+      }
+      document.getElementById('slider1-prev-feat').onclick = function() {
+        if (slider1IndexFeat > 0) {
+          slider1IndexFeat--;
+          if (syncSlidersFeat) {
+            slider2IndexFeat = slider1IndexFeat;
+            updateSlider2Feat();
+          }
+          updateSlider1Feat();
         }
-        updateSlider1();
-      }
-    };
-    document.getElementById('slider2-prev').onclick = function() {
-      if (slider2Index > 0) {
-        slider2Index--;
-        if (syncSliders) {
-          slider1Index = slider2Index;
-          updateSlider1();
+      };
+      document.getElementById('slider1-next-feat').onclick = function() {
+        if (slider1IndexFeat < slider1Images.length - 1) {
+          slider1IndexFeat++;
+          if (syncSlidersFeat) {
+            slider2IndexFeat = slider1IndexFeat;
+            updateSlider2Feat();
+          }
+          updateSlider1Feat();
         }
-        updateSlider2();
-      }
-    };
-    document.getElementById('slider2-next').onclick = function() {
-      if (slider2Index < slider2Images.length - 1) {
-        slider2Index++;
-        if (syncSliders) {
-          slider1Index = slider2Index;
-          updateSlider1();
+      };
+      document.getElementById('slider2-prev-feat').onclick = function() {
+        if (slider2IndexFeat > 0) {
+          slider2IndexFeat--;
+          if (syncSlidersFeat) {
+            slider1IndexFeat = slider2IndexFeat;
+            updateSlider1Feat();
+          }
+          updateSlider2Feat();
         }
-        updateSlider2();
-      }
-    };
-    // Inizializza
-    updateSlider1();
-    updateSlider2();
+      };
+      document.getElementById('slider2-next-feat').onclick = function() {
+        if (slider2IndexFeat < slider2Images.length - 1) {
+          slider2IndexFeat++;
+          if (syncSlidersFeat) {
+            slider1IndexFeat = slider2IndexFeat;
+            updateSlider1Feat();
+          }
+          updateSlider2Feat();
+        }
+      };
+      updateSlider1Feat();
+      updateSlider2Feat();
+    });
   </script>
 
 </body>
