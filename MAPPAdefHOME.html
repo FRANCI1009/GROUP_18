@@ -395,13 +395,11 @@
         'BOSNIA_BOUNDARIES',
         'BOSNIA_CANTONS',
         'BOSNIA_URBAN_AREAS',
-        'BOSNIA_LC_reclassified_2022'
       ];
       var layerNames = [
         'Bosnia Boundaries',
         'Cantons',
         'Urban Areas',
-        'Land Cover 2022 (Reclassified)'
       ];
       var wmsLayers = {};
       wmsLayerNames.forEach(function(name, i) {
@@ -411,7 +409,7 @@
             params: { 'LAYERS': wmsWorkspace+':'+name, 'TILED': true, 'FORMAT': 'image/png', 'TRANSPARENT': true },
             serverType: 'geoserver', crossOrigin: 'anonymous'
           }),
-          visible: false
+          visible: true // <--- Cambia qui: tutti i layer WMS visibili all'apertura
         });
         map.addLayer(wmsLayers['layer'+(i+1)]);
       });
@@ -432,6 +430,7 @@
           var label = document.createElement('label');
           label.style.display = 'block'; label.style.marginBottom = '16px';
           var cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = 'layer'+(i+1);
+          cb.checked = true; // Seleziona tutti i layer all'apertura
           label.appendChild(cb); label.appendChild(document.createTextNode(' '+nome));
           panel.appendChild(label);
         });
