@@ -12,30 +12,42 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Poppins",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Poppins", sans-serif;
+  --nav-font: "Poppins", sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #212529; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #001973; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #0d42ff; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+:root {
+  --background-color: #ffffff;
+  /* Background color for the entire website, including individual sections */
+  --default-color: #212529;
+  /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #001973;
+  /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #0d42ff;
+  /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff;
+  /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff;
+  /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
 
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: rgba(255, 255, 255, 0.6);  /* The default color of the main navmenu links */
-  --nav-hover-color: #ffffff; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #212529; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #0d42ff; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-color: rgba(255, 255, 255, 0.6);
+  /* The default color of the main navmenu links */
+  --nav-hover-color: #ffffff;
+  /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff;
+  /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff;
+  /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #212529;
+  /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #0d42ff;
+  /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -872,13 +884,19 @@ section,
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
-  height: 100vh;              /* Altezza piena viewport */
+  height: 100vh;
+  /* Altezza piena viewport */
   position: relative;
-  padding: 0;                 /* Rimuove padding verticale */
-  display: flex;              /* Flexbox per centrare contenuto */
-  justify-content: center;    /* Centro orizzontale */
-  align-items: center;        /* Centro verticale */
-  overflow: hidden;           /* Evita scroll indesiderati */
+  padding: 0;
+  /* Rimuove padding verticale */
+  display: flex;
+  /* Flexbox per centrare contenuto */
+  justify-content: center;
+  /* Centro orizzontale */
+  align-items: center;
+  /* Centro verticale */
+  overflow: hidden;
+  /* Evita scroll indesiderati */
 }
 
 .hero .hero-bg {
@@ -887,17 +905,23 @@ section,
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;          /* Copre tutta l'area senza distorsioni */
+  object-fit: cover;
+  /* Copre tutta l'area senza distorsioni */
   z-index: 1;
-  opacity: 0.2;               /* Sfondo leggermente trasparente */
+  opacity: 0.2;
+  /* Sfondo leggermente trasparente */
 }
 
 .hero .container {
   position: relative;
-  z-index: 3;                 /* Sopra l'immagine di sfondo */
-  text-align: center;         /* Centro testo */
-  max-width: 1200px;          /* Larghezza massima contenuto */
-  padding: 0 15px;            /* Padding laterale */
+  z-index: 3;
+  /* Sopra l'immagine di sfondo */
+  text-align: center;
+  /* Centro testo */
+  max-width: 1200px;
+  /* Larghezza massima contenuto */
+  padding: 0 15px;
+  /* Padding laterale */
 }
 
 .hero h2 {
@@ -906,7 +930,8 @@ section,
   padding: 0;
   font-size: 40px;
   font-weight: 700;
-  color: var(--heading-color, #fff); /* Colore testo (impostalo se vuoi) */
+  color: var(--heading-color, #fff);
+  /* Colore testo (impostalo se vuoi) */
 }
 
 @media (max-width: 575px) {
@@ -919,7 +944,8 @@ section,
   font-size: 15px;
   font-weight: 400;
   margin-bottom: 40px;
-  color: var(--default-color, #eee); /* Colore testo paragrafo */
+  color: var(--default-color, #eee);
+  /* Colore testo paragrafo */
 }
 
 .hero form {
@@ -1054,7 +1080,7 @@ section,
 .crs-section {
   background-color: var(--surface-color);
   padding: 60px 20px;
-  
+
   width: 100vw;
   position: relative;
   left: 50%;
@@ -1087,11 +1113,15 @@ section,
   margin-top: 40px;
 
   max-width: 100vw;
-  min-width: 800px;     /* aumentato a tutta la larghezza viewport */
-  white-space: nowrap;  /* testo su una riga sola */
-  overflow-x: auto;     /* scroll orizzontale se serve */
+  min-width: 800px;
+  /* aumentato a tutta la larghezza viewport */
+  white-space: nowrap;
+  /* testo su una riga sola */
+  overflow-x: auto;
+  /* scroll orizzontale se serve */
   box-sizing: border-box;
 }
+
 .crs-section .crs-info strong {
   font-weight: 700;
 }
@@ -1153,9 +1183,11 @@ section,
   border-radius: 0;
   height: 100%;
 }
+
 .card-img {
   width: 100%;
-  aspect-ratio: 4 / 3; /* o il rapporto corretto della tua immagine */
+  aspect-ratio: 4 / 3;
+  /* o il rapporto corretto della tua immagine */
   overflow: hidden;
 }
 

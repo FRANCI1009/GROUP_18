@@ -399,8 +399,8 @@
   <div id="map"></div>
   <div id="scaleLineWrapper"></div>
   <button id="backToMapBtn" title="Back to map">Back to map</button>
-  
-  
+
+
   <script type="text/javascript">
     // Utility: mostra/nasconde pannelli e aggiorna classi attive
     function togglePanel(panel, btn, others) {
@@ -422,29 +422,29 @@
     var map = new ol.Map({ target: 'map', layers: [osmBase, emptyBase, satBase, lightBase], view: new ol.View({ center: [17.6791, 43.9159], zoom: 8, projection: 'EPSG:4326' }) });
     // WMS config
     var wmsBaseUrl = 'https://www.gis-geoserver.polimi.it/geoserver/ows?';
-  var wmsWorkspace = 'gisgeoserver_18';
-  var wmsLayerNames = [
-    'BOSNIA_BOUNDARIES',
-    'BOSNIA_CANTONS',
-    'BOSNIA_URBAN_AREAS'
-  ];
-  var layerNames = [
-    'Bosnia Boundaries',
-    'Cantons',
-    'Urban Areas'
-  ];
-  var wmsLayers = {};
-  wmsLayerNames.forEach(function (name, i) {
-    wmsLayers['layer' + (i + 1)] = new ol.layer.Tile({
-      source: new ol.source.TileWMS({
-        url: wmsBaseUrl,
-        params: { 'LAYERS': wmsWorkspace + ':' + name, 'TILED': true, 'FORMAT': 'image/png', 'TRANSPARENT': true },
-        serverType: 'geoserver', crossOrigin: 'anonymous'
-      }),
-      visible: true // Make visible by default
+    var wmsWorkspace = 'gisgeoserver_18';
+    var wmsLayerNames = [
+      'BOSNIA_BOUNDARIES',
+      'BOSNIA_CANTONS',
+      'BOSNIA_URBAN_AREAS'
+    ];
+    var layerNames = [
+      'Bosnia Boundaries',
+      'Cantons',
+      'Urban Areas'
+    ];
+    var wmsLayers = {};
+    wmsLayerNames.forEach(function (name, i) {
+      wmsLayers['layer' + (i + 1)] = new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+          url: wmsBaseUrl,
+          params: { 'LAYERS': wmsWorkspace + ':' + name, 'TILED': true, 'FORMAT': 'image/png', 'TRANSPARENT': true },
+          serverType: 'geoserver', crossOrigin: 'anonymous'
+        }),
+        visible: true // Make visible by default
+      });
+      map.addLayer(wmsLayers['layer' + (i + 1)]);
     });
-    map.addLayer(wmsLayers['layer' + (i + 1)]);
-  });
     // Pannelli e bottoni
     var btns = {
       layer: { btn: document.getElementById('toggleLayerPanel'), panel: document.getElementById('layerPanel') },

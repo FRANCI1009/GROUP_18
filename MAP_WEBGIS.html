@@ -739,41 +739,41 @@
                 var value = '&mdash;';
                 if (json.features && json.features.length > 0) {
                   var props = json.features[0].properties;
-                if (showAllAttributesLayers.includes(userLayerName)) {
-                  // Mostra solo il nome del cantone con etichetta "Name"
-                  var html = '';
-                  if (props.hasOwnProperty('gaul2_name')) {
-                    html = '<b>Name:</b> ' + props['gaul2_name'];
+                  if (showAllAttributesLayers.includes(userLayerName)) {
+                    // Mostra solo il nome del cantone con etichetta "Name"
+                    var html = '';
+                    if (props.hasOwnProperty('gaul2_name')) {
+                      html = '<b>Name:</b> ' + props['gaul2_name'];
+                    } else {
+                      // fallback: mostra il primo attributo se non esiste gaul2_name
+                      for (var k in props) {
+                        html = '<b>Name:</b> ' + props[k];
+                        break;
+                      }
+                    }
+                    value = html || '&mdash;';
+                  } else if (userLayerName === 'Urban Areas' || userLayerName === 'Bosnia Boundaries') {
+                    value = 'Value: &mdash;';
+                  } else if (bivariateLayers.includes(userLayerName)) {
+                    // Mostra solo il valore "bivariate"
+                    var html = '';
+                    if (props.hasOwnProperty('bivariate')) {
+                      html = '<b>Bivariate:</b> ' + props['bivariate'];
+                    }
+                    value = html || '&mdash;';
                   } else {
-                    // fallback: mostra il primo attributo se non esiste gaul2_name
+                    // Altrimenti mostra solo il primo valore numerico
+                    var firstNumeric = null;
                     for (var k in props) {
-                      html = '<b>Name:</b> ' + props[k];
-                      break;
+                      var label = k;
+                      if (label === 'GRAY_INDEX') label = 'Value';
+                      if (typeof props[k] === 'number' || (!isNaN(props[k]) && props[k] !== null && props[k] !== '')) {
+                        firstNumeric = '<b>' + label + ':</b> ' + props[k];
+                        break;
+                      }
                     }
+                    value = firstNumeric || '&mdash;';
                   }
-                  value = html || '&mdash;';
-                } else if (userLayerName === 'Urban Areas' || userLayerName === 'Bosnia Boundaries') {
-                  value = 'Value: &mdash;';
-                } else if (bivariateLayers.includes(userLayerName)) {
-                  // Mostra solo il valore "bivariate"
-                  var html = '';
-                  if (props.hasOwnProperty('bivariate')) {
-                    html = '<b>Bivariate:</b> ' + props['bivariate'];
-                  }
-                  value = html || '&mdash;';
-                } else {
-                  // Altrimenti mostra solo il primo valore numerico
-                  var firstNumeric = null;
-                  for (var k in props) {
-                    var label = k;
-                    if (label === 'GRAY_INDEX') label = 'Value';
-                    if (typeof props[k] === 'number' || (!isNaN(props[k]) && props[k] !== null && props[k] !== '')) {
-                      firstNumeric = '<b>' + label + ':</b> ' + props[k];
-                      break;
-                    }
-                  }
-                  value = firstNumeric || '&mdash;';
-                }
                 }
                 pixelValueText.innerHTML = value;
                 pixelValueDiv.style.display = 'flex';
