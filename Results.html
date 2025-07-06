@@ -35,6 +35,22 @@
     #sync-btn-feat i {
       color: #001973 !important;
     }
+    .limit-box {
+      width: 100%;
+      max-width: 400px;
+      font-size: 0.95rem;
+      background-color: #eef1fe;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    @media (max-width: 500px) {
+      .limit-box {
+        padding: 12px 8px;
+        font-size: 0.92rem;
+      }
+    }
   </style>
 </head>
 
@@ -217,7 +233,27 @@ PM 2.5, on the other hand, although its annual average remains below European li
   <div class="col-md-7 d-flex align-items-start" data-aos="fade-up">
     <div>
       <h3 class="fw-bold" style="color: #001973;">Population exposure to pollution levels and comparison with WHO limits</h3>
-      <p>These representations show that both pollutants have higher concentrations near urban centers, once again reminding us how human activities play a crucial role in the increase of airborne particles.</p>
+      <p>Knowing that high levels of pollutants can harm people’s health, in the maps on the left we linked pollutant concentrations to urban areas in order to see whether a correlation exists.</p>
+      <p>Although NO2 concentrations are generally low, they are higher around the capital—the most urbanized area—compared to the rest of the country.</p>
+      <p>The situation is certainly more concerning when it comes to PM 2.5. In this case, the concentration levels in all major urban centers across the country are critical, and the problem is not limited to the capital but also affects other urban areas.
+      Furthermore, unlike NO2, PM 2.5 concentrations remain very high across the entire territory. This makes PM 2.5 the most dangerous pollutant in this area.
+      </p>
+      <div class="row w-100 mt-3 mb-2 justify-content-center gx-3">
+        <div class="col-12 col-md-6 d-flex justify-content-end mb-2 mb-md-0">
+          <div class="limit-box w-100">
+            <strong>According to the Current WHO limit values, the Annual Limit Values are:</strong><br><br>
+            <strong>NO₂:</strong> 10 µg/m³<br>
+            <strong>PM₂.₅:</strong> 5 µg/m³
+          </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-start">
+          <div class="limit-box w-100">
+            <strong>According to the Current EU limit values, the Annual Limit Values are:</strong><br><br>
+            <strong>NO₂:</strong> 40 µg/m³<br>
+            <strong>PM₂.₅:</strong> 25 µg/m³
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div><!-- Features Item -->
@@ -227,18 +263,42 @@ PM 2.5, on the other hand, although its annual average remains below European li
     <div class="d-flex flex-row gap-4">
       <div class="text-center">
         <img src="assets/img/exposure to NO2.png" class="img-fluid rounded border mb-1 exposure-img" alt="Exposure to NO2" style="max-width: 260px; cursor: zoom-in;" data-bs-toggle="modal" data-bs-target="#modal-exposure-no2">
-        <div class="small fw-bold">Exposure to NO2</div>
+        <div class="text-start" style="max-width:260px;">
+          <p class="mt-2 text-muted mb-1" style="font-size: 0.8rem; text-align: left;">
+            Mortality due to long-term exposure to NO₂ in 2022<br>
+            Source: EEA
+          </p>
+          <a href="https://www.eea.europa.eu/en/analysis/publications/harm-to-human-health-from-air-pollution-2024/map-2-mortality-due-to-long-term-exposure-to-no2-2022"
+            target="_blank"
+            class="d-block text-decoration-underline"
+            style="font-size: 0.8rem; color: #007bff; text-align: left;">
+            Full article: European Environment Agency
+          </a>
+        </div>
       </div>
       <div class="text-center">
         <img src="assets/img/exposure to PM2.5.png" class="img-fluid rounded border mb-1 exposure-img" alt="Exposure to PM2.5" style="max-width: 260px; cursor: zoom-in;" data-bs-toggle="modal" data-bs-target="#modal-exposure-pm25">
-        <div class="small fw-bold">Exposure to PM2.5</div>
+        <div class="text-start" style="max-width:260px;">
+          <p class="mt-2 text-muted mb-1" style="font-size: 0.8rem; text-align: left;">
+            Mortality due to long-term exposure to PM2.5 in 2022<br>
+            Source: EEA
+          </p>
+          <a href="https://www.eea.europa.eu/en/analysis/publications/harm-to-human-health-from-air-pollution-2024/map-1-mortality-due-to-long-term-exposure-to-pm2-5-2022"
+            target="_blank"
+            class="d-block text-decoration-underline"
+            style="font-size: 0.8rem; color: #007bff; text-align: left;">
+            Full article: European Environment Agency
+          </a>
+        </div>
       </div>
     </div>
   </div>
   <div class="col-md-7 order-2 order-md-1 d-flex align-items-start" data-aos="fade-up">
     <div>
       <h3 class="fw-bold" style="color: #001973;">Map showing the correlation between pollution and mortality</h3>
-      <p>Considering all the points discussed above, this map summarizes the situation. Consistently, it can be observed that, compared to the European average, deaths due to NO2 are significantly lower than those due to PM 2.5.</p>
+      <p>To confirm what was stated in the previous paragraph, the two maps on the right highlight the significant differences between the two pollutants.</p>
+      <p>The first map shows the mortality rate in Europe due to NO2. As can be seen, Bosnia and Herzegovina does not have one of the highest rates in Europe, recording 151 deaths per 100,000 caused by NO2 pollution.</p>
+      <p>A completely different and consistent situation with the previously discussed data is shown in the map on the right. As seen, Bosnia and Herzegovina is one of the European countries with the highest mortality rate linked to PM 2.5. In 2022, there were as many as 2,437 deaths per 100,000 due to this pollutant.</p>
     </div>
   </div>
 </div><!-- Features Item -->
@@ -272,7 +332,8 @@ PM 2.5, on the other hand, although its annual average remains below European li
       <div class="container section-title" data-aos="fade-up">
         <span>Conclusions<br></span>
         <h2>Conclusions</h2>
-        <p>We are students from the master's program in Urban Planning and Policy Design at Politecnico di Milano.</p>
+        <p>In conclusion, we can say that in recent years Bosnia is facing an increasingly serious problem with the rise of PM 2.5 pollution. In particular, over the last 5 years, the concentration of this pollutant in the air has grown rapidly and will present Bosnia and Herzegovina with new and significant environmental challenges.</p>
+        <p>The transition to more sustainable energy sources for vehicles and heating systems therefore becomes a priority to reduce this type of pollutant.</p>
       </div><!-- End Section Title -->
 
      <div class="container">
