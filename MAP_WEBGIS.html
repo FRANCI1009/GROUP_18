@@ -22,6 +22,7 @@
       position: absolute;
       top: 0;
       left: 0;
+      background: #fff !important;
     }
 
     #toggleLayerPanel,
@@ -427,13 +428,17 @@
     var wmsWorkspace = 'gisgeoserver_18';
     var wmsLayerNames = [
       'BOSNIA_BOUNDARIES', 'BOSNIA_CANTONS', 'BOSNIA_URBAN_AREAS', 'BOSNIA_LC_reclassified_2022', 'BOSNIA_Population_Quantiles_reclassified',
-      'BOSNIA_CAMS_NO2_2022_12', 'BOSNIA_average_NO2_2022', 'BOSNIA_NO2_concentration_map_2020', 'BOSNIA_NO2_2017-2022_AAD_map_2022', 'BOSNIA_NO2_2020_bivariate',
-      'BOSNIA_CAMS_pm2p5_2022_12', 'BOSNIA_average_pm2p5_2022', 'BOSNIA_pm2p5_concentration_map_2020_2020', 'BOSNIA_pm2p5 _2017-2021_AAD_map _2022', 'bosnia_pm2p5_2020_bivariate'
+      'BOSNIA_NO2_SUMMER_2022', 'BOSNIA_NO2_WINTER_2022',
+      'BOSNIA_average_NO2_2022', 'BOSNIA_NO2_concentration_map_2020', 'BOSNIA_NO2_2017-2022_AAD_map_2022', 'BOSNIA_NO2_2020_bivariate',
+      'BOSNIA_PM2,5_SUMMER_2022', 'BOSNIA_PM2,5_WINTER_2022',
+      'BOSNIA_average_pm2p5_2022', 'BOSNIA_pm2p5_concentration_map_2020_2020', 'BOSNIA_pm2p5 _2017-2021_AAD_map _2022', 'bosnia_pm2p5_2020_bivariate'
     ];
     var layerNames = [
       'Bosnia Boundaries', 'Cantons', 'Urban Areas', 'Land Cover 2022 (Reclassified)', 'Population Quantiles (Reclassified)',
-      'NO₂ CAMS 12/2022', 'NO₂ Average 2022', 'NO₂ Concentration 2020', 'NO₂ AAD Map 2022', 'NO₂ Bivariate Map 2020',
-      'PM2p5 CAMS 12/2022', 'PM2p5 Average 2022', 'PM2p5 Concentration 2020', 'PM2p5 AAD Map 2022', 'PM2p5 Bivariate Map 2020'
+      'NO₂ Summer 2022', 'NO₂ Winter 2022',
+      'NO₂ Average 2022', 'NO₂ Concentration 2020', 'NO₂ AAD Map 2022', 'NO₂ Bivariate Map 2020',
+      'PM2.5 Summer 2022', 'PM2.5 Winter 2022',
+      'PM2p5 Average 2022', 'PM2p5 Concentration 2020', 'PM2p5 AAD Map 2022', 'PM2p5 Bivariate Map 2020'
     ];
     var wmsLayers = {};
     wmsLayerNames.forEach(function (name, i) {
@@ -511,8 +516,9 @@
         label.style.display = 'block'; label.style.marginBottom = '16px';
         var cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = 'layer' + (i + 1);
         label.appendChild(cb); label.appendChild(document.createTextNode(' ' + nome));
+        // Inserisci nei gruppi NO2 o PM2.5 in base al nome
         if (nome.startsWith('NO₂')) group.NO2.appendChild(label);
-        else if (nome.startsWith('PM2p5')) group.PM25.appendChild(label);
+        else if (nome.startsWith('PM2p5') || nome.startsWith('PM2.5')) group.PM25.appendChild(label);
         else layerSection.appendChild(label);
       });
       layerSection.appendChild(group.NO2); layerSection.appendChild(group.PM25);
@@ -643,29 +649,148 @@
     // Chiudi valore pixel
     var closePixelValueBtn = document.getElementById('closePixelValueBtn');
     if (closePixelValueBtn) closePixelValueBtn.onclick = function (e) { e.stopPropagation(); document.getElementById('pixelValueDisplay').style.display = 'none'; };
-    // Valore pixel su click
+    // Valore pixel/feature su click (vettoriale e WMS)
     map.on('singleclick', function (evt) {
-      var coord = evt.coordinate, pixelValueDiv = document.getElementById('pixelValueDisplay'), pixelValueText = document.getElementById('pixelValueText');
+      var coord = evt.coordinate,
+        pixelValueDiv = document.getElementById('pixelValueDisplay'),
+        pixelValueText = document.getElementById('pixelValueText');
       if (!coord) { pixelValueDiv.style.display = 'none'; return; }
+
+      // 1. Cerca feature vettoriali
+      var foundVector = false;
+      map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+        var props = feature.getProperties();
+        var value = '';
+        for (var k in props) {
+          if (k !== 'geometry') {
+            value += '<b>' + k + ':</b> ' + props[k] + '<br>';
+          }
+        }
+        if (value) {
+          pixelValueText.innerHTML = value;
+          pixelValueDiv.style.display = 'flex';
+          foundVector = true;
+        }
+      });
+      if (foundVector) return;
+
+      // 2. Cerca valore pixel WMS (solo se nessuna feature vettoriale trovata)
       var found = false;
+      // Definisci i layer Geopackage per cui mostrare tutti gli attributi o solo alcuni
+      var showAllAttributesLayers = [
+        'Cantons'
+      ];
+      var bivariateLayers = [
+        'NO₂ Bivariate Map 2020',
+        'PM2p5 Bivariate Map 2020'
+      ];
       for (var i = 1; i <= wmsLayerNames.length; i++) {
         var key = 'layer' + i;
         if (wmsLayers[key] && wmsLayers[key].getVisible()) {
-          var v = map.getView(), r = v.getResolution(), s = map.getSize(), e = v.calculateExtent(s);
-          var x = Math.round((coord[0] - e[0]) / r), y = Math.round((e[3] - coord[1]) / r);
-          var url = wmsBaseUrl + 'SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=' + encodeURIComponent(wmsWorkspace + ':' + wmsLayerNames[i - 1]) + '&QUERY_LAYERS=' + encodeURIComponent(wmsWorkspace + ':' + wmsLayerNames[i - 1]) + '&STYLES=&BBOX=' + e.join(',') + '&FEATURE_COUNT=1&HEIGHT=' + s[1] + '&WIDTH=' + s[0] + '&FORMAT=image/png&INFO_FORMAT=application/json&SRS=EPSG:4326&X=' + x + '&Y=' + y;
-          fetch(url).then(r => r.json()).then(function (json) {
-            var value = '&mdash;';
-            if (json.features && json.features.length > 0) {
-              var props = json.features[0].properties;
-              for (var k in props) { if (typeof props[k] === 'number' || !isNaN(parseFloat(props[k]))) { value = props[k]; break; } }
+          var view = map.getView();
+          var viewResolution = view.getResolution();
+          var source = wmsLayers[key].getSource();
+          var url = source.getFeatureInfoUrl(
+            evt.coordinate,
+            viewResolution,
+            view.getProjection(),
+            {
+              'INFO_FORMAT': 'application/json',
+              'QUERY_LAYERS': wmsWorkspace + ':' + wmsLayerNames[i - 1]
             }
-            pixelValueText.innerHTML = 'Value: ' + value; pixelValueDiv.style.display = 'flex';
-          }).catch(function () { pixelValueText.innerHTML = 'Value: &mdash;'; pixelValueDiv.style.display = 'flex'; });
-          found = true; break;
+          );
+          if (url) {
+            // Salva il nome user-friendly del layer
+            var userLayerName = layerNames[i - 1] || wmsLayerNames[i - 1];
+            // Logga la risposta del server per il layer "PM2p5 CAMS 12/2022"
+            if (userLayerName === 'PM2p5 CAMS 12/2022') {
+              fetch(url)
+                .then(r => r.clone().json().catch(() => r.text()))
+                .then(function (data) {
+                  console.log('WMS GetFeatureInfo response for PM2p5 CAMS 12/2022:', data);
+                  // Prova a gestire sia json che text
+                  var value = '&mdash;';
+                  if (typeof data === 'object' && data.features && data.features.length > 0) {
+                    var props = data.features[0].properties;
+                    var firstNumeric = null;
+                    for (var k in props) {
+                      var label = k;
+                      if (label === 'GRAY_INDEX') label = 'Value';
+                      if (typeof props[k] === 'number' || (!isNaN(props[k]) && props[k] !== null && props[k] !== '')) {
+                        firstNumeric = '<b>' + label + ':</b> ' + props[k];
+                        break;
+                      }
+                    }
+                    value = firstNumeric || '&mdash;';
+                  } else if (typeof data === 'string') {
+                    value = '<pre style="font-size:13px;max-width:320px;white-space:pre-wrap;">' + data + '</pre>';
+                  }
+                  pixelValueText.innerHTML = value;
+                  pixelValueDiv.style.display = 'flex';
+                })
+                .catch(function (err) {
+                  pixelValueText.innerHTML = 'Value: &mdash;';
+                  pixelValueDiv.style.display = 'flex';
+                });
+              found = true;
+              break;
+            } else {
+              fetch(url).then(r => r.json()).then(function (json) {
+                var value = '&mdash;';
+                if (json.features && json.features.length > 0) {
+                  var props = json.features[0].properties;
+                if (showAllAttributesLayers.includes(userLayerName)) {
+                  // Mostra solo il nome del cantone con etichetta "Name"
+                  var html = '';
+                  if (props.hasOwnProperty('gaul2_name')) {
+                    html = '<b>Name:</b> ' + props['gaul2_name'];
+                  } else {
+                    // fallback: mostra il primo attributo se non esiste gaul2_name
+                    for (var k in props) {
+                      html = '<b>Name:</b> ' + props[k];
+                      break;
+                    }
+                  }
+                  value = html || '&mdash;';
+                } else if (userLayerName === 'Urban Areas' || userLayerName === 'Bosnia Boundaries') {
+                  value = 'Value: &mdash;';
+                } else if (bivariateLayers.includes(userLayerName)) {
+                  // Mostra solo il valore "bivariate"
+                  var html = '';
+                  if (props.hasOwnProperty('bivariate')) {
+                    html = '<b>Bivariate:</b> ' + props['bivariate'];
+                  }
+                  value = html || '&mdash;';
+                } else {
+                  // Altrimenti mostra solo il primo valore numerico
+                  var firstNumeric = null;
+                  for (var k in props) {
+                    var label = k;
+                    if (label === 'GRAY_INDEX') label = 'Value';
+                    if (typeof props[k] === 'number' || (!isNaN(props[k]) && props[k] !== null && props[k] !== '')) {
+                      firstNumeric = '<b>' + label + ':</b> ' + props[k];
+                      break;
+                    }
+                  }
+                  value = firstNumeric || '&mdash;';
+                }
+                }
+                pixelValueText.innerHTML = value;
+                pixelValueDiv.style.display = 'flex';
+              }).catch(function () {
+                pixelValueText.innerHTML = 'Value: &mdash;';
+                pixelValueDiv.style.display = 'flex';
+              });
+              found = true;
+              break;
+            }
+          }
         }
       }
-      if (!found) { pixelValueText.innerHTML = 'Valore: &mdash;'; pixelValueDiv.style.display = 'flex'; }
+      if (!found) {
+        pixelValueText.innerHTML = 'Valore: &mdash;';
+        pixelValueDiv.style.display = 'flex';
+      }
     });
     // Pulsante back to map
     document.getElementById('backToMapBtn').onclick = function () { map.getView().animate({ center: [17.6791, 43.9159], zoom: 8, duration: 600 }); };
