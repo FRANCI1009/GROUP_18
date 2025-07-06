@@ -216,7 +216,7 @@
       <div class="container section-title" data-aos="fade-up">
         <span>OUR ELABORATIONS</span>
         <h2>OUR ELABORATIONS</h2>
-        <p>Methodological Workflow for Mapping Air Pollution (NO₂ and PM2.₅)</p>
+        <p>Methodological Workflow for Mapping Air Pollution (NO₂ and PM₂.₅)</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -240,9 +240,9 @@
 
       <p class="fst-italic">1.1. From CAMS netCDF to yearly aggregated pollutants</p>
       <ul>
-  <li><i class="bi bi-check"></i><span> <strong>Data source:</strong> Downloaded monthly-aggregated NetCDF files for NO₂ and PM2.₅ from the CAMS European Air Quality Reanalysis Dataset.</span></li>
+  <li><i class="bi bi-check"></i><span> <strong>Data source:</strong> Downloaded monthly-aggregated NetCDF files for NO₂ and PM₂.₅ from the CAMS European Air Quality Reanalysis Dataset.</span></li>
   <li><i class="bi bi-check"></i> <span><strong>Temporal aggregation (monthly):</strong> daily data were averaged to generate monthly mean maps for each pollutant, using "Mesh Calculator" to compute the monthly means for December 2022 (the only month missing).</span></li>
-  <li><i class="bi bi-check"></i> <span><strong>Change the format:</strong> from mesh to tif, with "Rasterize mesh dataset" for NO₂ and PM2.₅ for December 2022 (the only month missing).</span></li>
+  <li><i class="bi bi-check"></i> <span><strong>Change the format:</strong> from mesh to tif, with "Rasterize mesh dataset" for NO₂ and PM₂.₅ for December 2022 (the only month missing).</span></li>
   <li><i class="bi bi-check"></i> <span><strong>Projection Alignment:</strong> All rasters were reprojected to EPSG:4326 (WGS 84) for consistency with population and land cover datasets.</span></li>
   <li><i class="bi bi-check"></i> <span><strong>Clipping to Study Area:</strong> All layers were spatially clipped using the official vector boundary of the assigned case study (Bosnia and Herzegovina), with "Clip Raster by Mask Layer". This reduced dataset size and improved performance.</span></li>
   <li><i class="bi bi-check"></i> <span><strong>Temporal aggregation (yearly):</strong> monthly-aggregated data were averaged to generate annual mean maps for each pollutant, using "r.series" to compute the annual means for each year (2013–2022) and each pollutant (NO₂, PM₂.₅).</span></li>
